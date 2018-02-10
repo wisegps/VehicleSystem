@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html class="ui-page-login">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link href="css/icons-extra.css" rel="stylesheet" />
+		<link href="css/iconfont.css" rel="stylesheet" />
+		<link href="css/style.css" rel="stylesheet" />
+		<style>
+			.area {
+				margin: 20px auto 0px auto;
+			}
+			.mui-input-group:first-child {
+				margin-top: 20px;
+			}
+			.mui-input-group label {
+				width: 15%;
+			}
+			.mui-input-row label~input,
+			.mui-input-row label~select,
+			.mui-input-row label~textarea {
+				width: 78%;
+			}
+			.mui-checkbox input[type=checkbox],
+			.mui-radio input[type=radio] {
+				top: 6px;
+			}
+			.mui-content-padded {
+				margin-top: 25px;
+			}
+			.mui-btn {
+				padding: 10px;
+			}
+			.mui-icon-color {
+				color: #AAAAAA;
+			}
+			.mui-send-btn {
+				float: left;
+    				width: 100px;
+    				line-height: 1.3;
+    				border: 0px;
+    				color: blue;
+			}
+			
+			.mui-valid-text-box {
+				width: 50%;
+    				float: left;
+			}
+			
+			.mui-input {
+				float: left!important;
+				width: 50%!important; 
+			}
+			header {
+				background-color: #FFFFFF!important;
+				box-shadow: 0 0 0!important;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header id="header" class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">注册</h1>
+		</header>
+
+		<div id="content" class="mui-content">
+			<form class="mui-input-group">
+				<div class="mui-input-row">
+					<label style="padding: 8px 15px;"><span class="mui-icon-extra mui-icon-extra-phone mui-icon-color"></span></label>
+					<input id='account' type="number" maxlength="11" class="mui-input-clear mui-input" placeholder="输入手机号码">
+				</div>
+				<div class="mui-input-row">
+					<label style="padding: 8px 15px;"><span class="iconfont icon-iconfont5 mui-icon-color"></label>
+					<input id='validCode' type="number" maxlength="4" class="mui-input" placeholder="输入验证码" style="width: 40%; float: left;">
+					<button id="sendValidCode" type="button" class="mui-btn-primary mui-pull-right mui-hidden" style="width: 30%; margin: 4px; border: 0px;color: white">发送验证码</button>
+				</div>
+				<div class="mui-input-row">
+					<label style="padding: 8px 15px;"><span class="mui-icon mui-icon-locked mui-icon-color"></label>
+					<input id='password' type="password" class="mui-input-clear mui-input" placeholder="输入密码">
+				</div>
+				<div class="mui-input-row">
+					<label style="padding: 8px 15px;"><span class="iconfont icon-querenmima mui-icon-color"></label>
+					<input id='password_confirm' type="password" class="mui-input-clear mui-input" placeholder="确认密码">
+				</div>
+				<!--<div class="mui-input-row">
+					<label style="padding: 8px 15px;"><span class="mui-icon mui-icon-email mui-icon-color"></label>
+					<input id='email' type="email" class="mui-input-clear mui-input" placeholder="输入邮箱">
+				</div>-->
+			</form>
+			<div class="mui-content-padded">
+				<button id='reg' class="mui-btn mui-btn-block mui-btn-primary" disabled>注册</button>
+			</div>
+			<!--<div class="mui-content-padded">
+				<p>注册真实可用，注册成功后的用户可用于登录，但是示例程序并未和服务端交互，用户相关数据仅存储于本地。</p>
+			</div>-->
+		</div>
+		<script src="js/mui.min.js"></script>
+		<script src="js/wistorm/define.js"></script>
+		<script src="js/wistorm/wistorm.js"></script>
+		<script src="js/wistorm/md5.js"></script>		
+		<script src="js/app.js"></script>
+		<script src="js/immersed.js" ></script>
+		<script>
+			(function($, doc) {
+				$.init({
+					swipeBack:true //启用右滑关闭功能
+				});
+				$.plusReady(function() {
+					var settings = app.getSettings();
+					var regButton = doc.getElementById('reg');
+					var sendButton = doc.getElementById('sendValidCode');
+					var accountBox = doc.getElementById('account');
+					var validBox = doc.getElementById('validCode');
+					var passwordBox = doc.getElementById('password');
+					var passwordConfirmBox = doc.getElementById('password_confirm');
+					var valid = false; //验证码是否正确
+					accountBox.addEventListener('keyup', function(event){
+						// 如果手机号为有效，则显示发送验证码按钮
+//						console.log(accountBox.value);
+						var ret = app.checkValidPhone(accountBox.value);
+//						console.log(ret);
+						if(ret.flag){
+							sendButton.classList.remove('mui-hidden');
+						}else{
+							sendButton.classList.add('mui-hidden');
+						}
+					});
+					accountBox.addEventListener('change', function(event){
+						// 如果手机号为有效，则显示发送验证码按钮
+//						console.log(accountBox.value);
+						var ret = app.checkValidPhone(accountBox.value);
+//						console.log(ret);
+						if(ret.flag){
+							sendButton.classList.remove('mui-hidden');
+						}else{
+							sendButton.classList.add('mui-hidden');
+						}
+					});
+					var checkValid = function(){
+						console.log(validBox.value);
+						app.checkValidCode(accountBox.value, validBox.value, function(_valid){
+							valid = _valid;
+						});
+					};
+					var setButton = function(){
+						regButton.disabled = !(valid && passwordBox.value != '' && passwordBox.value.length >= 6 && passwordBox.value == passwordConfirmBox.value);						
+					}
+					validBox.addEventListener('change', function(event){
+						checkValid();
+					});
+					passwordBox.addEventListener('keyup', function(event){
+						setButton();
+					});
+					passwordConfirmBox.addEventListener('keyup', function(event){
+						setButton();
+					});
+					passwordBox.addEventListener('change', function(event){
+						setButton();
+					});
+					passwordConfirmBox.addEventListener('change', function(event){
+						setButton();
+					});
+					
+					
+					sendButton.addEventListener('tap', function(event){
+						app.sendSMS(accountBox.value, function(success, msg){
+							if(success){
+								plus.nativeUI.toast(msg);
+								sendButton.disabled = true;
+								sendButton.innerText = '60秒';
+								var p = 60;
+								var timer = setInterval(function(){
+		//							plus.nativeUI.toast(p +'s');
+									p--;
+									sendButton.innerText = p + '秒';
+									if(p == 0){
+										clearInterval(timer);
+										sendButton.disabled = false;
+										sendButton.innerText = '发送验证码';
+									}
+								}, 1000);
+								validBox.focus();
+							}else{
+								plus.nativeUI.toast(msg);
+							}
+						});
+					});
+					regButton.addEventListener('tap', function(event) {
+						var regInfo = {
+							account: accountBox.value,
+							password: passwordBox.value,
+							validCode: validBox.value
+						};
+						var passwordConfirm = passwordConfirmBox.value;
+						if (passwordConfirm != regInfo.password) {
+							plus.nativeUI.toast('密码两次输入不一致');
+							return;
+						}
+						app.reg(regInfo, function(err) {
+							if (err) {
+								plus.nativeUI.toast(err);
+								return;
+							}
+							plus.nativeUI.toast('注册成功');
+							/*
+							 * 注意：
+							 * 1、因本示例应用启动页就是登录页面，因此注册成功后，直接显示登录页即可；
+							 * 2、如果真实案例中，启动页不是登录页，则需修改，使用mui.openWindow打开真实的登录页面
+							 */
+							plus.webview.getLaunchWebview().show("pop-in",200,function () {
+								plus.webview.currentWebview().close("none");
+							});
+							//若启动页不是登录页，则需通过如下方式打开登录页
+//							$.openWindow({
+//								url: 'login.html',
+//								id: 'login',
+//								show: {
+//									aniShow: 'pop-in'
+//								}
+//							});
+						});
+					});
+					accountBox.focus();
+				});
+			}(mui, document));
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>Hello MUI</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<link rel="stylesheet" href="css/mui.min.css">
+		<link href="css/style.css" rel="stylesheet" />		
+		<link href="css/icons-extra.css" rel="stylesheet" />
+		<link href="css/iconfont.css" rel="stylesheet" />
+		<style>
+			html {
+				height: 100%
+			}
+					
+			body {
+				height: 100%;
+				margin: 0px;
+				padding: 0px
+			}
+			
+			header {
+				background-color: #FFFFFF!important;
+				box-shadow: 0 0 0!important;
+			}
+			
+			.mui-card-header {
+				padding: 20px!important;
+			}
+			
+			.mui-media-body {
+				font-size: 16px;
+			}
+			
+			.mui-ellipsis {
+				font-size: 12px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="content" class="mui-content mui-scroll-wrapper">
+			<div class="mui-scroll">
+				<!--电子围栏列表-->
+				<ul class="mui-table-view mui-table-view-chevron">
+					<li id="0" class="mui-table-view-cell mui-media">
+						<div class="mui-slider-right mui-disabled">
+							<a class="mui-btn mui-btn-red">删除</a>
+						</div>
+						<div class="mui-slider-handle edit">
+							<img class="mui-media-object mui-pull-left" src="images/icon-geofence.png">
+							<div class="mui-media-body">
+								自动设置围栏
+								<p class='mui-ellipsis'>自动系统与01-19 20:00设置</p>
+							</div>
+						</div>
+					</li>
+					<li id="1" class="mui-table-view-cell mui-media">
+						<div class="mui-slider-right mui-disabled">
+							<a class="mui-btn mui-btn-red">删除</a>
+						</div>
+						<div class="mui-slider-handle edit">
+							<img class="mui-media-object mui-pull-left" src="images/icon-geofence.png">
+							<div class="mui-media-body">
+								自动设置围栏
+								<p class='mui-ellipsis'>自动系统与01-19 20:00设置</p>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+
+	</body>
+	<script src="js/mui.min.js "></script>
+	<!--<script src="js/map.js" type="text/javascript"></script>-->
+	<script src="js/immersed.js" ></script>
+	<!--<script src="js/app.js"></script>-->
+	<script>
+		mui.init({
+			pullRefresh: {
+				container: '#content',
+				down: {
+					callback: pulldownRefresh
+				},
+				up: {
+					contentrefresh: '正在加载...',
+					callback: pullupRefresh
+				}
+			}
+		});/**
+		 * 下拉刷新具体业务实现
+		 */
+		function pulldownRefresh() {
+			setTimeout(function() {
+//					var table = document.body.querySelector('.mui-table-view');
+//					var cells = document.body.querySelectorAll('.mui-table-view-cell');
+//					for (var i = cells.length, len = i + 3; i < len; i++) {
+//						var li = document.createElement('li');
+//						li.className = 'mui-table-view-cell';
+//						li.innerHTML = '<a class="mui-navigate-right">Item ' + (i + 1) + '</a>';
+//						//下拉刷新，新纪录插到最前面；
+//						table.insertBefore(li, table.firstChild);
+//					}
+					mui('#content').pullRefresh().endPulldownToRefresh(); //refresh completed
+			}, 1000);
+		}
+
+			function pullupRefresh() {
+				setTimeout(function() {
+					mui('#content').pullRefresh().endPullupToRefresh(false); //参数为true代表没有更多数据了。
+//					var table = document.body.querySelector('.mui-table-view');
+//					var cells = document.body.querySelectorAll('.mui-table-view-cell');
+//					for(var i = cells.length, len = i + 20; i < len; i++) {
+//						var li = document.createElement('li');
+//						li.className = 'mui-table-view-cell';
+//						li.innerHTML = '<a class="mui-navigate-right">Item ' + (i + 1) + '</a>';
+//						table.appendChild(li);
+//					}
+				}, 1000);
+			}
+
+		mui.plusReady(function() {// 电子围栏界面
+			geofenceAddPage = mui.preload({
+					"id": 'geofence-add',
+					"url": 'geofence.html'
+				});	
+//			var geofenceButton = document.getElementById('add');
+//			geofenceButton.addEventListener('tap', function(event) {
+//				geofenceAddPage.show("pop-in");
+//			});
+			
+			mui(".mui-table-view").on('tap','.mui-table-view-cell',function(){
+				//获取id
+  				var id = this.getAttribute("id");
+//				alert(id);
+				geofenceAddPage.show("pop-in");
+			});
+			
+			mui(".mui-table-view").on('longtap','.mui-table-view-cell',function(){
+				var id = this.getAttribute("id");
+				alert("是否删除该围栏" + id);
+			})
+		});
+	</script>
+
+</html>

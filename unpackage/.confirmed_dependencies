@@ -1,0 +1,860 @@
+{
+  "main.html": {
+    "refer": [
+      "setting.html"
+    ],
+    "resources": []
+  },
+  "login.html": {
+    "resources": [
+      "js/app.js",
+      "js/mui.min.js",
+      "images/sinaweibo.png",
+      "css/mui.min.css",
+      "css/style.css",
+      "images/weixin.png",
+      "images/qq.png",
+      "js/mui.enterfocus.js",
+      "fonts/mui-icons-extra.ttf",
+      "fonts/mui.ttf",
+      "css/icons-extra.css",
+      "js/immersed.js",
+      "js/wistorm/md5.js",
+      "js/wistorm/wistorm.js",
+      "js/wistorm/define.js",
+      "images/default.png",
+      "js/locales/i18nextXHRBackend.js",
+      "js/locales.js",
+      "js/locales/i18nextBrowserLanguageDetector.js",
+      "js/mui.jsonp.js",
+      "js/wistorm/wspub.js",
+      "js/locales/loc-i18next.js",
+      "js/locales/i18nextLocalStorageCache.js",
+      "js/locales/i18next.js",
+      "locales/dev/translation.json",
+      "locales/en/translation.json"
+    ],
+    "refer": [
+      "main.html",
+      "reg.html",
+      "forget_password.html",
+      "unlock.html",
+      "tab-webview-main.html",
+      "tab-webview-main-bak.html"
+    ]
+  },
+  "setting.html": {
+    "resources": [
+      "libs/easymob-webim-sdk/easemob.im-1.0.5.js",
+      "fonts/mui.ttf",
+      "libs/easymob-webim-sdk/json2.js",
+      "libs/easymob-webim-sdk/jquery-1.11.1.js",
+      "js/mui.locker.js",
+      "js/feedback.js",
+      "css/feedback-page.css",
+      "js/feedback-page.js",
+      "libs/easymob-webim-sdk/strophe-custom-2.0.0.js",
+      "js/mui.view.js"
+    ],
+    "refer": []
+  },
+  "unlock.html": {
+    "resources": [
+      "js/mui.locker.js"
+    ],
+    "refer": []
+  },
+  "tab-webview-main.html": {
+    "resources": [
+      "tab-webview-subpage-about.html",
+      "fonts/mui.ttf",
+      "js/mui.min.js",
+      "css/mui.min.css",
+      "css/iconfont.css",
+      "fonts/iconfont.ttf",
+      "tab-webview-subpage-home.html",
+      "js/immersed.js",
+      "js/mui.back.5+.js",
+      "js/menu.js",
+      "js/app.js",
+      "js/wistorm/md5.js",
+      "js/wistorm/wistorm.js",
+      "js/wistorm/define.js",
+      "css/style.css",
+      "locales/dev/translation.json",
+      "tab-webview-subpage-map.html",
+      "js/locales/i18nextXHRBackend.js",
+      "js/locales.js",
+      "js/locales/i18nextBrowserLanguageDetector.js",
+      "js/wistorm/wspub.js",
+      "js/locales/loc-i18next.js",
+      "js/locales/i18nextLocalStorageCache.js",
+      "js/locales/i18next.js",
+      "tab-webview-subpage-control.html",
+      "locales/en/translation.json",
+      "ui/tabbar2.png",
+      "ui/back2.png",
+      "ui/navbar.png",
+      "js/mapjs/baidu_MarkerClusterer.js",
+      "js/mapjs/baidu_TextIconOverlay.js",
+      "js/mapjs/gomap.js",
+      "imagecar/max_light.png",
+      "imagecar/min_light1.png",
+      "tab-webview-subpage-more.html",
+      "imagecar/lockon.png",
+      "ui/greenStatus.png"
+    ],
+    "refer": [
+      "tab-webview-subpage-about.html",
+      "tab-webview-subpage-setting.html",
+      "tab-webview-subpage-chat.html",
+      "tab-webview-subpage-contact.html",
+      "tab-webview-subpage-map.html",
+      "setting.html",
+      "tab-webview-subpage-geofence.html",
+      "playback.html",
+      "tab-webview-subpage-home.html",
+      "vehicle.html",
+      "vehicle-list.html",
+      "tab-webview-subpage-more.html",
+      "tab-webview-subpage-discover.html",
+      "alert-list-main2.html",
+      "article-detail.html",
+      "tab-webview-subpage-control.html",
+      "tab-webview-subpage-map-bak.html",
+      "tab-webview-subpage-badumap.html",
+      "about.html",
+      "tab-webview-subpage-more-set.html"
+    ]
+  },
+  "tab-webview-subpage-setting.html": {
+    "resources": [
+      "js/app.js",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "css/mui.min.css",
+      "css/feedback.css",
+      "img/logo.png",
+      "js/feedback.js",
+      "js/mui.view.js",
+      "images/iconfont-tianjia.png",
+      "js/immersed.js"
+    ],
+    "refer": []
+  },
+  "tab-webview-subpage-about.html": {
+    "resources": [
+      "images/yuantiao.jpg",
+      "images/shuijiao.jpg",
+      "js/mui.min.js",
+      "css/mui.min.css",
+      "images/ad2.png",
+      "images/ad1.jpg"
+    ],
+    "refer": []
+  },
+  "reg.html": {
+    "resources": [
+      "css/iconfont.css",
+      "fonts/mui-icons-extra.ttf",
+      "js/app.js",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "css/mui.min.css",
+      "css/style.css",
+      "css/icons-extra.css",
+      "fonts/iconfont.ttf",
+      "js/immersed.js",
+      "js/wistorm/md5.js",
+      "js/wistorm/define.js",
+      "js/wistorm/wistorm.js"
+    ],
+    "refer": []
+  },
+  "tab-webview-subpage-map.html": {
+    "resources": [
+      "js/map.js",
+      "images/logo.png",
+      "js/mui.min.js",
+      "css/iconfont.css",
+      "css/mui.min.css",
+      "fonts/iconfont.ttf",
+      "css/icons-extra.css",
+      "font/fontawesome-webfont.woff",
+      "css/font-awesome.min.css",
+      "js/mapjs/bmap.js",
+      "js/mapjs/wisemap.js",
+      "js/mapjs/define.js",
+      "js/app.js",
+      "js/wistorm/md5.js",
+      "js/wistorm/define.js",
+      "js/wistorm/wistorm.js",
+      "/images/icon.png",
+      "images/icon.png",
+      "fonts/mui-icons-extra.ttf",
+      "images/traffic_off.png",
+      "images/lock_off.png",
+      "images/lock_on.png",
+      "images/traffic_on.png",
+      "images/stand_off.png",
+      "images/stand_on.png",
+      "images/locate.png",
+      "images/locate_off.png",
+      "images/waiting.gif",
+      "images/locate_on.png",
+      "images/refresh.png",
+      "images/default.png",
+      "images/vicon.png",
+      "images/power.png",
+      "images/power_off.png",
+      "js/mapjs/global.js",
+      "images/myicon.png",
+      "css/style.css",
+      "js/mapjs/gmap.js",
+      "locales/dev/translation.json",
+      "js/mapjs/markerclusterer.js",
+      "js/mapjs/markerwithlabel.js",
+      "js/locales/i18nextXHRBackend.js",
+      "js/locales.js",
+      "js/locales/i18nextBrowserLanguageDetector.js",
+      "js/wistorm/wspub.js",
+      "js/locales/loc-i18next.js",
+      "js/locales/i18nextLocalStorageCache.js",
+      "js/locales/i18next.js",
+      "js/mapjs/googlemap.js",
+      "js/mapjs/gomap.js",
+      "images/objects/normal_stop_180.gif",
+      "images/objects/normal_run_45.gif",
+      "images/objects/normal_run_135.gif",
+      "images/objects/normal_stop_225.gif",
+      "images/objects/normal_run_270.gif",
+      "images/objects/normal_stop_135.gif",
+      "images/objects/normal_offline_135.gif",
+      "images/objects/normal_offline_90.gif",
+      "images/objects/normal_alert_315.gif",
+      "images/objects/normal_offline_180.gif",
+      "images/objects/normal_offline_270.gif",
+      "images/objects/normal_run_90.gif",
+      "images/objects/normal_run_180.gif",
+      "images/objects/normal_run_0.gif",
+      "images/objects/normal_offline_45.gif",
+      "images/objects/normal_stop_315.gif",
+      "images/objects/normal_stop_0.gif",
+      "images/objects/normal_offline_315.gif",
+      "images/objects/normal_stop_270.gif",
+      "images/objects/normal_offline_225.gif",
+      "images/objects/normal_stop_90.gif",
+      "images/objects/normal_stop_45.gif",
+      "images/objects/normal_run_315.gif",
+      "images/objects/normal_offline_0.gif",
+      "images/objects/normal_run_225.gif",
+      "images/objects/normal_alert_0.gif",
+      "js/mui.jsonp.js",
+      "js/mapjs/baidu_MarkerClusterer.js",
+      "js/mapjs/baidu_TextIconOverlay.js"
+    ],
+    "refer": [
+      "geofence-list.html",
+      "geofence-list-main.html",
+      "alert-list-main.html",
+      "alert-list-main2.html",
+      "geofence-list-main2.html",
+      "geofence-set.html",
+      "tab-webview-main.html"
+    ]
+  },
+  "tab-webview-subpage-home.html": {
+    "resources": [
+      "images/ad2.png",
+      "images/ad1.jpg",
+      "css/icons-extra.css",
+      "js/core.js",
+      "js/mui.min.js",
+      "css/iconfont.css",
+      "css/mui.min.css",
+      "fonts/iconfont.ttf",
+      "js/menu.js",
+      "js/app.js",
+      "images/cbd.jpg",
+      "images/muwu.jpg",
+      "images/yuantiao.jpg",
+      "images/shuijiao.jpg",
+      "js/wistorm/md5.js",
+      "js/wistorm/wistorm.js",
+      "js/wistorm/define.js",
+      "images/nophoto.jpg",
+      "locales/dev/translation.json"
+    ],
+    "refer": [
+      "vehicle.html",
+      "vehicle-list.html",
+      "booking.html",
+      "service.html",
+      "article-detail.html",
+      "service-list.html"
+    ]
+  },
+  "playback.html": {
+    "resources": [
+      "js/app.js",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "css/iconfont.css",
+      "css/mui.min.css",
+      "fonts/iconfont.ttf",
+      "css/icons-extra.css",
+      "js/immersed.js",
+      "js/map.js",
+      "js/mapjs/bmap.js",
+      "js/mapjs/wisemap.js",
+      "js/wistorm/md5.js",
+      "js/wistorm/define.js",
+      "css/style.css",
+      "js/wistorm/wistorm.js",
+      "js/mapjs/define.js",
+      "js/mapjs/global.js",
+      "images/icon.png",
+      "images/traffic_off.png",
+      "images/lock_off.png",
+      "images/stand_off.png",
+      "images/locate.png",
+      "images/locate_off.png",
+      "images/default.png",
+      "images/refresh.png",
+      "js/mapjs/gomap.js",
+      "js/wistorm/wspub.js",
+      "js/mui.jsonp.js",
+      "images/objects/normal_run_0.gif",
+      "images/objects/normal_run_180.gif",
+      "images/objects/normal_run_225.gif",
+      "images/objects/normal_run_45.gif",
+      "images/objects/normal_run_315.gif",
+      "images/objects/normal_run_135.gif",
+      "images/objects/normal_run_270.gif",
+      "js/locales/i18nextXHRBackend.js",
+      "js/locales.js",
+      "js/locales/i18nextBrowserLanguageDetector.js",
+      "js/locales/loc-i18next.js",
+      "js/locales/i18nextLocalStorageCache.js",
+      "js/locales/i18next.js",
+      "locales/dev/translation.json"
+    ],
+    "refer": []
+  },
+  "geofence-list.html": {
+    "resources": [
+      "images/icon-geofence.png",
+      "js/app.js",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "css/iconfont.css",
+      "css/mui.min.css",
+      "fonts/iconfont.ttf",
+      "css/icons-extra.css",
+      "js/immersed.js",
+      "js/map.js",
+      "css/style.css"
+    ],
+    "refer": [
+      "geofence.html"
+    ]
+  },
+  "geofence.html": {
+    "resources": [
+      "js/app.js",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "css/iconfont.css",
+      "css/mui.min.css",
+      "css/icons-extra.css",
+      "js/immersed.js",
+      "js/map.js",
+      "css/style.css"
+    ],
+    "refer": [
+      "search.html"
+    ]
+  },
+  "vehicle.html": {
+    "resources": [
+      "js/common.js",
+      "fonts/mui-icons-extra.ttf",
+      "js/app.js",
+      "css/style.css",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "css/iconfont.css",
+      "css/mui.min.css",
+      "fonts/iconfont.ttf",
+      "css/icons-extra.css",
+      "js/immersed.js",
+      "js/wistorm/md5.js",
+      "js/wistorm/define.js",
+      "js/wistorm/wistorm.js"
+    ],
+    "refer": [
+      "barcode_scan.html",
+      "vehicle-type-list.html"
+    ]
+  },
+  "barcode_scan.html": {
+    "resources": [
+      "css/common.css",
+      "js/common.js"
+    ],
+    "refer": []
+  },
+  "tab-webview-main-bak.html": {
+    "resources": [
+      "css/iconfont.css",
+      "fonts/iconfont.ttf",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "css/mui.min.css",
+      "js/immersed.js",
+      "tab-webview-subpage-home.html"
+    ],
+    "refer": [
+      "tab-webview-subpage-map.html",
+      "tab-webview-subpage-contact.html"
+    ]
+  },
+  "vehicle-list.html": {
+    "resources": [
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "css/mui.min.css",
+      "js/immersed.js",
+      "js/app.js",
+      "js/wistorm/md5.js",
+      "js/wistorm/wistorm.js",
+      "js/wistorm/define.js",
+      "css/iconfont.css",
+      "fonts/iconfont.ttf",
+      "css/style.css",
+      "css/icons-car.css",
+      "locales/dev/translation.json",
+      "js/locales/i18nextXHRBackend.js",
+      "js/locales.js",
+      "js/locales/i18nextBrowserLanguageDetector.js",
+      "js/wistorm/wspub.js",
+      "js/mui.jsonp.js",
+      "js/locales/loc-i18next.js",
+      "js/locales/i18nextLocalStorageCache.js",
+      "js/locales/i18next.js",
+      "css/img/devs.png",
+      "images/waiting.gif",
+      "js/mapjs/global.js",
+      "js/mapjs/define.js",
+      "images/objects/normal_alert_0.gif",
+      "images/objects/normal_stop_0.gif",
+      "images/vicon.png"
+    ],
+    "refer": [
+      "tab-webview-subpage-map.html",
+      "vehicle.html",
+      "tab-webview-subpage-control.html"
+    ]
+  },
+  "tab-webview-subpage-more.html": {
+    "resources": [
+      "images/logo.png",
+      "js/app.js",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "css/mui.min.css",
+      "js/immersed.js",
+      "css/style.css",
+      "fonts/iconfont.ttf",
+      "css/iconfont.css",
+      "images/default.png",
+      "locales/dev/translation.json",
+      "js/locales.js",
+      "js/wistorm/wspub.js",
+      "js/locales/i18nextXHRBackend.js",
+      "js/locales/i18nextBrowserLanguageDetector.js",
+      "js/wistorm/md5.js",
+      "js/locales/loc-i18next.js",
+      "js/wistorm/define.js",
+      "js/locales/i18nextLocalStorageCache.js",
+      "js/wistorm/wistorm.js",
+      "js/locales/i18next.js",
+      "locales/en/translation.json"
+    ],
+    "refer": [
+      "account.html",
+      "forget_password.html",
+      "security.html",
+      "about.html",
+      "login.html",
+      "geofence-set.html",
+      "vehicle-manege-list.html",
+      "alert-list-main.html",
+      "alert-list-main2.html"
+    ]
+  },
+  "account.html": {
+    "resources": [
+      "js/app.js",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "css/mui.min.css",
+      "js/immersed.js",
+      "images/qihoo.png",
+      "css/style.css",
+      "images/default.png",
+      "js/upload.js",
+      "js/wistorm/md5.js",
+      "js/wistorm/wistorm.js",
+      "js/wistorm/define.js"
+    ],
+    "refer": [
+      "tab-webview-subpage-more.html"
+    ]
+  },
+  "forget_password.html": {
+    "resources": [
+      "fonts/mui-icons-extra.ttf",
+      "js/app.js",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "css/iconfont.css",
+      "css/mui.min.css",
+      "css/style.css",
+      "fonts/iconfont.ttf",
+      "css/icons-extra.css",
+      "js/immersed.js",
+      "js/wistorm/md5.js",
+      "js/wistorm/define.js",
+      "js/wistorm/wistorm.js"
+    ],
+    "refer": []
+  },
+  "security.html": {
+    "resources": [
+      "js/app.js",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "css/mui.min.css",
+      "css/style.css",
+      "js/immersed.js",
+      "js/wistorm/md5.js",
+      "js/wistorm/wistorm.js",
+      "js/wistorm/define.js"
+    ],
+    "refer": []
+  },
+  "geofence-list-main.html": {
+    "resources": [
+      "geofence-list.html",
+      "fonts/mui.ttf",
+      "js/mui.min.js",
+      "css/iconfont.css",
+      "css/mui.min.css",
+      "css/style.css",
+      "fonts/iconfont.ttf",
+      "css/icons-extra.css"
+    ],
+    "refer": [
+      "geofence-list.html",
+      "geofence.html"
+    ]
+  },
+  "alert-list-main.html": {
+    "resources": [
+      "alert-list.html",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "css/iconfont.css",
+      "css/mui.min.css",
+      "css/style.css",
+      "css/icons-extra.css"
+    ],
+    "refer": [
+      "alert-list.html"
+    ]
+  },
+  "alert-list.html": {
+    "resources": [
+      "js/mui.min.js",
+      "images/icon-geofence.png",
+      "css/iconfont.css",
+      "css/mui.min.css",
+      "css/style.css",
+      "css/icons-extra.css"
+    ],
+    "refer": []
+  },
+  "alert-list-main2.html": {
+    "resources": [
+      "js/mui.pullToRefresh.js",
+      "js/mui.pullToRefresh.material.js",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "css/mui.min.css",
+      "css/style.css",
+      "js/immersed.js",
+      "js/app.js",
+      "js/wistorm/md5.js",
+      "js/wistorm/wistorm.js",
+      "js/wistorm/define.js",
+      "css/iconfont.css",
+      "fonts/iconfont.ttf"
+    ],
+    "refer": []
+  },
+  "tab-webview-subpage-discover.html": {
+    "resources": [
+      "js/mui.pullToRefresh.js",
+      "images/cbd.jpg",
+      "js/mui.pullToRefresh.material.js",
+      "js/mui.min.js",
+      "css/mui.min.css",
+      "css/style.css",
+      "js/app.js",
+      "js/wistorm/md5.js",
+      "js/wistorm/wistorm.js",
+      "js/wistorm/define.js",
+      "locales/dev/translation.json",
+      "js/locales/i18nextXHRBackend.js",
+      "js/locales/i18nextBrowserLanguageDetector.js",
+      "js/locales/i18nextLocalStorageCache.js",
+      "js/locales/loc-i18next.js",
+      "js/locales/i18next.js"
+    ],
+    "refer": [
+      "article-detail.html"
+    ]
+  },
+  "about.html": {
+    "resources": [
+      "css/feedback.css",
+      "js/feedback.js",
+      "js/mui.view.js",
+      "js/app.js",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "css/mui.min.css",
+      "js/immersed.js",
+      "images/iconfont-tianjia.png",
+      "images/zj_logo.png",
+      "img/logo.png",
+      "images/logo.png",
+      "css/style.css",
+      "js/wistorm/md5.js",
+      "js/wistorm/wistorm.js",
+      "js/wistorm/define.js"
+    ],
+    "refer": []
+  },
+  "article-detail.html": {
+    "resources": [
+      "fonts/mui.ttf",
+      "js/app.js",
+      "js/mui.min.js",
+      "css/mui.min.css",
+      "css/style.css",
+      "js/immersed.js",
+      "css/iconfont.css",
+      "fonts/iconfont.ttf"
+    ],
+    "refer": []
+  },
+  "booking.html": {
+    "resources": [
+      "fonts/mui-icons-extra.ttf",
+      "js/app.js",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "css/iconfont.css",
+      "css/mui.min.css",
+      "css/style.css",
+      "fonts/iconfont.ttf",
+      "css/icons-extra.css",
+      "js/immersed.js",
+      "js/wistorm/md5.js",
+      "js/wistorm/define.js",
+      "js/wistorm/wistorm.js"
+    ],
+    "refer": []
+  },
+  "service.html": {
+    "resources": [
+      "js/app.js",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "css/iconfont.css",
+      "css/mui.min.css",
+      "css/style.css",
+      "css/icons-extra.css",
+      "js/immersed.js",
+      "js/map.js",
+      "js/mapjs/bmap.js",
+      "js/mapjs/global.js",
+      "js/mapjs/wisemap.js",
+      "js/wistorm/md5.js",
+      "js/wistorm/define.js",
+      "js/wistorm/wistorm.js",
+      "js/mapjs/define.js",
+      "images/icon.png",
+      "images/traffic_off.png"
+    ],
+    "refer": []
+  },
+  "search.html": {
+    "resources": [
+      "js/app.js",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "css/iconfont.css",
+      "css/mui.min.css",
+      "css/style.css",
+      "css/icons-extra.css",
+      "js/immersed.js",
+      "js/map.js"
+    ],
+    "refer": []
+  },
+  "geofence-list-main2.html": {
+    "refer": [
+      "geofence.html"
+    ],
+    "resources": [
+      "fonts/mui.ttf"
+    ]
+  },
+  "geofence-set.html": {
+    "resources": [
+      "js/app.js",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "css/iconfont.css",
+      "css/mui.min.css",
+      "css/style.css",
+      "css/icons-extra.css",
+      "js/immersed.js",
+      "js/map.js",
+      "js/wistorm/md5.js",
+      "js/wistorm/wistorm.js",
+      "js/wistorm/define.js"
+    ],
+    "refer": []
+  },
+  "service-list.html": {
+    "resources": [
+      "js/mui.pullToRefresh.js",
+      "js/app.js",
+      "js/wistorm/md5.js",
+      "js/mui.pullToRefresh.material.js",
+      "fonts/mui.ttf",
+      "js/wistorm/define.js",
+      "css/style.css",
+      "css/icons-extra.css",
+      "js/immersed.js",
+      "js/mui.min.js",
+      "js/wistorm/wistorm.js",
+      "css/iconfont.css",
+      "css/mui.min.css",
+      "fonts/iconfont.ttf",
+      "js/mui.picker.min.js",
+      "js/mui.poppicker.js",
+      "css/mui.picker.min.css",
+      "css/mui.poppicker.css",
+      "js/city.data.js"
+    ],
+    "refer": [
+      "service.html"
+    ]
+  },
+  "tab-webview-subpage-control.html": {
+    "resources": [
+      "images/alert.png",
+      "images/unlock.png",
+      "images/doorClose.png",
+      "images/redStatus.png",
+      "images/battery.png",
+      "images/lock.png",
+      "images/flameOutOff.png",
+      "images/greenStatus.png",
+      "js/map.js",
+      "js/mui.min.js",
+      "js/wistorm/define.js",
+      "js/wistorm/md5.js",
+      "js/wistorm/wistorm.js",
+      "js/app.js",
+      "js/mapjs/define.js",
+      "js/mapjs/global.js",
+      "images/flameOut.png",
+      "images/unlockOff.png",
+      "images/lockOff.png",
+      "images/doorOpen.png",
+      "images/unlockOn.png",
+      "images/lockOn.png",
+      "css/mui.min.css",
+      "ui/cutPower.png",
+      "ui/redStatus.png",
+      "ui/unlockoff.png",
+      "ui/backsign.png",
+      "ui/doorOpen.png",
+      "ui/start.png",
+      "ui/engineStartActive.png",
+      "ui/battery.png",
+      "ui/lockon.png",
+      "ui/flameout.png",
+      "ui/alert.png",
+      "ui/unlockon.png",
+      "ui/lockoff.png",
+      "ui/greenStatus.png",
+      "ui/engineStart.png"
+    ],
+    "refer": [
+      "alert-list-main2.html"
+    ]
+  },
+  "tab-webview-subpage-map-bak.html": {
+    "resources": [
+      "js/mapjs/bmap.js",
+      "js/mapjs/wisemap.js",
+      "css/font-awesome.min.css",
+      "css/icons-extra.css"
+    ]
+  },
+  "tab-webview-subpage-badumap.html": {
+    "resources": [
+      "tab-webview-subpage-map.html"
+    ],
+    "refer": [
+      "tab-webview-subpage-map.html",
+      "tab-webview-subpage-more.html",
+      "vehicle-list.html",
+      "vehicle.html",
+      "alert-list-main2.html",
+      "playback.html",
+      "tab-webview-main.html"
+    ]
+  },
+  "vehicle-manege-list.html": {
+    "refer": [
+      "vehicle.html",
+      "manege-list.html"
+    ],
+    "resources": [
+      "manege-list.html"
+    ]
+  },
+  "tab-webview-subpage-more-set.html": {
+    "refer": [
+      "vehicle-manege-list.html",
+      "alert-list-main2.html",
+      "forget_password.html"
+    ],
+    "resources": [
+      "locales/dev/translation.json"
+    ]
+  },
+  "manege-list.html": {
+    "refer": [
+      "vehicle.html"
+    ]
+  }
+}

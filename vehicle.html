@@ -1,0 +1,1132 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link href="css/icons-extra.css" rel="stylesheet" />
+		<link href="css/iconfont.css" rel="stylesheet" />
+		<link href="css/style.css" rel="stylesheet" />
+		<link href="css/mui.poppicker.css" rel="stylesheet" />
+		<link href="css/mui.picker.min.css" rel="stylesheet" />
+		<style>
+			.area {
+				margin: 20px auto 0px auto;
+			}
+			.mui-input-group:first-child {
+				margin-top: 20px;
+			}
+			.mui-input-group label {
+				width: 15%;
+			}
+			.mui-input-row label~input,
+			.mui-input-row label~select,
+			.mui-input-row label~textarea {
+				width: 75%;
+			}
+			.mui-checkbox input[type=checkbox],
+			.mui-radio input[type=radio] {
+				top: 6px;
+			}
+			.mui-content-padded {
+				margin-top: 25px;
+			}
+			.mui-btn {
+				padding: 10px;
+			}
+			.mui-icon-color {
+				color: #AAAAAA;
+			}
+			.mui-send-btn {
+				float: left;
+    				width: 100px;
+    				line-height: 1.3;
+    				border: 0px;
+    				color: blue;
+			}
+			
+			.mui-valid-text-box {
+				width: 50%;
+    				float: left;
+			}
+			
+			.mui-input {
+				float: left!important;
+				/*width: 50%!important;*/
+			}
+			
+			.mui-icon-extra-sweep {
+			    font-size: 20px;
+			    position: absolute;
+			    z-index: 1;
+			    top: 10px;
+			    right: 0;
+			    width: 38px;
+			    height: 38px;
+			    text-align: center;
+			    color: #999;
+			    /*font-weight: bold;*/
+			}
+			header {
+				background-color: #FFFFFF!important;
+				box-shadow: 0 0 0!important;
+			}
+			
+			#service-date {
+				width: 100%;
+				text-align: text;
+				font-size: 13px;
+				padding: 20px 10px 0px 10px;
+				color: #999999;
+				display: none;
+			} 
+			
+			#service-date .mui-row {
+				width: 100%;
+				text-align: center;
+			}
+			
+			#service-date .mui-row span {
+				padding-right: 15px;
+			}
+			
+			#delete {
+				display: none;
+			}
+			
+			.icon-saoma {
+				padding-top: 10px;
+			}
+			
+			.mui-car-set{
+				width: 100%;
+				height: auto;
+				margin-top: 0px;
+				background-color: white;
+			}
+			
+			.mui-driving-set{
+				width: 100%;
+				height: 40px;
+				border-bottom: solid #E0E0E0 1px;
+			}
+			
+			.mui-switch{
+				float: right; 
+				bottom: 45px; 
+				right: 10px;
+				
+			}
+			
+			.mui-set-name{
+				font-size: 18px;
+				line-height:40px; 
+				margin-left: 10px;
+				color: #323232;
+			}
+			.mui-off {
+				-webkit-transform: translate(0px, 0px);
+			}
+			.mui-on {
+				-webkit-transform: translate(43px, 0px);
+			}
+		</style>
+	</head>
+
+	<body>
+		<header id="header" class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 id="title" class="mui-title">添加车辆</h1>
+		</header>
+
+		<div id="content" class="mui-content">
+			<form id="vehicleForm" class="mui-input-group">
+				<div class="mui-input-row">
+					<label style="padding: 8px 15px;"><span class="iconfont icon-shebei1 mui-icon-color"></span></label>
+					<input id='deviceId' type="number" class="mui-input" placeholder="扫描 / 输入 IMEI (*)">
+					<span id="scan" class="mui-icon iconfont icon-saoma mui-icon-color"></span> 
+				</div>
+				<div class="mui-input-row">
+					<label style="padding: 8px 15px;"><span class="iconfont icon-cheliangguanli mui-icon-color"></span></label>
+					<input id='plate' type="text" class="mui-input-clear mui-input" placeholder="车牌号 (*)">
+				</div>
+				<div id="vehicle-type" class="mui-input-row">
+					<label style="padding: 8px 15px;"><span class="iconfont icon-pinpai mui-icon-color"></span></label>
+					<input id='brand' type="text" class="mui-input-clear mui-input" placeholder="车型" readonly>
+				</div>
+				<div class="mui-input-row">
+					<label style="padding: 8px 15px;"><span class="iconfont icon-dydjgl mui-icon-color"></label>
+					<input id='battery' type="number" class="mui-input" placeholder="电量" style="width: 40%; float: left;">
+				</div>
+				<div class="mui-input-row">
+					<label style="padding: 8px 15px;"><span class="iconfont icon-shijian mui-icon-color"></label>
+					<input id='buyDate' type="text" class="mui-input-clear mui-input" placeholder="购买日期">
+				</div>
+				<div class="mui-input-row">
+					<label style="padding: 8px 15px;"><span class="iconfont icon-yansexuanze mui-icon-color"></label>
+					<input id='color' type="text" class="mui-input-clear mui-input" placeholder="颜色">
+				</div>
+				<div class="mui-input-row" id="bluetooth-input-box">
+						<label style="padding: 8px 15px;"><span class="iconfont icon-lanya mui-icon-color"></label>
+						<input id="bluetooth-box" type="text" class=" mui-input" placeholder="蓝牙" readonly>
+						<button id="accede" type="button" style="position: absolute; float: right; right: 10px; top: 3px; width: 80px;">授权</button>
+				</div>
+			</form>
+			
+			<div class="mui-car-set"  id="car-set">
+				<div class="mui-driving-set">
+					<p class="mui-set-name">自动落锁</p>
+					<div class="mui-switch" id="auto-lock">
+				  		<div class="mui-switch-handle" ></div>
+					</div>
+				</div>
+				
+				<div class="mui-driving-set">
+					<p class="mui-set-name">声光模式</p>
+					<div class="mui-switch" id="acous-mode">
+				  		<div class="mui-switch-handle" ></div>
+					</div>
+				</div>
+				
+				<div class="mui-driving-set">
+					<p class="mui-set-name">自动升窗</p>
+					<div class="mui-switch" id="auto-window">
+				  		<div class="mui-switch-handle" ></div>
+					</div>
+				</div>
+				
+				<div class="mui-driving-set">
+					<p class="mui-set-name" >自动双闪</p>
+					<div class="mui-switch" id="auto-two-shan">
+				  		<div class="mui-switch-handle" ></div>
+					</div>
+				</div>
+				
+				
+				<div class="mui-driving-set" style="position: relative;">
+					<p class="mui-set-name">启动时间:</p>
+					<div class="mui-set-start-time" style="position: absolute; right: 0px; top: 10px; right: 30px;">
+						<input id="time_radio10" name="radio1" type="radio"/>
+						<label>10分</label>
+						
+						<input id="time_radio20" name="radio1" type="radio" />
+						<label>20分</label>
+						
+						<input id="time_radio30" name="radio1" type="radio" />
+						<label>30分</label>
+						
+						<input id="time_radio40" name="radio1" type="radio" />
+						<label>40分</label>
+					</div>
+			</div>
+			
+			<div class="mui-driving-set" style="position: relative;">
+					<p class="mui-set-name">点火时间:</p>
+					<div class="mui-set-start-time" style="position: absolute; right: 0px; top: 10px; right: 105px;">
+						<input id="time_radio1" name="radio2" type="radio"/>
+						<label>1秒</label>
+						
+						<input id="time_radio2" name="radio2" type="radio" style="margin-left: 5px;"/>
+						<label>2秒</label>
+						
+						<input id="time_radio3" name="radio2" type="radio" style="margin-left: 5px;"/>
+						<label>3秒</label>
+					</div>
+			</div>
+			</div>
+			<div id="service-date">
+				<div class="mui-row">
+					<label>登记日期：</label><span id="serviceRegDate"></span><label>结束日期：</label><span id="serviceExpireIn"></span>
+				</div>
+			</div>
+			<div class="mui-content-padded">
+				<p style="color: #CF2D28">注意：*是必填字段</p>
+				<button id='save' class="mui-btn mui-btn-block mui-btn-primary" data-loading-text="保存..." disabled>保存</button>
+				<button id='delete' class="mui-btn mui-btn-block mui-btn-danger" data-loading-text="删除...">删除</button>
+			</div>
+		
+		
+		<script src="js/mui.min.js"></script>
+		<script src="js/wistorm/define.js"></script>
+		<script src="js/wistorm/wistorm.js"></script>
+		<script src="js/wistorm/md5.js"></script>		
+		<script src="js/app.js"></script>
+		<script src="js/immersed.js" ></script>		
+		<script src="js/mui.picker.min.js"></script>
+		<script src="js/mui.poppicker.js"></script>
+		<script>
+			//console.log(1)
+			var parmeVehicle;
+			var modleVehicle;
+			var vehicleName ;
+			var currentVehicle;
+			var initing = false;
+			var task1;
+			var bluetoothMac;
+			var bluetoothReasult;
+			var mode = 0; //0: 新增 1：编辑
+			var deviceDid;
+			(function($, doc) {
+				$.init(); 
+				$.plusReady(function() {
+					
+					var scanButton = doc.getElementById('scan');
+					scanButton.addEventListener('tap', function(event){
+						clicked('barcode_scan.html',true,true);
+					});
+				});
+				var deviceIdBox = document.getElementById('deviceId');
+				var plateBox = document.getElementById('plate');
+				var brandBox = document.getElementById('brand');
+				var batteryBox = document.getElementById('battery');
+				var buyDateBox = document.getElementById('buyDate');
+				var colorBox = document.getElementById('color');
+				var saveButton = document.getElementById('save');
+				var delButton = document.getElementById("delete");
+				var vehicleForm = document.getElementById('vehicleForm');
+				var serviceBox = document.getElementById("service-date");
+				var serviceRegDate = document.getElementById("serviceRegDate");
+				var serviceExpireIn = document.getElementById("serviceExpireIn");
+				var carSetBox = document.getElementById('car-set');
+				var bluetooth = document.getElementById('bluetooth-box');
+				var accedeBtn = document.getElementById('accede');
+				var bluetoothInputBox = document.getElementById('bluetooth-input-box');
+				var valid = false;
+				var valid_plate = false;
+				var parentId = 0;
+				var treePath = '';
+				var activedIn = new Date();
+				
+				var setButton = function(){
+					saveButton.disabled = !(((currentVehicle && deviceIdBox.value == currentVehicle.did) || valid) && plateBox.value != '' && brandBox.value != ' '&&((currentVehicle && plateBox.value == currentVehicle.name) || valid_plate));												
+				}
+				var checkValid = function(){
+					console.log(deviceIdBox.value);
+					if(mode === 1 && currentVehicle && deviceIdBox.value == currentVehicle.did){
+						valid = true;
+						setButton();
+						return;
+					}
+					app.checkDeviceId(deviceIdBox.value, function(ret){
+						valid = ret.flag;
+						parentId = ret.parentId;
+						treePath = ret.treePath;
+						activedIn = ret.activedIn;
+						deviceDid = deviceIdBox.value;
+						console.log('parentId: ' + JSON.stringify(parentId));
+						console.log('treePath: ' + treePath);
+						console.log('activedIn: ' + activedIn);
+						setButton();
+						if(!valid){
+							plus.nativeUI.toast(ret.message);						
+						}
+					});
+				};
+				var checkPlate = function(){
+					app.checkPlate(plateBox.value, function(ret){
+						valid_plate = ret.flag;
+						setButton();
+						if(!valid_plate){
+							plus.nativeUI.toast(ret.message);						
+						}
+					});
+				};
+				
+				var title = '车型设置会影响到车辆控制，请谨慎修改！';
+				var bts=["取消","确定"];
+				var vehicle_type = document.getElementById('vehicle-type');
+				vehicle_type.addEventListener('tap', function(){
+					plus.nativeUI.confirm(title ,function(e){
+						var i=e.index;
+						if(i == 1){
+					
+					 		var picker = new mui.PopPicker({
+					    		layer: 2
+							});
+					    picker.setData([ {
+					        value: '0000',
+					        text: '标准',
+					        children: [{
+						        value: '0000',
+					            text: "所有车型"
+					        }]
+					    },{
+					        value: '0100',
+					        text: '奥迪',
+					        children: [{
+					                value: '0101',
+					                text: "A3"
+					        },{
+					                value: '0101',
+					                text: "A4"
+					        },{
+					                value: '0101',
+					                text: "A5"
+					        },{
+					                value: '0101',
+					                text: "Q5"
+					        },{
+					                value: '0103',
+					                text: "Q7"
+					        },{
+					                value: '0104',
+					                text: "A6L"
+					        },{
+					        		value: '0100',
+					        		text:"标准车型"
+					        }]
+					        
+					    }, {
+					        value: '0100',
+					        text: '大众',
+					        children: [{
+						        value: '0102',
+					            text: "朗逸"
+					        }, {
+						        value: '0102',
+					            text: "宝来"
+					        }, {
+					            value: '0100',
+					            text: "其他车型"
+					        }]
+					    }, {
+					        	
+					        value: '0200',
+					        text: '通用',
+					        children: [{
+						        value: '0200',
+					            text: "所有车型"
+					        }]
+					    }, {
+					        	
+					        value: '0201',
+					        text: '宝骏',
+					        children: [{
+						        value: '0000',
+					            text: "560"
+					        },{
+						        value: '0000',
+					            text: "730"
+					        },{
+						        value: '0000',
+					            text: "标准车型"
+					        }]
+					    }, {
+					        	
+					        value: '0300',
+					        text: '福特',
+					        children: [{
+						        value: '0300',
+					            text: "新 FOCUS"
+					        },{
+						        value: '0301',
+					            text: "经典 FOCUS"
+					        },{
+						        value: '0302',
+					            text: "老蒙迪欧"
+					        },{
+						        value: '0303',
+					            text: "翼搏"
+					        },{
+						        value: '0303',
+					            text: "嘉年华"
+					        },{
+						        value: '0304',
+					            text: "新蒙迪欧"
+					        },{
+						        value: '0305',
+					            text: "锐界"
+					        }]
+					    }, {
+					        	
+					        value: '0400',
+					        text: '丰田',
+					        children: [{
+						        value: '0000',
+					            text: "所有车型"
+					        }]
+					    }, {
+					        	
+					        value: '0500',
+					        text: '本田',
+					        children: [{
+						        value: '0501',
+					            text: "飞度"
+					        },{
+						        value: '0500',
+					            text: "标准车型"
+					        }]
+					    }, {
+					        	
+					        value: '0600',
+					        text: '日产',
+					        children: [{
+						        value: '0601',
+					            text: "经典轩逸"
+					        },{
+						        value: '0601',
+					            text: "新款骊威"
+					        },{
+						        value: '0600',
+					            text: "标准车型"
+					        }]
+					    }, {
+					        	
+					        value: '0700',
+					        text: '起亚',
+					        children: [{
+						        value: '0000',
+					            text: "所有车型"
+					        }]
+					    }, {
+					        	
+					        value: '0800',
+					        text: '现代',
+					        children: [{
+						        value: '0801',
+					            text: "IX35"
+					        },{
+						        value: '0800',
+					            text: "标准车型"
+					        }]
+					    }, {
+					        	
+					        value: '0900',
+					        text: '宝马',
+					        children: [{
+						        value: '0000',
+					            text: "所有车型"
+					        }]
+					    }, {
+					        	
+					        value: '0A00',
+					        text: '奔驰',
+					        children: [{
+						        value: '0000',
+					            text: "所有车型"
+					        }]
+					    }, {
+					        	
+					        value: '0E00',
+					        text: '标志',
+					        children: [{
+						        value: '0000',
+					            text: "所有车型"
+					        }]
+					    }, {
+					        	
+					        value: '1200',
+					        text: '克莱斯特',
+					        children: [{
+						        value: '0000',
+					            text: "所有车型"
+					        }]
+					    },
+					    
+					    ])
+					picker.pickers[0].setSelectedIndex(1);
+					picker.pickers[1].setSelectedIndex(1);
+					picker.show(function(SelectedItem) {
+						console.log(SelectedItem);
+//						alert(JSON.stringify(SelectedItem[0]))
+                       checkValid();
+						document.getElementById('brand').value = SelectedItem[0].text+SelectedItem[1].text;
+					parmeVehicle = SelectedItem[0].value;
+					modleVehicle = SelectedItem[1].value;
+						picker.dispose();
+					})
+
+			}
+		   },'车型标定',bts);
+		});		
+				
+				window.addEventListener('show', function(event){
+					console.log('vehicle page show');
+					mode = event.detail.mode;
+					var objectId = event.detail.objectId
+					console.log('mode = ' + mode);
+					var title = document.getElementById('title');
+//					currentVehicle = app.getCurrentVehicle();
+					vehicleForm.reset();
+//					title.innerHTML = mode == 0 ? '添加车辆': vehicleName;
+					if(mode == 0){
+						title.innerHTML = '添加车辆';
+					}
+					serviceBox.style.display = mode == 0 ? 'none': 'block';
+					delButton.style.display = mode == 0 ? 'none': 'block';
+					carSetBox.style.display = mode == 0 ? 'none': 'block';
+					bluetoothInputBox.style.display = mode == 0 ? 'none': 'block';
+					switch(mode){
+						case 0:
+							saveButton.disabled = true;
+							break;
+						case 1:				
+//							deviceIdBox.value = currentVehicle.did;
+//							plateBox.value = currentVehicle.name;
+							app.getVehicle(objectId, function(vehicle){
+								if(vehicle){
+									currentVehicle = vehicle;
+									deviceIdBox.value = vehicle.did;
+									plateBox.value = vehicle.name;
+									vehicleName = vehicle.name;
+									title.innerHTML = vehicleName;
+									brandBox.value = vehicle.brand;			
+									batteryBox.value = vehicle.battery;
+									
+									buyDateBox.value = (new Date(vehicle.buyDate)).format('yyyy-MM-dd');
+									colorBox.value = vehicle.color;
+									serviceRegDate.innerHTML = new Date(vehicle.serviceRegDate).format('yyyy-MM-dd');
+									serviceExpireIn.innerHTML = new Date(vehicle.serviceExpireIn).format('yyyy-MM-dd');
+									app.getDevice(vehicle.did, function(device){
+										if(device){
+											 bluetoothMac = device.params.btMac;
+											 bluetoothReasult = device.params.btResult; 
+											 if(bluetoothMac == '000000000000' || bluetoothMac == '' || bluetoothMac == null){
+													accedeBtn.innerHTML = '授权';
+												}else{
+													accedeBtn.innerHTML = '取消授权';
+												}
+																		
+												if(bluetoothMac == '000000000000'){
+													bluetooth.value = ''; 
+												}else if(bluetoothMac != null ){
+													bluetooth.value = bluetoothMac;
+												}
+											initing = true;
+											device.params.autoLockDoor != $('#auto-lock').switch().classList.contains('mui-active').toString() ? $('#auto-lock').switch().toggle():null;
+											console.log(device.params.startMinute20);
+											device.params.acousMode != $('#acous-mode').switch().classList.contains('mui-active').toString() ? $('#acous-mode').switch().toggle():null;
+											device.params.autoWindow != $('#auto-window').switch().classList.contains('mui-active').toString() ? $('#auto-window').switch().toggle():null;
+											device.params.autoTwoShan != $('#auto-two-shan').switch().classList.contains('mui-active').toString() ? $('#auto-two-shan').switch().toggle():null;
+											document.getElementById('time_radio10').checked = device.params.startMinute10 == 'true';
+											document.getElementById('time_radio20').checked = device.params.startMinute20 == 'true';
+											document.getElementById('time_radio30').checked = device.params.startMinute30 == 'true';
+											document.getElementById('time_radio40').checked = device.params.startMinute40 == 'true';
+											document.getElementById('time_radio1').checked = device.params.ignitionSecond1 == 'true';
+											document.getElementById('time_radio2').checked = device.params.ignitionSecond2 == 'true';
+											document.getElementById('time_radio3').checked = device.params.ignitionSecond3 == 'true';
+											initing = false;
+										}
+									});
+								}
+								saveButton.disabled = true;								
+							});
+							break;
+					}
+				});
+				
+				brandBox.addEventListener('change',function(){
+					checkValid();
+				});
+				buyDateBox.addEventListener('change',function(){
+					checkValid();
+				});
+				colorBox.addEventListener('input',function(){
+					checkValid();
+				});
+				batteryBox.addEventListener('input',function(){
+					checkValid();
+				});
+				deviceIdBox.addEventListener('input', function(){
+					checkValid();
+				});
+				plateBox.addEventListener('input', function(){
+					checkPlate();
+				});
+				buyDateBox.addEventListener('tap', function(event) {
+					var dDate = new Date();
+					dDate.setFullYear(2014, 7, 16);
+					var minDate = new Date();
+					minDate.setFullYear(2010, 0, 1);
+					var maxDate = new Date();
+					maxDate.setFullYear(2020, 11, 31);
+					plus.nativeUI.pickDate(function(e) {
+						var d = e.date;
+						buyDateBox.value = d.format('yyyy-MM-dd');
+						checkValid();
+					}, function(e) {
+					}, {
+						title: "选择购买日期",
+						date: dDate,
+						minDate: minDate,
+						maxDate: maxDate
+					});
+				});	
+//				mui(document.body).on('tap', '.mui-btn', function(e) {
+//		            mui(this).button('loading');
+//		            setTimeout(function() {
+//		                mui(this).button('reset');
+//		            }.bind(this), 2000);
+//		      	});
+
+//				function oprate(vehicle){
+					delButton.addEventListener('tap', function(event) {
+					var bts=["否","是"];
+					plus.nativeUI.confirm("确认删除 [" + currentVehicle.name + "]?", function(e) {
+						var i = e.index;
+						if(i == 1) {
+							app.deleteVehicle(currentVehicle.objectId, currentVehicle.did, function(err) {
+								if(err) {
+									plus.nativeUI.toast(err);
+									return;
+								}
+								plus.nativeUI.toast('删除车辆 [' + currentVehicle.name + '] 成功.');
+								// 清除选中车辆
+								app.setCurrentVehicle();
+								// 刷新车辆列表
+								app.updateTime = new Date(0);
+								vehiclePage = plus.webview.getWebviewById('vehicle-list');
+								vehicleManege = plus.webview.getWebviewById('vehicle-manege-list');
+								mui.fire(vehicleManege, 'refreshVehicle', null);
+								mui.fire(vehiclePage, 'refreshVehicle', null);
+								// 返回首页
+								mui.back();
+							});
+						}
+					}, "删除车辆", bts);
+				});
+				saveButton.addEventListener('tap', function(event){
+//					alert(setImmediate[1].value);
+					var _this = this;
+					mui(this).button('loading');
+					switch(mode){
+						case 0:
+							console.log(activedIn);
+							sendCommond(parmeVehicle, modleVehicle);
+							app.addVehicle(deviceIdBox.value, plateBox.value, brandBox.value, 
+								batteryBox.value, buyDateBox.value, colorBox.value, parentId, treePath, activedIn, function(err, id){
+									if (err) {
+										plus.nativeUI.toast(err);
+										return;
+									}
+									plus.nativeUI.toast('添加车辆成功.');
+									mui(_this).button('reset');
+									$.back();
+									// 设置新增车辆为默认选中
+									var vehicle = {
+								  		id: id.toString(),
+								  		name: plateBox.value,
+								  		did: deviceIdBox.value
+								  	};
+								  	app.setCurrentVehicle(vehicle);
+									// 刷新车辆列表
+									app.updateTime = new Date(0);
+									vehiclePage = plus.webview.getWebviewById('vehicle-list');
+									$.fire(vehiclePage, 'refreshVehicle', null);			
+									vehicleManege = plus.webview.getWebviewById('vehicle-manege-list');
+									$.fire(vehicleManege, 'refreshVehicle', null);
+								});		
+							break;
+						case 1:
+							sendCommond(parmeVehicle, modleVehicle);
+//							alert(parmeVehicle);
+							app.updateVehicle(currentVehicle.objectId, deviceIdBox.value, plateBox.value, brandBox.value, 
+								batteryBox.value, buyDateBox.value, colorBox.value, currentVehicle.did, function(err){
+									if (err) {
+										plus.nativeUI.toast(err);
+										return;
+									}
+									plus.nativeUI.toast('编辑车辆成功.');
+									mui(_this).button('reset');
+									$.back();
+									// 设置新增车辆为默认选中
+									var vehicle = {
+								  		id: currentVehicle.id,
+								  		name: plateBox.value,
+								  		did: deviceIdBox.value
+								  	};
+								  	app.setCurrentVehicle(vehicle);
+									// 刷新车辆列表
+									app.updateTime = new Date(0);
+									vehiclePage = plus.webview.getWebviewById('vehicle-list');
+									$.fire(vehiclePage, 'refreshVehicle', null);	
+									vehicleManege = plus.webview.getWebviewById('vehicle-manege-list');
+									$.fire(vehicleManege, 'refreshVehicle', null);
+								});
+							break;
+					}
+				});
+			}(mui, document));
+			
+			var bluetooth = document.getElementById('bluetooth-box');
+			function carInfo(){
+				if(currentVehicle){
+						app.getDevice(currentVehicle.did, function(device){
+						bluetoothMac = device.params.btMac;
+						bluetoothReasult = device.params.btResult; 
+						if(bluetoothMac == '000000000000' || bluetoothMac == '' || bluetoothMac == null){
+							accedeBtn.innerHTML = '授权';
+						}else{
+							accedeBtn.innerHTML = '取消授权';
+						}
+						
+						if(bluetoothMac == '000000000000'){
+							bluetooth.value = ''; 
+						}else if(bluetoothMac != null ){
+							bluetooth.value = bluetoothMac;
+						}
+						bluetooth.value = bluetoothMac;
+					});
+				}else{
+					plus.nativeUI.toast('请选择车辆');	
+				}
+			}
+			
+			var accedeBtn = document.getElementById('accede');
+			accedeBtn.addEventListener('tap', function(event){
+//				alert(bluetoothMac);
+					if(bluetoothMac == '' || bluetoothMac  == '000000000000'){
+						sendBluetoothCommond(2, '');
+					}else{
+						sendBluetoothCommond(1, bluetoothMac);
+					}
+			});
+			
+			var flat2 = 0;
+			function startSearch() {
+				var timer = setTimeout(function() {
+					flat2++;
+					console.log(flat2)
+					carInfo();
+					if(flat2 == 60){
+						plus.nativeUI.toast('授权超时！');
+						flat2 = 0;
+					}else if(bluetoothMac  == '000000000000' ||bluetoothMac  == '' ){
+						startSearch();
+					}else {
+						flat2 = 0;
+					}
+					
+				},5000)
+			}
+			
+			//蓝牙授权指令
+			function sendBluetoothCommond(bluetoothType, bluetoothMAC){
+					var cmdType = IOT_CMD.SET_PARAM;
+					var type = 0;
+					var remark = '蓝牙授权';
+					var params = {
+						'param_id': 0x0F4, 
+						'type': bluetoothType,
+						'mac': bluetoothMAC
+					};
+					if(currentVehicle){
+						if(bluetoothType == 2 ){
+							plus.nativeUI.showWaiting("正在授权中...");
+						}else if(bluetoothType == 1 ){
+							plus.nativeUI.showWaiting("正在取消授权...");
+						}
+//						plus.nativeUI.showWaiting("车型设定中...");
+						app.sendCommand(currentVehicle.did, cmdType, params, type, remark, 0, function(err) {
+							if(err) {
+								plus.nativeUI.closeWaiting();
+								plus.nativeUI.toast(err);
+								return;
+							}
+							plus.nativeUI.closeWaiting();
+							if(bluetoothType == 2 ){
+								startSearch();
+								plus.nativeUI.toast('蓝牙授权开启成功，请在5分钟内搜索蓝牙“VRDBTDEVICE”并配对连接！');
+							}else if(bluetoothType == 1){
+								bluetooth.value = '';
+								bluetoothMac = '';
+								accedeBtn.innerHTML = '授权';
+								plus.nativeUI.toast('取消授权成功！');
+							}
+							StandStatus = true;
+						});
+					}else{
+						plus.nativeUI.toast('请选择车辆');	
+					}
+				
+			}
+			
+			//车辆标定指令
+			function sendCommond(paramVehicle, modelVehicle){
+				
+					var cmdType = IOT_CMD.SET_PARAM;
+					var type = 1;
+					var remark = '车型标定';
+					var params = {
+						'param_id': 0x0F3, 
+						'model': paramVehicle,
+						'switch': modelVehicle
+					};
+//					alert(paramVehicle+','+modelVehicle);
+					if(paramVehicle != null && modleVehicle != null){
+						if(mode == 0){
+								if(deviceDid){
+									plus.nativeUI.showWaiting("车型设定中...");
+									app.sendCommand(deviceDid, cmdType, params, type, remark, 0, function(err) {
+										if(err) {
+											plus.nativeUI.closeWaiting();
+											return;
+										}
+										plus.nativeUI.closeWaiting();
+										plus.nativeUI.toast('车型设定成功！');
+										StandStatus = true;
+									});
+								}
+						}else if(mode == 1){
+							if(currentVehicle){
+								plus.nativeUI.showWaiting("车型设定中...");
+								app.sendCommand(currentVehicle.did, cmdType, params, type, remark, 0, function(err) {
+									if(err) {
+										plus.nativeUI.closeWaiting();
+										return;
+									}
+									plus.nativeUI.closeWaiting();
+									plus.nativeUI.toast('车型设定成功！');
+									StandStatus = true;
+									alert('车型设定成功！');
+								});
+							}else{
+								plus.nativeUI.toast('请选择车辆');	
+							}
+						}
+						
+				}else{
+							plus.nativeUI.toast('车型未设定！');	
+					}
+			}
+			
+				//发送车辆设置指令
+				var autoLock;
+				var On_off;
+				document.getElementById("auto-lock").addEventListener("toggle",function(event){
+						  if(initing)return;
+						  		autoLock = '01';
+						  if(event.detail.isActive){
+						  		On_off = '01'
+						  }else{
+						    	On_off = '00'
+						  }
+						  sendCommodSet(autoLock,On_off);
+						});
+				
+				document.getElementById("acous-mode").addEventListener("toggle",function(event){
+						  if(initing)return;
+						  		autoLock = '02';
+						  if(event.detail.isActive){
+						  		On_off = '01'
+						  }else{
+						    	On_off = '00'
+						  }
+						  sendCommodSet(autoLock,On_off);
+						});
+				
+				document.getElementById("auto-window").addEventListener("toggle",function(event){
+						  if(initing)return;
+						  		autoLock = '05';
+						  if(event.detail.isActive){
+						  		On_off = '01'
+						  }else{
+						    	On_off = '00'
+						  }
+						  sendCommodSet(autoLock,On_off);
+				});
+				
+				document.getElementById("auto-two-shan").addEventListener("toggle",function(event){
+						  if(initing)return;
+						  		autoLock = '06';
+						  if(event.detail.isActive){
+						  		On_off = '01'
+						  }else{
+						    	On_off = '00'
+						  }
+						  sendCommodSet(autoLock,On_off);
+				});
+				document.getElementById('time_radio10').addEventListener('change', function(event){
+					 autoLock = '07';
+					 On_off = '01'
+					 sendCommodSet(autoLock,On_off);
+				});
+				
+				document.getElementById('time_radio20').addEventListener('change', function(event){
+					 autoLock = '07';
+					 On_off = '02'
+					 sendCommodSet(autoLock,On_off);
+				});
+				
+				document.getElementById('time_radio30').addEventListener('change', function(event){
+					 autoLock = '07';
+					 On_off = '03'
+					 sendCommodSet(autoLock,On_off);
+				});
+				
+				document.getElementById('time_radio40').addEventListener('change', function(event){
+					 autoLock = '07';
+					 On_off = '04'
+					 sendCommodSet(autoLock,On_off);
+				});
+				
+				document.getElementById('time_radio1').addEventListener('change', function(event){
+					 autoLock = '08';
+					 On_off = '01'
+					 sendCommodSet(autoLock,On_off);
+				});
+				
+				document.getElementById('time_radio2').addEventListener('change', function(event){
+					 autoLock = '08';
+					 On_off = '02'
+					 sendCommodSet(autoLock,On_off);
+				});
+				
+				document.getElementById('time_radio3').addEventListener('change', function(event){
+					 autoLock = '08';
+					 On_off = '03'
+					 sendCommodSet(autoLock,On_off);
+				});
+			
+			function sendCommodSet(aa,bb){
+				
+				var cmdType = IOT_CMD.SET_PARAM;
+				var type = 0;
+				var remark = '设置';
+				var autoLockDoor;
+				var acousMode;
+				var autoWindow;
+				var autoTwoShan;
+				var startMinute10, startMinute20, startMinute30,startMinute40;
+				var ignitionSecond1,ignitionSecond2,ignitionSecond3;
+				var update;
+				var params = {
+						'param_id': 0x0F2,
+						'flag': aa, 
+						'switch': bb
+					};
+					
+					if(aa == '01'){
+						autoLockDoor = bb == '01' ? true: false;
+						update = {'params.autoLockDoor': autoLockDoor};
+					}else if(aa == '02'){
+						acousMode = bb == '01' ? true: false;
+						update = {'params.acousMode': acousMode};
+					}else if(aa == '05'){
+						autoWindow = bb == '01' ? true: false;
+						update = {'params.autoWindow': autoWindow};
+					}else if(aa == '06'){
+						autoTwoShan = bb == '01' ? true: false;
+						update = {'params.autoTwoShan': autoTwoShan};
+					}else if(aa == '07'){
+							if(bb == '01'){
+								startMinute10 = true;
+								startMinute20 = false;
+								startMinute30 = false;
+								startMinute40 = false;
+							}else if(bb == '02'){
+								startMinute20 = true;
+								startMinute10 = false;
+								startMinute30 = false;
+								startMinute40 = false;
+							}else if(bb == '03'){
+								startMinute30 = true;
+								startMinute20 = false;
+								startMinute10 = false;
+								startMinute40 = false;
+							}else if(bb == '04'){
+								startMinute40 = true;
+								startMinute20 = false;
+								startMinute30 = false;
+								startMinute10 = false;
+							}
+						
+						update = {'params.startMinute10': startMinute10, 'params.startMinute20': startMinute20, 'params.startMinute30': startMinute30,'params.startMinute40': startMinute40};
+						
+					}else if(aa == '08'){
+							if(bb == '01'){
+								ignitionSecond1 = true;
+								ignitionSecond2 = false;
+								ignitionSecond3 = false;
+							}else if(bb == '02'){
+								ignitionSecond1 = false;
+								ignitionSecond2 = true;
+								ignitionSecond3 = false;
+							}else if(bb == '03'){
+								ignitionSecond1 = false;
+								ignitionSecond2 = false;
+								ignitionSecond3 = true;
+							}
+						
+						update = {'params.ignitionSecond1': ignitionSecond1,'params.ignitionSecond2': ignitionSecond2,'params.ignitionSecond3': ignitionSecond3};
+					}
+					
+//					var currentVehicle = app.getCurrentVehicle();
+					if(currentVehicle){
+						plus.nativeUI.showWaiting("发送指令中...");
+						app.sendCommand(currentVehicle.did, cmdType, params, type, remark, 5, function(err) {
+							if(err) {
+								plus.nativeUI.closeWaiting();
+								plus.nativeUI.toast(err);
+								return;
+							}
+							plus.nativeUI.closeWaiting();
+							plus.nativeUI.toast('发送指令成功！');
+							console.log('aa:' + aa + ',bb:' + bb + "," + JSON.stringify(update));
+							app.updateDevice(currentVehicle.did, update, function(obj){
+								console.log('更新设备：' + JSON.stringify(obj));
+							});
+							StandStatus = true;
+						});
+					}else{
+						plus.nativeUI.toast('请选择车辆');	
+					}
+			}
+			
+			
+		    function scaned( t, r, f ) {
+				var deviceId = document.getElementById('deviceId');
+				deviceId.value = r;
+				mui.trigger(deviceId, 'change');
+			}
+			// 处理点击事件
+			var openw = null,
+				waiting = null;
+			var clicked = function(id, wa, ns, ws) {
+				if(openw) { //避免多次打开同一个页面
+					return null;
+				}
+				if(window.plus) {
+					wa && (waiting = plus.nativeUI.showWaiting());
+					ws = ws || {};
+					ws.scrollIndicator || (ws.scrollIndicator = 'none');
+					ws.scalable || (ws.scalable = false);
+					var pre = ''; //'http://192.168.1.178:8080/h5/';
+					openw = plus.webview.create(pre + id, id, ws);
+					ns || openw.addEventListener('loaded', function() { //页面加载完成后才显示
+						//		setTimeout(function(){//延后显示可避免低端机上动画时白屏
+						openw.show(as);
+						closeWaiting();
+						//		},200);
+					}, false);
+					openw.addEventListener('close', function() { //页面关闭后可再次打开
+						openw = null;
+					}, false);
+					return openw;
+				} else {
+					window.open(id);
+				}
+				return null;
+			};
+			var closeWaiting = function() {
+				waiting && waiting.close();
+				waiting = null;
+			}
+			
+			var apage = null;
+			mui.plusReady(function(){
+				var vehicle_typechick = mui.preload({
+					"id":'vehicle-type-list',
+					"url":'vehicle-type-list.html'
+				});
+			});
+//			
+		</script>
+		
+
+
+		
+	</body>
+
+</html>

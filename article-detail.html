@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>个人中心</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<link rel="stylesheet" href="css/mui.min.css">
+		<link href="css/iconfont.css" rel="stylesheet" />
+		<link href="css/style.css" rel="stylesheet" />
+		<style>
+			html,
+			body {
+				font-family: 'Helvetica Neue',Helvetica,sans-serif;
+				background-color: #fff;
+			}
+			.head {
+				height: 40px;
+			}
+			#head {
+				line-height: 40px;
+			}
+			.head-img {
+				width: 40px;
+				height: 40px;
+			}
+			#head-img1 {
+				position: absolute;
+				bottom: 10px;
+				right: 40px;
+				width: 40px;
+				height: 40px;
+			}
+			.title{
+				margin: 20px;
+				color: #242424;
+				font-size: 24px;
+				line-height: 30px;
+			}
+			.remark {
+				color: #B5B5B5; 
+				font-size: 12px;
+				margin: 20px;
+			}
+			.body {
+				color: #242424; 
+				font-size: 14px;
+				margin: 20px;
+			}
+			.body p {
+				color: #242424; 
+				font-size: 17px;
+				line-height: 28px;	
+				margin-top: 0;
+    				margin-bottom: 10px;			
+			}
+			.body img {
+				width: 100%;
+			}
+			.update {
+				font-style: normal;
+				color: #999999;
+				margin-right: -25px;
+				font-size: 15px
+			}
+			header {
+				background-color: #FFFFFF!important;
+				box-shadow: 0 0 0!important;
+			}
+			
+		</style>
+	</head>
+
+	<body>
+		<header id="header" class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<a id="share" class="mui-icon iconfont icon-fenxiang mui-pull-right"></a>
+			<h1 class="mui-title"></h1>
+		</header>
+		<!--<div id="content" class="mui-content">
+			<div class="mui-scroll">
+				<h3 class="title">奥迪全新SQ5国内谍照曝光 将进口至国内</h3>
+				<p class="remark">张三 02-01 13:02</p>
+				<div class="body">
+					<p>奥迪刚于2017北美车展上发布了全新SQ5车型，目前我们就获得了该车的国内路试谍照，这意味着其未来将进口至国内上市销售。</p><p><img alt="奥迪全新SQ5国内谍照曝光 将进口至国内" src="http://img1.gtimg.com/auto/pics/hv1/190/57/2180/141769225.jpg"></p><p>奥迪全新SQ5谍照曝光</p><p>从曝光的尾部谍照来看，我们发现路试车的排气管周围并未采用和新Q5一样的镀铬装饰，同时装饰排气管内部的条幅也发生了改变，所以其应该就是奥迪全新SQ5车型。</p><p style="text-align: center;"><img alt="奥迪全新SQ5国内谍照曝光 将进口至国内" src="http://img1.gtimg.com/auto/pics/hv1/189/57/2180/141769224.jpg"></p><p style="text-align: center;"><img alt="奥迪全新SQ5国内谍照曝光 将进口至国内" src="http://img1.gtimg.com/auto/pics/hv1/191/57/2180/141769226.jpg"></p><p style="text-align: center;">海外亮相的奥迪全新SQ5</p><p>外观方面，从海外亮相的全新SQ5来看，其将和新一代Q5一样配备矩阵式全LED大灯，且双L形的内部结构让新车更具性能气息。同时，新车配备了家族式六边形进气格栅。尾部方面，新车配备了犀利的全LED尾灯，同时后杠下方加入了扩散器。</p><p style="text-align: center;"><img alt="奥迪全新SQ5国内谍照曝光 将进口至国内" src="http://img1.gtimg.com/auto/pics/hv1/192/57/2180/141769227.jpg"></p><p style="text-align: center;">海外亮相的奥迪全新SQ5</p><p>内饰方面，全新奥迪SQ5采用了全新设计，十分简约。细节方面，新车配备了三幅式运动方向盘。中控方面，其顶部配备了全新8.3英寸多媒体显示屏、MMI导航Plus系统以及平视显示系统，整体科技感十足。</p><p style="text-align: center;"><img alt="奥迪全新SQ5国内谍照曝光 将进口至国内" src="http://img1.gtimg.com/auto/pics/hv1/193/57/2180/141769228.jpg"></p><p style="text-align: center;">海外亮相的奥迪全新SQ5内饰</p>
+				</div>
+			</div>			
+		</div>-->
+	</body>
+	<script src="js/mui.min.js "></script>
+	<script src="js/immersed.js" ></script>
+	<script type="text/javascript" src="js/app.js" ></script>
+	<script>
+		var ws = null,
+			embed = null;
+		var id = '',
+			title = "",
+			summary = "",
+			img = "";
+		var url ='';
+		mui.init({
+			swipeBack:true //启用右滑关闭功能
+		});		
+		//分享操作
+		var shares = {};
+		function shareMessage(share, ex) {
+			var msg = {
+				extra: {
+					scene: ex
+				}
+			};
+			msg.href = url;
+			msg.title = title;
+			msg.content = summary;
+			msg.thumbs = ['_www/images/120x120.png'];
+			share.send(msg, function() {
+				console.log("分享到\"" + share.description + "\"成功！ ");
+			}, function(e) {
+				console.log("分享到\"" + share.description + "\"失败: " + e.code + " - " + e.message);
+			});
+		}
+		mui.plusReady(function() {
+			ws = plus.webview.currentWebview();
+			console.log(ws.objectId);
+			id = ws.objectId;
+			title = ws.title;
+			summary = ws.summary;
+			img = ws.img;
+			url ='http://wop-api.chease.cn/article?dev_key=59346d400236ab95e95193f35f3df6a4&id=' + id;
+			ws.addEventListener('show',createEmbed,false);
+			//显示当前页面
+    			ws.show();
+			function createEmbed(){
+				var topoffset='45px';
+				if(plus.navigator.isImmersedStatusbar()){// 兼容immersed状态栏模式
+					topoffset=(Math.round(plus.navigator.getStatusbarHeight())+45)+'px';
+				}
+				plus.nativeUI.showWaiting('',{style:'black',modal:false,background:'rgba(0,0,0,0)'});
+				embed=plus.webview.create(url,'embed',{top:topoffset,bottom:'0px',position:'dock',dock:'bottom',bounce:'vertical'});
+				ws.append(embed);
+				embed.addEventListener('loaded',function(){
+					plus.nativeUI.closeWaiting();
+				},false);
+				embed.addEventListener('loading',function(){
+					plus.nativeUI.showWaiting('',{style:'black',modal:false,background:'rgba(0,0,0,0)'});
+				},false);
+			}
+			// 打开网址
+			function openUrl(){
+				embed.loadURL(url);
+			}
+			//添加newId自定义事件监听
+			window.addEventListener('newsId',function(event){
+			  //获得事件参数
+			  var id = event.detail.id;
+			  //根据id向服务器请求新闻详情
+			  console.log('id=' + id);
+			  url = 'http://wop-api.chease.cn/article?dev_key=59346d400236ab95e95193f35f3df6a4&id=' + id;
+			  if(embed){
+			  	 console.log(url);
+			  	 openUrl();
+			  }
+			});
+			plus.share.getServices(function(s) {
+				if (s && s.length > 0) {
+					for (var i = 0; i < s.length; i++) {
+						var t = s[i];
+						shares[t.id] = t;
+					}
+				}
+			}, function() {
+				console.log("获取分享服务列表失败");
+			});
+			//添加分享代码
+			var shareButton = document.getElementById('share');
+			shareButton.addEventListener('tap', function(event){
+				var ids = [{
+					id: "weixin",
+					ex: "WXSceneSession"
+				}, {
+					id: "weixin",
+					ex: "WXSceneTimeline"
+				}, {
+					id: "qq"
+				}],
+				bts = [{
+					title: "发送给微信好友"
+				}, {
+					title: "分享到微信朋友圈"
+				}, {
+					title: "分享到QQ"
+				}];
+				plus.nativeUI.actionSheet({
+					cancel: "取消",
+					buttons: bts
+				}, function(e) {
+					var i = e.index;
+					if (i > 0) {
+						var s_id = ids[i - 1].id;
+						var share = shares[s_id];
+						if (share) {
+							if (share.authenticated) {
+								shareMessage(share, ids[i - 1].ex);
+							} else {
+								share.authorize(function() {
+									shareMessage(share, ids[i - 1].ex);
+								}, function(e) {
+									mui.toast("认证授权失败：" + e.code + " - " + e.message);
+								});
+							}
+						} else {
+							mui.toast("无法获取分享服务，请检查manifest.json中分享插件参数配置，并重新打包")
+						}
+					}
+				});
+			});
+		});
+	</script>
+
+</html>

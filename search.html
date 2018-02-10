@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link href="css/icons-extra.css" rel="stylesheet" />
+		<link href="css/iconfont.css" rel="stylesheet" />
+		<link href="css/style.css" rel="stylesheet" />
+		<style>
+			html {
+				height: 100%;
+				overflow: hidden;
+			}
+					
+			body {
+				height: 100%;
+				margin: 0px;
+				padding: 0px;
+				overflow: hidden;
+			}
+			
+			header {
+				background-color: #FFFFFF!important;
+				box-shadow: 0 0 0!important;
+			}
+			#container {
+				height: 100%;
+				text-align: center;
+				font-size: 14px;
+			}
+			
+			.mui-search {
+				padding-left: 40px;
+    				padding-right: 10px;
+    				margin-top: -39px;
+    				z-index: 999;
+			}
+			.mui-search .mui-placeholder {
+				padding-left: 24px;
+			}
+			.mui-search.mui-active:before {
+				padding-left: 40px;
+			}
+			.mui-search .mui-icon-clear {
+			    padding-right: 10px;
+			}
+			input[type=search] {
+			    background-color: rgba(185, 185, 185, 0.1);
+			    /*font-size: 14px;*/
+			}
+		</style>
+	</head>
+
+	<body>
+		<header id="header" class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+		</header>
+		<div id="content" class="mui-content">
+			<div id="search" class="mui-search mui-input-row mui-active">
+				<input id="key" type="search" class="mui-input-clear" placeholder="搜索位置" autofocus="true">
+			</div>
+		</div>
+		<script src="js/mui.min.js"></script>
+		<script src="js/map.js" type="text/javascript"></script>
+		<script src="js/app.js"></script>
+		<script src="js/immersed.js" ></script>
+		<script>
+			(function($, doc) {
+				$.init();
+				$.plusReady(function() {
+				});
+				$.ready(function(){
+//					var key = document.getElementById('key');
+//					key.placeholder = "搜索位置";
+				});
+			}(mui, document));
+		</script>
+	</body>
+
+</html>

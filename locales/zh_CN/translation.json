@@ -1,0 +1,52 @@
+{
+	"app": {
+		"name": "车联在线"
+	},
+	"login": {
+		"title": "登陆",
+		"login": "登陆",
+		"logining": "登陆中...",
+		"register": "快速注册",
+		"forgot": "忘记密码",
+		"auto-login": "自动登陆",
+		"account": "请输入手机号码",
+		"password": "请输入密码"
+	},
+	"main": {
+		"home": "控制",
+		"monitor": "定位",
+		"discover": "发现",
+		"more": "更多"
+	},
+	"vehicle-list": {
+		"title": "车辆列表"
+	},
+	"push": {
+		"0": {
+			"title": "新消息通知",
+			"content": "收到一条新的消息，是否立即查看？"
+		},
+		"1": {
+			"title": "新报警通知",
+			"content": "收到一条新的报警，是否立即查看？"
+		}
+	},
+	"alert": {
+		"yes": "是",
+		"no": "否"
+	},
+	"system": {
+		"exit": "再按一次退出应用",
+		"no-vehicle": "当前没有车辆",
+		"search-vehicle": "搜索车辆"
+	},
+	"msg": {
+		"err-network": "网络不给力，请稍后重试",
+		"err-invaliduser": "用户名或密码错误",
+		"err-saveparam": "保存推送参数出错，请稍后重试",
+		"err-getcustomers": "获取用户列表失败，请稍后重试",
+		"err-getvehicles": "获取车辆列表失败，请稍后重试",
+		"err-execption": "出现异常，请重新登录后重试",
+		"warn-password": "密码最短为6个字符"
+	}
+}

@@ -1,0 +1,52 @@
+{
+	"app": {
+		"name": "车管云"
+	},
+	"login": {
+		"title": "Sign in",
+		"login": "Sign in",
+		"logining": "Loading...",
+		"register": "Sign Up",
+		"forgot": "forgot?",
+		"auto-login": "Auto Sign in",
+		"account": "Email",
+		"password": "Password"
+	},
+	"main": {
+		"home": "Control",
+		"monitor": "Monitor",
+		"discover": "Discover",
+		"more": "More"
+	},
+	"vehicle-list": {
+		"title": "Vehicle List"
+	},
+	"push": {
+		"0": {
+			"title": "New Message",
+			"content": "You got a new message, check it now?"
+		},
+		"1": {
+			"title": "New Alert",
+			"content": "You got a new alert, check it now?"
+		}
+	},
+	"alert": {
+		"yes": "Yes",
+		"no": "No"
+	},
+	"system": {
+		"exit": "Tap again to exit",
+		"no-vehicle": "No vehicle now.",
+		"search-vehicle": "Search Vehicle"
+	},
+	"msg": {
+		"err-network": "Network cannot access, try again later",
+		"err-invaliduser": "Account or password is wrong",
+		"err-saveparam": "Save params failed",
+		"err-getcustomers": "Get customers failed, try again later",
+		"err-getvehicles": "Get vehicles failed, try again later",
+		"err-execption": "Unknow expection, pls relogin and try",
+		"warn-password": "Password length is 6 at least"
+	}
+}

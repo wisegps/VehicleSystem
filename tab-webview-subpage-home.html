@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>首页</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<link rel="stylesheet" href="css/mui.min.css">
+		<link href="css/icons-extra.css" rel="stylesheet" />
+		<link href="css/iconfont.css" rel="stylesheet" />
+		<style>
+			html {
+				height: 100%;
+				background-color: #fff;
+				overflow: hidden;
+			}
+					
+			body {
+				height: 100%;
+				background-color: #fff;				
+				margin: 0px;
+				padding: 0px;
+				overflow: hidden;
+			}
+			
+			.mui-bar .mui-pull-left .mui-icon {
+				padding-right: 5px;
+				font-size: 28px;
+			}
+			
+			.mui-bar .mui-btn {
+				font-weight: normal;
+				font-size: 17px;
+			}
+			
+			.mui-bar .mui-btn-link {
+				top: 1px;
+			}
+			
+			#container {
+				height: 100%;
+			}			
+			
+			.mui-content img{
+				width: 100%;
+			}
+			.hm-description{
+				margin: .5em 0 2em;
+			}
+			
+			.hm-description>li {
+				font-size: 14px;
+				color: #8f8f94;
+			}
+			
+			.mui-grid-view.mui-grid-9 {
+				background-color: #ffffff;
+			}
+			
+			.mui-grid-view.mui-grid-9 .mui-media .mui-icon {
+				font-size: 1.7em;
+			}
+			
+			.mui-table-view.mui-grid-view .mui-table-view-cell .mui-media-body {
+				font-size: 12px;
+			}
+			
+			/*@media screen and (max-device-width:400px) { 
+				.mui-slider img {
+					height: 210px;
+				}
+			}
+			
+			@media screen and (max-device-width:320px) { 
+				.mui-slider img {
+					height: 160px;
+				}
+			}*/
+			/*.mui-slider img {
+				height: 160px;
+				height: calc(100% - 376px - 30px);
+				height: -webkit-calc(100% - 376px - 30px);
+				height: -moz-calc(100% - 376px - 30px);
+			}	*/
+			
+			.mui-slider {
+				height: 160px;
+			}
+			
+			.mui-slider-item {
+				height: 100%;
+			}
+			
+			.mui-slider .mui-slider-group.mui-slider-loop {
+			   height: 100%;
+			}
+			
+			/*#noPhoto {
+			    font-size: 14px;
+			    position: relative;
+			    display: inline-block;
+			    width: 100%;
+			    height: 100%;
+			    vertical-align: top;
+			    white-space: normal;
+			}*/
+		</style>
+	</head>
+	<body>
+		<div class="mui-content">
+			<div class="mui-scroll">
+				<div id="slider" class="mui-slider" style="background: #f2f6f9 url(images/nophoto.jpg) no-repeat top; background-size: 100% auto;">
+					<div class="mui-slider-group mui-slider-loop">
+						<!--<div class="mui-slider-item" id="834408832015929300" title="静静看这世界" summary="静静看这世界" img="http://img2.bibibaba.cn/photo/1487773483673.jpg@!baba" style="background-image: url(http://img2.bibibaba.cn/photo/1487773483673.jpg@!baba); background-color: rgb(0, 0, 0); background-size: 100%; background-position: 50% 0%; background-repeat: no-repeat no-repeat;"><p class="mui-slider-title">静静看这世界</p></div>-->
+						<!--<div id="noPhoto" class="" style="background: #000000 url(images/nophoto.jpg) no-repeat fixed top; background-size: 100% auto;">
+							<p class="mui-slider-title">加载中...</p>
+						</div>-->
+						<!-- 额外增加的一个节点(循环轮播：第一个节点是最后一张轮播) -->
+						<!--<div class="mui-slider-item mui-slider-item-duplicate">
+							<a href="#">
+								<img src="http://img2.bibibaba.cn/photo/1487773483673.jpg@!baba">
+								<p class="mui-slider-title">静静看这世界</p>
+							</a>
+						</div>
+						<div class="mui-slider-item">
+							<a href="#">
+								<img src="http://img2.bibibaba.cn/photo/1487773950340.jpg@!baba">
+								<p class="mui-slider-title">想要一间这样的木屋，静静的喝咖啡</p>
+							</a>
+						</div>
+						<div class="mui-slider-item">
+							<a href="#">
+								<img src="http://img2.bibibaba.cn/photo/1487773671112.jpg@!baba">
+								<p class="mui-slider-title">Color of SIP CBD</p>
+							</a>
+						</div>
+						<div class="mui-slider-item">
+							<a href="#">
+								<img src="images/yuantiao.jpg">
+								<p class="mui-slider-title">静静看这世界</p>
+							</a>
+						</div>-->
+						<!-- 额外增加的一个节点(循环轮播：最后一个节点是第一张轮播) -->
+						<!--<div class="mui-slider-item mui-slider-item-duplicate">
+							<a href="#">
+								<img src="http://img2.bibibaba.cn/photo/1487773950340.jpg@!baba">
+								<p class="mui-slider-title">想要一间这样的木屋，静静的喝咖啡</p>
+							</a>
+						</div>-->
+					</div>
+					<div class="mui-slider-indicator mui-text-right">
+						<!--<div class="mui-indicator mui-active"></div>
+						<div class="mui-indicator"></div>
+						<div class="mui-indicator"></div>-->
+					</div>
+				</div>
+				
+				<ul class="mui-table-view mui-grid-view mui-grid-9">
+			            <li id="booking" class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">
+			                    <span class="mui-icon iconfont icon-yuyue-copy" style="color: royalblue"></span>
+			                    <div class="mui-media-body">预约安装</div></a></li>
+						<li id="service" class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">
+			                    <span class="mui-icon iconfont icon-songwangfuwuwangdian" style="color: darkseagreen "></span>
+			                    <div class="mui-media-body">服务网点</div></a></li>
+			            <li id="vehicle" class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">
+			                    <span class="mui-icon iconfont icon-che" style="color: mediumpurple"></span>
+			                    <div class="mui-media-body">车辆信息</div></a></li>
+						<li id="insurance" class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">
+			                    <span class="mui-icon iconfont icon-baoxian2" style="color: mediumvioletred" ></span>
+			                    <div class="mui-media-body">保险信息</div></a></li>
+			            <li id="notify" class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">
+			                    <span class="mui-icon iconfont icon-gonggao" style="color: coral"></span>
+			                    <div class="mui-media-body">消息公告</div></a></li>
+			            <li id="question" class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">
+			                    <span class="mui-icon iconfont icon-changjianwenti" style="color: orangered"></span>
+			                    <div class="mui-media-body">常见问题</div></a></li>
+			            <li id="jifen" class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">
+			                    <span class="mui-icon iconfont icon-jifenshangcheng" style="color: blue;"></span>
+			                    <div class="mui-media-body">网上商城</div></a></li>
+			            <li id="fenqi" class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">
+			                    <span class="mui-icon iconfont icon-zhifu-fenqi" style="color: green;"></span>
+			                    <div class="mui-media-body">分 期 购</div></a></li>
+				</ul>
+			</div>
+		</div>
+	</body>
+	<script src="./js/mui.min.js"></script>
+	<script src="./js/locales.js" ></script>
+	<script src="./js/core.js"></script>
+	<script src="js/wistorm/wspub.js"></script>
+	<script src="js/wistorm/define.js"></script>
+	<script src="js/wistorm/wistorm.js"></script>
+	<script src="js/wistorm/md5.js"></script>	
+	<script src="js/app.js"></script>	
+	<script type="text/javascript">
+			var height = document.body.clientHeight == 0 ? app.getSettings().height : document.body.clientHeight;
+			var width = document.body.clientWidth == 0 ? app.getSettings().width : document.body.clientWidth;
+			mui.init({
+				swipeBack: true //启用右滑关闭功能
+			});
+			var initImage = function(){
+				var t = document.getElementById('slider');
+				if(height){
+					var h = height - 287;
+					console.log('ad height: ' + h);
+					if(h > 260){
+						h = 260;
+					}
+					t.style.height = h + 'px';
+				}
+			};
+			initImage();
+			mui.plusReady(function() {
+				var noPhoto = document.getElementById("noPhoto");
+				var insuranceButton = document.getElementById('insurance');
+				var jifenButton = document.getElementById('jifen');
+				var fenqiButton = document.getElementById('fenqi');
+				switch ( plus.os.name ) {
+			        case "iOS":
+//				        jifenButton.style.display = "none";
+//				        fenqiButton.style.display = "none";
+				        break;
+			        default:
+			        		insuranceButton.classList.remove("mui-hidden");
+			        		jifenButton.classList.remove("mui-hidden");
+				        fenqiButton.classList.remove("mui-hidden");
+				        insuranceButton.addEventListener('tap', function(event){
+			        			plus.nativeUI.toast('功能正在开发，敬请期待');
+			        		});
+			        		jifenButton.addEventListener('tap', function(event){
+			        			plus.nativeUI.toast('功能正在开发，敬请期待');
+			        		});
+			        		fenqiButton.addEventListener('tap', function(event){
+			        			plus.nativeUI.toast('功能正在开发，敬请期待');
+			        		});
+			        		break;
+			    }
+				var vehicleButton = document.getElementById('vehicle');
+				vehicleButton.addEventListener('tap', function(event) {
+					var currentVehicle = app.getCurrentVehicle();
+					var vehiclePage = plus.webview.getWebviewById('vehicle-add');
+					if(vehiclePage){
+						var mode = currentVehicle ? 1: 0;
+						mui.fire(vehiclePage, 'show', {mode: mode});
+					}
+					setTimeout(function(){
+//						mui.openWindow('vehicle.html', 'vehicle-add', {
+//							waiting:{
+//	      						autoShow:false
+//	      					}
+//						});		
+						vehiclePage.show('pop-in');
+					}, 100);
+				});
+				var bookingButton = document.getElementById('booking');
+				bookingButton.addEventListener('tap', function(event) {
+					mui.openWindow('booking.html', 'booking', {
+						waiting:{
+      						autoShow:false
+      					}
+					});
+				});
+				var serviceButton = document.getElementById('service');
+				serviceButton.addEventListener('tap', function(event) {
+					mui.openWindow('service-list.html', 'service-list', {
+						show: {
+							autoShow: true
+						},
+						waiting:{
+      						autoShow:false
+      					}
+					});
+				});
+				var notifyButton = document.getElementById('notify');
+				notifyButton.addEventListener('tap', function(event) {
+					mainPage = plus.webview.getWebviewById('main');
+					mui.fire(mainPage, 'godiscover', {id: 2});
+				});
+				var questionButton = document.getElementById('question');
+				questionButton.addEventListener('tap', function(event) {
+					mainPage = plus.webview.getWebviewById('main');
+					mui.fire(mainPage, 'godiscover', {id: 3});
+				});
+//				var lifeButton = document.getElementById('life');
+//				lifeButton.addEventListener('tap', function(event) {
+//					plus.navigator.setUserAgent('Mozilla/5.0 (Windows; U; Windows NT 5.2) AppleWebKit/525.13 (KHTML, like Gecko) Chrome/0.2.149.27 Safari/525.13', false);
+//					mui.openWindow('http://wx.qq.com', 'baidu', {
+//						waiting:{
+//    						autoShow:false
+//    					}
+//					});
+//				});
+//				alert("plusReady");
+				// 创建div
+				var createItem = function(ad, duplicate){
+					var div = document.createElement('div');
+					div.className = duplicate ? 'mui-slider-item mui-slider-item-duplicate': 'mui-slider-item';
+					div.id = ad.objectId.toString();
+					div.style.background = '#000000 url("' + ad.img  +'") no-repeat top';
+					div.style.backgroundSize = '100% auto';
+					div.setAttribute("title", ad.title);
+					div.setAttribute("summary", ad.summary); 
+					div.setAttribute("img", ad.img); 
+					var content = '' + 
+//					 		'<a href="#">' +
+//								'<img src="{{img}}">' +
+								'<p class="mui-slider-title">{{title}}</p>';
+//							'</a>';
+					div.innerHTML = content.format(ad);
+//					console.log(div.outerHTML);
+					return div;
+				}
+				// 创建指示器
+				var createIndicator = function(active){
+					var div = document.createElement('div');
+					div.className = active ? 'mui-indicator mui-active': 'mui-indicator';
+					div.innerHTML = '';
+					return div;
+				};
+				// 添加广告显示
+				var addAD = function(ad, duplicate, ifAddIndicator, active){
+					var item = createItem(ad, duplicate);
+					var slider = document.querySelector('.mui-slider-group'); 
+					slider.appendChild(item);
+					if(ifAddIndicator){
+						var indicator = createIndicator(active);
+						var indicators = document.querySelector('.mui-slider-indicator');
+						indicators.appendChild(indicator);
+					}
+				};
+				// 加载广告
+				var loadAD = function(){
+					var ad = app.getAD();
+					if(ad){
+						console.log('ad: ' + JSON.stringify(ad));
+						// 额外增加的一个节点(循环轮播：第一个节点是最后一张轮播) 
+						addAD(ad.data[ad.data.length - 1], true, false);
+						for(var i = 0; i < ad.data.length; i++){
+							addAD(ad.data[i], false, true, i == 0);
+						}
+						// 额外增加的一个节点(循环轮播：最后一个节点是第一张轮播)
+						addAD(ad.data[0], true, false);
+						mui('#slider').slider();			
+						app.listArticle(9, 0, 0, 4, function(obj){
+							if(obj.status_code == 0 && obj.total > 0){
+								app.setAD(obj);
+							}
+						});
+					}else{
+						app.listArticle(9, 0, 0, 4, function(obj){
+							if(obj.status_code == 0 && obj.total > 0){
+								// 额外增加的一个节点(循环轮播：第一个节点是最后一张轮播) 
+								addAD(obj.data[obj.data.length - 1], true, false);
+								for(var i = 0; i < obj.data.length; i++){
+									addAD(obj.data[i], false, true, i == 0);
+								}
+								// 额外增加的一个节点(循环轮播：最后一个节点是第一张轮播)
+								addAD(obj.data[0], true, false);
+								mui('#slider').slider();
+								app.setAD(obj);
+							}
+						});	
+					}
+				};
+//				var detailPage = mui.preload({
+//					"id": 'article-detail',
+//					"url": 'article-detail.html'
+//				});
+				//添加列表项的点击事件
+				mui('.mui-slider-group').on('tap', '.mui-slider-item', function(e) {
+					var id = this.getAttribute('id');
+					var title = this.getAttribute('title');
+					var summary = this.getAttribute('summary');
+					var img = this.getAttribute('img');
+					//获得详情页面
+					//触发详情页面的newsId事件
+//					mui.fire(detailPage,'newsId',{
+//					   id:id
+//					});
+//					//打开详情页面          
+//					setTimeout(function(){
+//						detailPage.show("pop-in");						
+//					}, 200);
+					mui.openWindow({
+						url:'article-detail.html',
+						show:{
+							autoShow:false
+						},
+						waiting:{
+      						autoShow:false,//自动显示等待框，默认为true
+      					},
+						extras:{
+							objectId: id,  //扩展参数
+							title: title,
+							summary: summary,
+							img: img
+						}
+					});
+				}); 	
+				
+				// 启动加载广告
+				loadAD();
+			});
+			var header = document.getElementById("header");
+			var transparentApi;
+			
+			// 保存高度和宽度
+			var setting = app.getSettings();
+			setting.height = document.body.clientHeight;
+			setting.width = document.body.clientWidth;
+			app.setSettings(setting);
+		</script>
+</html>

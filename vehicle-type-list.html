@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>Hello MUI</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<link rel="stylesheet" href="./css/mui.min.css">
+		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" href="css/mui.picker.min.css" />
+		<link rel="stylesheet" href="css/mui.poppicker.css" />
+		<link href="css/icons-extra.css" rel="stylesheet" />
+		<link href="css/iconfont.css" rel="stylesheet" />
+		<style>
+			html,
+			body {
+				background-color: #efeff4;
+			}
+			header {
+				background-color: #FFFFFF!important;
+				box-shadow: 0 0 0!important;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header id="header" class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">车型标定</h1>
+		</header>
+		
+		<ul class="mui-table-view" style="margin-top: 46px;" id="vehicleTypeList">
+		    <!--<li class="mui-table-view-cell mui-collapse" style="border-bottom: solid #C0C0C0 1px;">
+	            <a class="mui-navigate-right" href="#">
+	            	<img src="imgcartype/audi.png" style="width: 47px; height: 47px; position: relative;" />
+	            	<span style="position: absolute; top: 25px; margin-left: 10px;">奥迪</span></a>
+	            <div class="mui-collapse-content" style="border-bottom:solid #EFEFF4 1px">
+	                <p>A4</p>
+	            </div>
+	            <div class="mui-collapse-content" style="border-bottom:solid #EFEFF4 1px">
+	                <p>A5</p>
+	            </div>
+	            <div class="mui-collapse-content" style="border-bottom:solid #EFEFF4 1px">
+	                <p>A7</p>
+	            </div>
+        	</li>-->
+		</ul>
+		
+		<script src="./js/mui.min.js"></script>
+		<script type="text/javascript" src="js/city.data.js" ></script>
+		<script type="text/javascript" src="js/mui.picker.min.js" ></script>
+		<script type="text/javascript" src="js/mui.poppicker.js" ></script>
+		<script src="js/immersed.js" ></script>		
+		<script src="./js/mui.pullToRefresh.js"></script>
+		<script src="./js/mui.pullToRefresh.material.js"></script>
+		<script src="js/wistorm/define.js"></script>
+		<script src="js/wistorm/wistorm.js"></script>
+		<script src="js/wistorm/md5.js"></script>
+		<script src="js/app.js"></script>				
+		<script>
+			mui.init();
+			
+			var carTypes ={data:[{imgs:'imgcartype/audi.png',name:'奥迪',type:['A3','A4','A5','Q5','Q7','A6L']},
+							{imgs:'imgcartype/dazhong.png',name:'大众',type:['朗逸','宝来']},
+							{imgs:'imgcartype/buick.png',name:'宝骏',type:['560','730']},
+							{imgs:'imgcartype/ford.png',name:'福特',type:['新 FOCUS','经典 FOCUS','老蒙迪欧','翼搏','嘉年华','新蒙迪欧','锐界']},
+							{imgs:'imgcartype/nissan.png',name:'丰田',type:['其他',]},
+							{imgs:'imgcartype/honda.png',name:'本田',type:['飞度','其他']},
+							{imgs:'imgcartype/toyota.png',name:'日产',type:['经典轩逸','新款骊威','其他']},
+							{imgs:'imgcartype/kia.png',name:'起亚',type:['其他']},
+							{imgs:'imgcartype/hyundai.png',name:'现代',type:['IX35','其他']},
+							{imgs:'imgcartype/bmw.png',name:'宝马',type:['其他']},
+							{imgs:'imgcartype/benz.png',name:'奔驰',type:['其他']},
+							{imgs:'imgcartype/chrysler.png',name:'克莱斯特',type:['其他']},
+							{imgs:'imgcartype/roewe.png',name:'通用',type:['其他']},
+							{imgs:'imgcartype/peugeot.png',name:'标志',type:['其他']}]}
+			var lis;
+			var ptext;
+			var ptexts;
+			var names;
+			for(var i = 0;i<carTypes.data.length;i++){
+							var li = document.createElement('li');
+							var _index = i;
+							var typeId = 'xx'+i;
+							var Li = '<li id="" class="mui-table-view-cell mui-collapse" style="border-bottom: solid #C0C0C0 1px;">'
+								            +'<a class="mui-navigate-right" href="#">'
+								            	+'<img src='+carTypes.data[i].imgs+' style="width: 47px; height: 47px; position: relative;" />'
+								            	+'<span style="position: absolute; top: 25px; margin-left: 10px;">'+carTypes.data[i].name+'</span></a>'
+								           +' <div id='+typeId+' class="mui-collapse-content" style="border-bottom:solid #EFEFF4 1px">'
+								               
+								           + '</div>'
+        								+'</li>';
+        					names = carTypes.data[0].name;
+					        li.innerHTML = Li; 
+							document.getElementById('vehicleTypeList').appendChild(li);
+							carTypes.data[i].type
+							for(var j = 0; j< carTypes.data[i].type.length;j++ ){
+								lis = document.createElement('p');
+								lis.style.borderBottom='solid #EFEFF4 1px'
+								ptext = carTypes.data[i].type[j];
+								ptexts = carTypes.data[0].type[j];
+								lis.innerHTML = ptext;
+								document.getElementById(typeId).appendChild(lis);
+								
+							}
+							
+						}
+			
+			 mui.plusReady(function(){
+			 	lis.addEventListener('tap',function(){
+									alert(names+ptexts);
+					            var indexPage=plus.webview.getLaunchWebview();//获取首页对象 
+					            console.log(indexPage);
+					            mui.fire(indexPage,'backIndexPage',{str:"我回来了！"});
+					            mui.back();
+						});
+			
+			 	
+			 });
+			
+					
+		</script>
+	</body>
+
+</html>

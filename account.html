@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<link rel="stylesheet" href="css/mui.min.css">
+		<link href="css/style.css" rel="stylesheet" />
+		<style>
+			html,
+			body {
+				background-color: #efeff4;
+			}
+			.head {
+				height: 40px;
+			}
+			#head {
+				line-height: 40px;
+			}
+			.head-img {
+				width: 40px;
+				height: 40px;
+			}
+			#logo {
+				position: absolute;
+				bottom: 10px;
+				right: 40px;
+				width: 42px!important;
+				height: 41px!important;
+			}
+			.title{
+				margin: 20px 15px 7px;
+				color: #6d6d72;
+				font-size: 15px;
+			}
+			.update {
+				font-style: normal;
+				color: #999999;
+				margin-right: -25px;
+				font-size: 15px
+			}
+			header {
+				background-color: #FFFFFF!important;
+				box-shadow: 0 0 0!important;
+			}
+			
+			#circle img{ border-radius:50%}
+			#sex {
+				font-size: 16px;
+				margin-bottom: 0px;
+				padding: 0px;
+				width: 85%;
+				background-color: rgba(0, 0, 0, 0);
+			}
+			select {
+			    direction: rtl;
+			}
+			select:active {
+
+			}
+		</style>
+	</head>
+
+	<body>
+		<header id="header" class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">个人中心</h1>
+		</header>
+		<div id="content" class="mui-content">
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell">
+					<a id="head" class="mui-navigate-right">头像
+						<span class="mui-pull-right head">
+							<div id="circle"><img class="head-img mui-action-preview" id="logo" src="images/default.png"/></div>
+						</span>
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a id="name-bar">姓名<span id="name" class="mui-pull-right"></span></a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a id="sex-bar">性别
+						<select id="sex" class="mui-pull-right">
+							<option value="1">男</option>
+							<option value="2">女</option>
+						</select>
+					</a>
+				</li>
+			</ul>
+			<div class="title">
+				
+			</div>
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell">
+					<a>手机号<span id="mobile" class="mui-pull-right"></span></a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a id="email-bar">邮箱地址<span id="email" class="mui-pull-right"></span></a>
+				</li>
+			</ul>
+		</div>
+	</body>
+	<script src="js/mui.min.js "></script>
+	<script src="js/immersed.js" ></script>
+	<script src="js/wistorm/define.js"></script>
+	<script src="js/wistorm/wistorm.js"></script>
+	<script src="js/wistorm/md5.js"></script>	
+	<!--<script type="text/javascript" src="js/upload.js" ></script>-->
+	<script type="text/javascript" src="js/app.js" ></script>
+	<script>
+		mui.init();
+		mui.plusReady(function() {
+			//更换头像
+			mui(".mui-table-view-cell").on("tap", "#head", function(e) {
+				if(mui.os.plus){
+					var a = [{
+						title: "拍照"
+					}, {
+						title: "从手机相册选择"
+					}];
+					plus.nativeUI.actionSheet({
+						title: "修改头像",
+						cancel: "取消",
+						buttons: a
+					}, function(b) {
+						switch (b.index) {
+							case 0:
+								break;
+							case 1:
+								getImage();
+								break;
+							case 2:
+								galleryImg();
+								break;
+							default:
+								break
+						}
+					})	
+				}
+			});
+						
+			var logoBox = document.getElementById('logo');
+			var nameBox = document.getElementById('name');
+			var sexBox = document.getElementById('sex');
+			var mobileBox = document.getElementById('mobile');
+			var emailBox = document.getElementById('email');
+			//更换姓名
+			mui(".mui-table-view-cell").on("tap", "#name-bar", function(e) {
+				var bts=["确认","取消"];
+				plus.nativeUI.prompt("输入新的姓名",function(e){
+					var i=e.index;
+					if(i == 0){
+						var update = {
+							name: e.value
+						};
+						app.updateCustomer(update, function(err){
+							if(err){
+								plus.nativeUI.toast(err);
+								return;
+							}
+							var state = app.getState();
+							state.name = e.value;
+							app.setState(state);
+							nameBox.innerText = e.value;
+						});
+						console.log(e.value);						
+					}
+				},"",nameBox.innerText,bts);
+			});			
+			//更换邮箱
+			mui(".mui-table-view-cell").on("tap", "#email-bar", function(e) {
+				var bts=["确认","取消"];
+				plus.nativeUI.prompt("输入新的邮箱",function(e){
+					var i=e.index;
+					if(i == 0){
+						var update = {
+							email: e.value
+						};
+						app.updateUser(update, function(err){
+							if(err){
+								plus.nativeUI.toast(err);
+								return;
+							}
+							emailBox.innerText = e.value;
+						});
+						console.log(e.value);						
+					}
+				},"",emailBox.innerText,bts);			
+			});		
+			//保存性别
+			sexBox.addEventListener("change", function(event){
+//				console.log(this.value);
+				var update = {
+					sex: this.value
+				};
+				app.updateCustomer(update, function(err){
+					if(err){
+						plus.nativeUI.toast(err);
+						return;
+					}
+				});
+			});
+			
+			// 更新信息显示
+			var loadCustomer = function(){
+				var state = app.getState();
+				mobileBox.innerHTML = state.account;
+				logoBox.src = state.logo;
+				nameBox.innerHTML = state.name;
+				app.getCustomer(function(obj){
+					if(obj.status_code == 0 && obj.data){
+						logoBox.src = obj.data.logo || state.logo;
+						nameBox.innerHTML = obj.data.name || '';
+						sexBox.value = (obj.data.sex || '1').toString();
+					}
+				});
+				app.getUser(function(obj){
+					if(obj.status_code == 0 && obj.data){
+						emailBox.innerHTML = obj.data.email || '';
+					}				
+				});
+			};
+			
+			window.addEventListener('show', function(event){
+				loadCustomer();
+			});
+	
+			// 上传文件
+			var uploadFile = function(f, callback) {
+//				console.log(f);
+				if(!f) {
+					plus.nativeUI.toast("请选择图像文件！");
+					return;
+				}
+				var wt=plus.nativeUI.showWaiting('上传中...');
+				var path = wistorm_api.upload();
+//				console.log(path);
+				var task = plus.uploader.createUpload(path, { method: "POST" },
+					function(t, status) { //上传完成
+//						console.log(status);
+						if(status == 200) {
+							console.log(t.responseText);
+							var ret = JSON.parse(t.responseText);
+							wt.close();
+							return callback(ret);
+						} else {
+							plus.nativeUI.toast("上传文件失败");
+							wt.close();
+							return callback();
+						}
+					}
+				);
+				task.addFile(f, { key: 'image' });
+				task.start();
+			};
+
+			//缩放图片
+			var zoomImage = function(oldFile, newFile, callback){
+				plus.zip.compressImage({
+						src:oldFile,
+						dst:newFile,
+						width:"25%"	// 缩小到原来的一半
+					},
+					function() {
+						callback();
+					},function(e) {
+						callback(e);
+					});
+			}
+			
+			var upload = function(e){
+				uploadFile(e, function(ret){
+					console.log(JSON.stringify(ret));
+					var update = {
+						logo: ret.small_file_url
+					};
+					app.updateCustomer(update, function(err){
+						if(err){
+							plus.nativeUI.toast(err);
+							return;
+						}
+						document.getElementById("logo").src = ret.small_file_url;
+						var state = app.getState();
+						state.logo = ret.small_file_url;
+						app.setState(state);
+					});
+				});
+			}
+			
+			var getImage = function() {
+				var c = plus.camera.getCamera();
+				c.captureImage(function(e) {
+					plus.io.resolveLocalFileSystemURL(e, function(entry) {
+						entry.getMetadata(function(meta){
+							var o = entry.toLocalURL() + "?version=" + new Date().getTime();
+							var n = '_doc/' + new Date().getTime() + '.jpg';
+							console.log(meta.size);
+							if(meta.size > 1024 * 1024){
+								zoomImage(o, n, function(err){
+									if(err){
+										console.log('zoom image:' + err.message);
+										return;
+									}
+									upload(n);
+								});
+							}else{
+								upload(o);
+							}
+						}, function(e){
+							console.log('get meta fail:' + e.message);
+						}, false);
+					}, function(e) {
+						console.log("读取拍照文件错误：" + e.message);
+					});
+				}, function(s) {
+					console.log("error" + s);
+				}, {
+					filename: "_doc/head.jpg"
+				})
+			}			
+	
+			var galleryImg = function() {
+				plus.gallery.pick(function(a) {
+					plus.io.resolveLocalFileSystemURL(a, function(entry) {
+						plus.io.resolveLocalFileSystemURL("_doc/", function(root) {
+							root.getFile("head.jpg", {}, function(file) {
+								//文件已存在
+								file.remove(function() {
+									console.log("file remove success");
+									entry.copyTo(root, 'head.jpg', function(e) {
+											e.getMetadata(function(meta){
+												var o = e.fullPath + "?version=" + new Date().getTime();
+												var n = '_doc/' + new Date().getTime() + '.jpg';
+												console.log(meta.size);
+												if(meta.size > 1024 * 1024){
+													zoomImage(o, n, function(err){
+														if(err){
+															console.log('zoom image:' + err.message);
+															return;
+														}
+														upload(n);
+													});
+												}else{
+													upload(o);
+												}
+											}, function(e){
+												console.log('get meta fail:' + e.message);
+											}, false);
+										},
+										function(e) {
+											console.log('copy image fail:' + e.message);
+										});
+								}, function() {
+									console.log("delete image fail:" + e.message);
+								});
+							}, function() {
+								//文件不存在
+								entry.copyTo(root, 'head.jpg', function(e) {
+										var path = e.fullPath + "?version=" + new Date().getTime();
+										document.getElementById("head-img").src = path;
+										document.getElementById("head-img1").src = path;
+										//变更大图预览的src
+										//目前仅有一张图片，暂时如此处理，后续需要通过标准组件实现
+										document.querySelector("#__mui-imageview__group .mui-slider-item img").src = path;
+									},
+									function(e) {
+										console.log('copy image fail:' + e.message);
+									});
+							});
+						}, function(e) {
+							console.log("get _www folder fail");
+						})
+					}, function(e) {
+						console.log("读取拍照文件错误：" + e.message);
+					});
+				}, function(a) {}, {
+					filter: "image"
+				})
+			};	
+			var old_back = mui.back;
+			mui.back = function(){
+				// 更新更多里面的客户信息
+				morePage = plus.webview.getWebviewById('tab-webview-subpage-more.html');
+				mui.fire(morePage, 'refreshInfo', null);	
+			    	old_back();
+			};
+		});
+	</script>
+
+</html>

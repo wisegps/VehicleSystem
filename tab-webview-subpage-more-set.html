@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+	
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<link rel="stylesheet" href="css/mui.min.css">
+		<link rel="stylesheet" href="css/iconfont.css" />
+		<link rel="stylesheet" href="css/style.css" />
+		<style>
+			html,
+			body {
+				/*background: url('ui/back2.png') no-repeat fixed top;*/
+				/*background-image: url(ui/back.png);*/
+				background-color: #080808;
+				background-size:100%;
+			}
+			.mui-content {
+				/*background-color: #efeff4;*/
+				background-color: transparent;
+			}
+			.mui-table-view {
+			    position: relative;
+			    margin-top: 0;
+			    margin-bottom: 0;
+			    padding-left: 0;
+			    list-style: none;
+			    background-color: rgba(0, 0, 0, 0.3);
+			    color: #fff;
+			}
+			.mui-table-view-cell>a:not(.mui-btn).mui-active {
+			    background-color: rgba(0, 0, 0, 0.4);
+			}
+			.head-img {
+				width: 42px!important;
+				height: 41px!important;
+			}
+			.title{
+				margin: 20px 15px 7px;
+				color: #6d6d72;
+				font-size: 15px;
+			}
+			.update {
+				font-style: normal;
+				color: #EEEEEE;
+				margin-right: -25px;
+				font-size: 15px
+			}
+			
+			.list_icon {
+				font-size: 18px;
+				padding-right: 15px;
+			}
+			
+			.password {
+				color: #007AFF
+			}
+			.security {
+				color: #DD524D
+			}
+			.contact {
+				color: #FFCC33
+			}
+			.geofence {
+				color: #EC971F
+			}
+			
+			#circle img{ border-radius:50%}
+			
+			#header {
+				box-sizing: content-box;
+				background-color: #b01526!important;
+				background: url('ui/navbar.png') no-repeat fixed top!important;
+				background-size:100%!important;
+				border-bottom: 0px solid rgba(247, 247, 247, 0)!important;
+			}
+			
+			.mui-title{
+				color: floralwhite;
+				font-weight: 700;
+			}
+			
+		</style>
+	</head>
+
+	<body>
+		<header id="header" class="mui-bar mui-bar-nav headers" style="box-shadow: 0 1px 6px  #ccc;"> 
+			<!--<a id="vehicle" class="mui-action-menu mui-icon iconfont mui-pull-left mui-action-back"  style="color: #fff"  href="javascript :;" onClick="javascript :history.back(1);" ><img src="ui/icon_back.png" style="width: 25px; height: 25px;"/> </a>-->
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" style="color: white;"></a>
+			<h1 id="title" class="mui-title" >更多设置
+			</h1>
+		</header>
+		<div id="content" class="mui-content">
+			<ul class="mui-table-view mui-table-view-chevron">
+				<li class="mui-table-view-cell">
+					<a id="password" class="mui-navigate-right"><i class="mui-icon iconfont icon-xiugaimima list_icon password"></i>修改密码</a>
+				</li>
+			</ul>
+			
+			
+			<div class="title"></div>
+			<ul class="mui-table-view mui-table-view-chevron">
+				<li class="mui-table-view-cell">
+					<a id="Vehicle_management" class="mui-navigate-right"><i class="mui-icon iconfont icon-cheliangguanli list_icon security"></i>车辆管理</a>
+				</li>
+			</ul>
+			
+			<div class="title"></div>
+			<ul class="mui-table-view mui-table-view-chevron">
+				<li class="mui-table-view-cell">
+					<a id="alert" class="mui-navigate-right"><i class="mui-icon iconfont icon-anquan list_icon security"></i>报警</a>
+				</li>
+			</ul>
+			<div class="title"></div>
+			<ul class="mui-table-view mui-table-view-chevron">
+				<li class="mui-table-view-cell">
+					<a id="about" class="mui-navigate-right">版本号<i id="version" class="mui-pull-right update">V1.0.0</i></a>
+				</li>
+			</ul>
+			<div class="title">
+				
+			</div>
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell" style="text-align: center;">
+					<a id="exit">退出</a>
+				</li>
+			</ul>
+		</div>
+	</body>
+	<script src="js/mui.min.js "></script>
+	<script src="js/locales.js" ></script>
+	<script src="js/wistorm/wspub.js"></script>
+	<script src="js/wistorm/define.js"></script>
+	<script src="js/wistorm/wistorm.js"></script>
+	<script src="js/wistorm/md5.js"></script>	
+	<script src="js/immersed.js" ></script>
+	<script type="text/javascript" src="js/app.js" ></script>
+	<script>
+		mui.init();
+		
+		mui.plusReady(function(){
+			var logo = document.getElementById('head-img');
+			var name = document.getElementById('name');
+			var mobile = document.getElementById('mobile');
+			var version = document.getElementById('version');
+			version.innerHTML = plus.runtime.version;			
+			// 更新信息显示
+			var loadCustomer = function(){
+				// 设置个人信息
+				var state = app.getState();
+				logo.src = state.logo;
+				name.innerHTML = state.name;
+				mobile.innerHTML = state.account;
+			};
+			
+			
+			var alertPage = mui.preload({
+				"id":'alert-list-main2',
+				"url":'alert-list-main2.html'
+			});
+
+			var alertButton = document.getElementById('alert');
+			alertButton.addEventListener('tap', function(event) {
+				mui.fire(alertPage, 'refreshAlertList', null);	
+				setTimeout(function(){
+					alertPage.show("pop-in");
+				}, 200);
+			});	
+			
+			var management = mui.preload({
+				"id":'vehicle-manege-list',
+				"url":'vehicle-manege-list.html'
+			});
+			
+			
+			var managements = document.getElementById('Vehicle_management');
+				managements.addEventListener('tap', function(event) {
+					management.show("pop-in");
+					mui.fire(management, 'refreshVehicle', '');
+			});	
+			
+			
+			var passwordpage = mui.preload({
+				"id":'forget_password',
+				"url":'forget_password.html'
+			});
+			
+			var passwords = document.getElementById('password');
+				passwords.addEventListener('tap', function(){
+				passwordpage.show("pop-in");
+			});
+			
+			
+			//退出操作******************
+			document.getElementById('exit').addEventListener('tap', function() {
+				if (mui.os.ios) {
+					app.setState({});
+//					var state = app.getState();
+//					state.token = "";
+//					app.setState(state);
+					app.updateTime = new Date(0);
+//					mui.openWindow({
+//						url: 'login.html',
+//						id: 'login',
+//						show: {
+//							aniShow: 'pop-in'
+//						},
+//						waiting: {
+//							autoShow: false
+//						}
+//					});
+					plus.webview.getLaunchWebview().show("pop-in");
+					return;
+				}
+				var btnArray = [{
+					title: "退出账号"
+				}, {
+					title: "退出页面"
+				}];
+				plus.nativeUI.actionSheet({
+					cancel: "取消",
+					buttons: btnArray
+				}, function(event) {
+					var index = event.index;
+					switch (index) {
+						case 1:
+							//注销账号
+							app.setState({});
+//							var state = app.getState();
+//							state.token = "";
+//							app.setState(state);
+							app.updateTime = new Date(0);
+							/*
+							 * 注意：
+							 * 1、因本示例应用启动页就是登录页面，因此注册成功后，直接显示登录页即可；
+							 * 2、如果真实案例中，启动页不是登录页，则需修改，使用mui.openWindow打开真实的登录页面
+							 */
+							console.log('get state before logout: ' + JSON.stringify(app.getState()));
+							plus.webview.getLaunchWebview().show("pop-in");
+							break;
+						case 2: 
+							plus.runtime.quit();
+							break;
+					}
+				});
+			}, false);
+		});
+	</script>
+
+</html>

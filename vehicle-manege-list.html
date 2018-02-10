@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>Hello MUI</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<link rel="stylesheet" href="./css/mui.min.css">
+		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" href="css/mui.picker.min.css" />
+		<link rel="stylesheet" href="css/mui.poppicker.css" />
+		<link href="css/icons-extra.css" rel="stylesheet" />
+		<link href="css/iconfont.css" rel="stylesheet" />
+		<style>
+			html,
+			body {
+				background-color: #efeff4;
+			}
+			header {
+				background-color: #FFFFFF!important;
+				box-shadow: 0 0 0!important;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header id="header" class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<!--<a id="map" class="mui-icon iconfont icon-map mui-pull-right"></a>-->
+			<a id="add-car" class="mui-icon iconfont icon-guolv icon-add1 mui-pull-right"></a>
+			<h1 class="mui-title">车辆管理</h1>
+		</header>
+		<div id="content" class="mui-content">
+			<div class="mui-slider-group" >
+				<div class="mui-scroll">
+					<ul class="mui-table-view" id="vehicleList">
+					</ul>
+				</div>
+			</div>
+		</div>	
+		<script src="./js/mui.min.js"></script>
+		<script type="text/javascript" src="js/city.data.js" ></script>
+		<script type="text/javascript" src="js/mui.picker.min.js" ></script>
+		<script type="text/javascript" src="js/mui.poppicker.js" ></script>
+		<script src="js/immersed.js" ></script>		
+		<script src="./js/mui.pullToRefresh.js"></script>
+		<script src="./js/mui.pullToRefresh.material.js"></script>
+		<script src="js/wistorm/define.js"></script>
+		<script src="js/wistorm/wistorm.js"></script>
+		<script src="js/wistorm/md5.js"></script>
+		<script src="js/app.js"></script>				
+		<script>
+			mui.init();
+			
+			window.addEventListener('refreshVehicle', function(event) {
+				console.log('refresh vehicle list');
+				loadVehicle();	
+			});
+			
+			//加载或者刷新车辆
+			var flage;
+			var loadVehicle = function() {
+				var ul = document.querySelector('#vehicleList');
+				uids = []; 
+				app.listCustomer(function(customers, err){
+					 
+					if(err){
+						app.toast(err);
+						ul.innerHTML = ''; 
+						logout();
+						return;
+					}
+					ul.innerHTML = ''; 
+					var liCustomers = [];
+					for(var i = 0; i < customers.data.length; i++){
+						uids.push(customers.data[i].uid);
+					}
+					
+					app.listVehicle(uids, function(vehicles, err){ 
+						
+						var dd ={data:[{name:'ddd',did:111,serviceRegDate:'ssssTss'},{name:'dddd',did:111,serviceRegDate:'ssssTss'}]} 
+						for(var i = 0;i<vehicles.data.length;i++){
+							var li = document.createElement('li');
+							var _index = i;
+//							var objectId = vehicles.data[i].objectId
+//							alert(objectId)
+							var Li = '<li id='+_index+'  class="mui-table-view-cell mui-media" style="position: relative; border-bottom:solid #DBDBDB 1px;"><a href="javascript:;">' +
+					            '<img class="mui-media-object mui-pull-left" src="images/objects/normal_run_0.gif">'+
+					            '<div class="mui-media-body">'+ 
+					               	vehicles.data[i].name+
+					               '<p class="mui-ellipsis">编号:'+vehicles.data[i].did+'</p>'+
+					               '<p class="mui-pull-right" style="position: absolute; top:20px;right: 20px;">'+vehicles.data[i].serviceRegDate.slice(0,vehicles.data[i].serviceRegDate.indexOf('T'))+'</p>'
+					            +'</div>'
+					        +'</a></li>';
+					        li.innerHTML = Li; 
+							document.getElementById('vehicleList').appendChild(li);
+							document.getElementById(_index).addEventListener('tap',function(){
+//							flage = _index;
+							var objectId = vehicles.data[this.id].objectId
+//							alert(objectId)
+//							var currentVehicle = app.getCurrentVehicle();
+//								if(currentVehicle){
+									var vehiclePage = plus.webview.getWebviewById('vehicle');
+									if(vehiclePage){
+										mui.fire(vehiclePage, 'show', {mode: 1,objectId:objectId});
+									}
+										li_detail.show("pop-in");									
+//								}else{
+//									plus.nativeUI.toast('请选择车辆');
+//								}
+								
+							})
+							
+						}
+					});	
+				});	
+			};
+			
+			
+		
+				var li_detail;
+			  mui.plusReady(function(){
+			  	
+			  	loadVehicle();
+			  	var add_vehicle = mui.preload({
+			  		"id":'vehicle-add',
+			  		"url":'vehicle.html'
+			  	});
+			  	
+			  	var add_car = document.getElementById('add-car');
+			  	add_car.addEventListener('tap', function(){
+			  		
+			  		var vehiclePage = plus.webview.getWebviewById('vehicle-add');
+								if(vehiclePage){
+									mui.fire(vehiclePage, 'show', {mode: 0});
+								}
+								setTimeout(function(){
+									add_vehicle.show("pop-in");									
+								}, 100);
+			  		
+					add_vehicle.show('pop-in');
+			  	});
+			  	
+			  	li_detail = mui.preload({
+			  		"id":'vehicle',
+			  		"url":'vehicle.html'
+			  	});
+			  	
+			
+			});
+			
+		</script>
+	</body>
+
+</html>

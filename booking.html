@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link href="css/icons-extra.css" rel="stylesheet" />
+		<link href="css/iconfont.css" rel="stylesheet" />
+		<link href="css/style.css" rel="stylesheet" />
+		<style>
+			.area {
+				margin: 20px auto 0px auto;
+			}
+			.mui-input-group:first-child {
+				margin-top: 20px;
+			}
+			.mui-input-group label {
+				width: 15%;
+			}
+			.mui-input-row label~input,
+			.mui-input-row label~select,
+			.mui-input-row label~textarea {
+				width: 78%;
+			}
+			.mui-checkbox input[type=checkbox],
+			.mui-radio input[type=radio] {
+				top: 6px;
+			}
+			.mui-content-padded {
+				margin-top: 25px;
+			}
+			.mui-btn {
+				padding: 10px;
+			}
+			.mui-icon-color {
+				color: #AAAAAA;
+			}
+			.mui-send-btn {
+				float: left;
+    				width: 100px;
+    				line-height: 1.3;
+    				border: 0px;
+    				color: blue;
+			}
+			
+			.mui-valid-text-box {
+				width: 50%;
+    				float: left;
+			}
+			
+			.mui-input {
+				float: left!important;
+				/*width: 50%!important;*/
+			}
+			
+			.mui-icon-extra-sweep {
+			    font-size: 20px;
+			    position: absolute;
+			    z-index: 1;
+			    top: 10px;
+			    right: 0;
+			    width: 38px;
+			    height: 38px;
+			    text-align: center;
+			    color: #999;
+			}
+			header {
+				background-color: #FFFFFF!important;
+				box-shadow: 0 0 0!important;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header id="header" class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">预约安装</h1>
+		</header>
+
+		<div id="content" class="mui-content">
+			<form class="mui-input-group">
+				<div class="mui-input-row">
+					<label style="padding: 8px 15px;"><span class="iconfont icon-xingming mui-icon-color"></span></label>
+					<input id='name' type="text" class="mui-input-clear mui-input" placeholder="输入姓名">
+				</div>
+				<div class="mui-input-row">
+					<label style="padding: 8px 15px;"><span class="mui-icon-extra mui-icon-extra-phone mui-icon-color"></span></label>
+					<input id='mobile' type="number" class="mui-input-clear mui-input" placeholder="输入手机号">
+				</div>
+				<div class="mui-input-row">
+					<label style="padding: 8px 15px;"><span class="iconfont icon-shouhuodizhi mui-icon-color"></span></label>
+					<input id='city' type="text" class="mui-input-clear mui-input" placeholder="输入城市">
+				</div>
+				<div class="mui-input-row">
+					<label style="padding: 8px 15px;"><span class="iconfont icon-xingbie mui-icon-color"></label>
+<!--					<input id='sex' type="text" class="mui-input" placeholder="选择性别" readonly>
+-->
+					<select id="sex" class="mui-input-clear mui-input mui-btn-block">
+						<option value="1">男</option>
+						<option value="2">女</option>
+					</select>
+				</div>
+			</form>
+			<div class="mui-content-padded">
+				<button id='save' class="mui-btn mui-btn-block mui-btn-primary" data-loading-text="保存中..." disabled>保存</button>
+			</div>
+		</div>
+		<script src="js/mui.min.js"></script>
+		<script src="js/wistorm/define.js"></script>
+		<script src="js/wistorm/wistorm.js"></script>
+		<script src="js/wistorm/md5.js"></script>		
+		<script src="js/app.js"></script>		
+		<script src="js/immersed.js" ></script>
+		<script>
+			(function($, doc) {
+				$.init();
+				$.plusReady(function() {
+
+				});
+				var nameBox = document.getElementById('name');
+				var mobileBox = document.getElementById('mobile');
+				var cityBox = document.getElementById('city');
+				var sexBox = document.getElementById('sex');
+				var saveButton = document.getElementById('save');
+				var setButton = function(){
+					saveButton.disabled = !(nameBox.value != '' && app.checkValidPhone(mobileBox.value).flag);												
+				}	
+				nameBox.addEventListener('keyup', function(){
+					setButton();
+				});
+				mobileBox.addEventListener('keyup', function(){
+					setButton();
+				});
+				saveButton.addEventListener('tap', function(event){
+					var _this = this;
+					mui(this).button('loading');
+					app.addBooking(nameBox.value, mobileBox.value, cityBox.value, sexBox.value, function(err, id) {
+						if(err) {
+							plus.nativeUI.toast(err);
+							return;
+						}
+						plus.nativeUI.toast('预约成功');
+						mui(_this).button('reset');
+						$.back();
+					});
+				});
+//				mui(document.body).on('tap', '.mui-btn', function(e) {
+//		            mui(this).button('loading');
+//		            setTimeout(function() {
+//		                mui(this).button('reset');
+//		            }.bind(this), 2000);
+//		        });
+			}(mui, document));
+		</script>
+	</body>
+
+</html>

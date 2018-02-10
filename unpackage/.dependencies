@@ -1,0 +1,68 @@
+{
+  "tab-webview-subpage-map.html": {
+    "href": "tab-webview-subpage-map.html",
+    "resources": [],
+    "priority": 0
+  },
+  "alert-list-main2.html": {
+    "href": "alert-list-main2.html",
+    "resources": [],
+    "priority": 1
+  },
+  "tab-webview-subpage-control.html": {
+    "href": "tab-webview-subpage-control.html",
+    "resources": [],
+    "refer": [],
+    "priority": 1
+  },
+  "vehicle-list.html": {
+    "href": "vehicle-list.html",
+    "resources": [],
+    "refer": [],
+    "priority": 0
+  },
+  "barcode_scan.html": {
+    "href": "barcode_scan.html",
+    "resources": [],
+    "priority": 2
+  },
+  "vehicle.html": {
+    "href": "vehicle.html",
+    "resources": [],
+    "refer": [],
+    "priority": 2
+  },
+  "forget_password.html": {
+    "href": "forget_password.html",
+    "resources": [],
+    "priority": 3
+  },
+  "tab-webview-subpage-more.html": {
+    "href": "tab-webview-subpage-more.html",
+    "resources": [],
+    "refer": [],
+    "priority": 3
+  },
+  "playback.html": {
+    "href": "playback.html",
+    "resources": [],
+    "priority": 4
+  },
+  "tab-webview-main.html": {
+    "href": "tab-webview-main.html",
+    "resources": [],
+    "refer": [],
+    "priority": 0
+  },
+  "reg.html": {
+    "href": "reg.html",
+    "resources": [],
+    "priority": 2
+  },
+  "login.html": {
+    "href": "login.html",
+    "resources": [],
+    "refer": [],
+    "priority": 0
+  }
+}

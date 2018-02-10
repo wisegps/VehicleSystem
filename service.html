@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link href="css/icons-extra.css" rel="stylesheet" />
+		<link href="css/iconfont.css" rel="stylesheet" />
+		<link href="css/style.css" rel="stylesheet" />
+		<style>
+			html {
+				height: 100%;
+				overflow: hidden;
+			}
+					
+			body {
+				height: 100%;
+				margin: 0px;
+				padding: 0px;
+				overflow: hidden;
+			}
+			
+			header {
+				background-color: #FFFFFF!important;
+				box-shadow: 0 0 0!important;
+			}
+			#container {
+				height: 100%;
+				text-align: center;
+				font-size: 14px;
+			}
+			
+			/*信息窗口样式*/
+			.info-window {
+				font-size: 12px;
+			}
+			
+			.info-window .mui-row {
+				line-height: 25px;
+			}
+			
+			.info-window h5 {
+				color:#333333;
+				line-height: 25px;
+			}
+			
+			.info-window span {
+				color:#666666;
+			} 
+			
+			.info-window .mui-btn-block {
+				margin-top: 10px;
+				padding: 5px!important;
+				font-size: 14px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header id="header" class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">服务网点</h1>
+		</header>
+		<div id="content" class="mui-content">
+			<div id="container">
+				<p style="padding-top: 20px;">
+					地图加载中...				
+				</p>
+			</div>
+		</div>
+		<!--<div class="info-window">
+			<div class="mui-row">
+				<h5 class="title">测试服务网点</h5>
+			</div>
+			<div class="mui-row">
+				<span>地址：深圳市南山区松湖路，离山海居60米</span>
+			</div>
+			<div class="mui-row">
+				<span>联系人：联系人2</span>
+			</div>
+			<div class="mui-row">
+				<span>电话：1329301313132</span>
+			</div>
+			<div class="mui-row">
+				<button class="mui-btn mui-btn-primary mui-btn-block">导航到此处</button>
+			</div>
+		</div>-->
+		<script src="js/mui.min.js"></script>
+		<script src="js/immersed.js" ></script>		
+		<script src="js/wistorm/define.js"></script>
+		<script src="js/wistorm/wistorm.js"></script>
+		<script src="js/wistorm/md5.js"></script>
+		<script src="js/app.js"></script>		
+		<!--<script src="js/map.js" type="text/javascript"></script>-->
+		<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=647127add68dd0a3ed1051fd68e78900"></script>
+		<script src="js/mapjs/global.js" type="text/javascript"></script>
+		<script src="js/mapjs/define.js" type="text/javascript"></script>
+		<script src="js/mapjs/bmap.js" type="text/javascript"></script>
+		<script src="js/mapjs/wisemap.js" type="text/javascript"></script>
+		<script>
+			(function($, doc) {
+				$.init();
+				var lon = 116.404;
+				var lat = 39.915;
+				$.plusReady(function() {
+					window.addEventListener('refreshList', function(event){
+						console.log('refresh');
+						id = event.detail.id;
+//						lon = event.detail.lon;
+//						lat = event.detail.lat;
+//						wimap.setZoom(16);
+//						wimap.setCenter(lon, lat);
+						wimap.findPoi(id);
+						//显示当前页面
+						setTimeout(function(){
+		   					mui.currentWebview.show('pop-in');														
+						}, 200);						
+					});	
+					refresh();
+				});
+				var cp = {lon: 116.404, lat: 39.915};
+				var wimap = new wiseMap(MAP_TYPE_BAIDU, document.getElementById('container'), cp, 15);
+				var refresh = function(){
+					app.listBranch('', 0, 0, function(obj){
+						if(obj.status_code == 0 && obj.total > 0){
+							wimap.setZoom(13);
+							wimap.addPois(obj.data);
+//							//显示当前页面
+//							setTimeout(function(){
+//		   						mui.currentWebview.show('pop-in');														
+//							}, 0);
+						}
+					});
+				};
+			}(mui, document));
+		</script>
+	</body>
+
+</html>

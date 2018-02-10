@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>Hello MUI</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<link rel="stylesheet" href="css/mui.min.css">
+		<link href="css/style.css" rel="stylesheet" />		
+		<link href="css/icons-extra.css" rel="stylesheet" />
+		<link href="css/iconfont.css" rel="stylesheet" />
+		<style>
+			html {
+				height: 100%
+			}
+					
+			body {
+				height: 100%;
+				margin: 0px;
+				padding: 0px
+			}
+			
+			header {
+				background-color: #FFFFFF!important;
+				box-shadow: 0 0 0!important;
+			}
+			
+			.mui-card-header {
+				padding: 20px!important;
+			}
+			
+			.mui-media-body {
+				font-size: 16px;
+			}
+			
+			.mui-ellipsis {
+				font-size: 12px;
+			}
+			
+			#type {
+				padding-top: 40px;
+				font-size: 16px;
+			}
+			
+			.mui-bar .mui-segmented-control {
+				top: 0px;	
+			}
+			.mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active {
+				border-bottom: 0px;
+			}
+			.mui-segmented-control.mui-scroll-wrapper .mui-control-item {
+			    padding: 0 8px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header id="header" class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+<!--			<a id="add" class="mui-icon iconfont icon-tianjia1 mui-pull-right"></a>
+-->			<h1 class="mui-title">报警信息</h1>
+				<div id="sliderSegmentedControl" class="mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+					<div class="mui-scroll">
+						<a class="mui-control-item mui-active">
+							全部
+						</a>
+						<a class="mui-control-item">
+							震动
+						</a>
+						<a class="mui-control-item">
+							离线
+						</a>
+						<a class="mui-control-item">
+							低电
+						</a>
+						<a class="mui-control-item">
+							断电
+						</a>
+						<a class="mui-control-item">
+							围栏
+						</a>
+				</div>
+			</div>
+		</header>	
+		<div id="content" class="mui-content">
+					
+		</div>
+	</body>
+	<script src="js/mui.min.js "></script>
+	<!--<script src="js/map.js" type="text/javascript"></script>-->
+	<!--<script src="js/immersed.js" ></script>-->
+	<!--<script src="js/app.js"></script>-->
+	<script>
+		mui.init({
+			gestureConfig:{
+				doubletap:true
+			},
+			subpages:[{
+				url:'alert-list.html',
+				id:'alert-list',
+				styles:{
+					top: '85px',
+					bottom: '0px',
+				}
+			}]
+		});
+		
+		var contentWebview = null;
+		document.querySelector('header').addEventListener('doubletap',function () {
+			if(contentWebview==null){
+				contentWebview = plus.webview.currentWebview().children()[0];
+			}
+			contentWebview.evalJS("mui('#content').pullRefresh().scrollTo(0,0,100)");
+		});
+		
+		mui.plusReady(function() {// 电子围栏界面
+//			geofenceAddPage = mui.preload({
+//					"id": 'geofence-add',
+//					"url": 'geofence.html'
+//				});	
+//				var geofenceButton = document.getElementById('add');
+//				geofenceButton.addEventListener('tap', function(event) {
+//					geofenceAddPage.show("pop-in");
+//			});
+			
+//			mui(".mui-table-view").on('tap','.mui-table-view-cell',function(){
+//				//获取id
+//				var id = this.getAttribute("id");
+////				alert(id);
+//				geofenceAddPage.show("pop-in");
+//			});
+//			
+//			mui(".mui-table-view").on('longtap','.mui-table-view-cell',function(){
+//				var id = this.getAttribute("id");
+//				alert("是否删除该围栏" + id);
+//			})
+		});
+	</script>
+
+</html>

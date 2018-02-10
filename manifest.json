@@ -1,0 +1,774 @@
+{
+	"@platforms": [
+		"android",
+		"iPhone",
+		"iPad"
+	],
+	"id": "H554C81CE",/*应用的标识，创建应用时自动生成，勿手动修改*/
+	"name": "车管云",/*应用名称，程序桌面图标名称*/
+	"version": {
+		"name": "1.2.3",/*应用版本名称*/
+		"code": "47"
+	},
+	"description": "车管云",/*应用描述信息*/
+	"icons": {
+		"72": "icon.png"
+	},
+	"launch_path": "login.html",/*应用的入口页面，默认为根目录下的index.html；支持网络地址，必须以http://或https://开头*/
+	"developer": {
+		"name": "",/*开发者名称*/
+		"email": "",/*开发者邮箱地址*/
+		"url": ""
+	},
+	"permissions": {
+		"Accelerometer": {
+			"description": "访问加速度感应器"
+		},
+		"Audio": {
+			"description": "访问麦克风"
+		},
+
+		"Cache": {
+			"description": "管理应用缓存"
+		},
+		"Camera": {
+			"description": "访问摄像头"
+		},
+		"Console": {
+			"description": "跟踪调试输出日志"
+		},
+
+		"Device": {
+			"description": "访问设备信息"
+		},
+		"Downloader": {
+			"description": "文件下载管理"
+		},
+		"Events": {
+			"description": "应用扩展事件"
+		},
+		"File": {
+			"description": "访问本地文件系统"
+		},
+		"Gallery": {
+			"description": "访问系统相册"
+		},
+		"Geolocation": {
+			"description": "访问位置信息"
+		},
+		"Invocation": {
+			"description": "使用Native.js能力"
+		},
+		"Orientation": {
+			"description": "访问方向感应器"
+		},
+		"Proximity": {
+			"description": "访问距离感应器"
+		},
+		"Storage": {
+			"description": "管理应用本地数据"
+		},
+
+		"Uploader": {
+			"description": "管理文件上传任务"
+		},
+		"Runtime": {
+			"description": "访问运行期环境"
+		},
+		"XMLHttpRequest": {
+			"description": "跨域网络访问"
+		},
+		"Zip": {
+			"description": "文件压缩与解压缩"
+		},
+		"Barcode": {
+			"description": "管理二维码扫描插件"
+		},
+		"Maps": {
+			"description": "管理地图插件"
+		},
+		
+		"Webview": {
+			"description": "窗口管理"
+		},
+		"NativeUI": {
+			"description": "原生UI控件"
+		},
+		"Navigator": {
+			"description": "浏览器信息"
+		},
+		"NativeObj": {
+			"description": "原生对象"
+		},
+		"Contacts":{
+			"description": "通讯录"
+		}
+	},
+	"plus": {
+		"splashscreen": {
+			"autoclose": false,/*是否自动关闭程序启动界面，true表示应用加载应用入口页面后自动关闭；false则需调plus.navigator.closeSplashscreen()关闭*/
+			"waiting": false,
+			"delay": "3000"
+		},
+		"runmode": "liberate",/*应用的首次启动运行模式，可取liberate或normal，liberate模式在第一次启动时将解压应用资源（Android平台File API才可正常访问_www目录）*/
+		"signature": "Sk9JTiBVUyBtYWlsdG86aHIyMDEzQGRjbG91ZC5pbw==",/*可选，保留给应用签名，暂不使用*/
+		"distribute": {
+			"plugins": {
+				"push": {}
+			},
+			"apple": {
+				"appid": "",/*iOS应用标识，苹果开发网站申请的appid，如io.dcloud.HelloH5*/
+				"mobileprovision": "",/*iOS应用打包配置文件*/
+				"password": "",/*iOS应用打包个人证书导入密码*/
+				"p12": "",/*iOS应用打包个人证书，打包配置文件关联的个人证书*/
+				"devices": "universal",/*iOS应用支持的设备类型，可取值iphone/ipad/universal*/
+				"UIReserveStatusbarOffset": false,
+				"frameworks": []
+			},
+			"google": {
+				"packagename": "",/*Android应用包名，如io.dcloud.HelloH5*/
+				"keystore": "",/*Android应用打包使用的密钥库文件*/
+				"password": "",/*Android应用打包使用密钥库中证书的密码*/
+				"aliasname": "",/*Android应用打包使用密钥库中证书的别名*/
+				"ImmersedStatusbar": true,
+				"permissions": ["<uses-permission android:name=\"android.permission.GET_ACCOUNTS\"/>","<uses-permission android:name=\"android.permission.RECORD_AUDIO\"/>","<uses-permission android:name=\"android.permission.MODIFY_AUDIO_SETTINGS\"/>","<uses-permission android:name=\"android.permission.READ_CONTACTS\"/>","<uses-permission android:name=\"android.permission.MOUNT_UNMOUNT_FILESYSTEMS\"/>","<uses-permission android:name=\"android.permission.INTERNET\"/>","<uses-permission android:name=\"android.permission.CHANGE_WIFI_STATE\"/>","<uses-permission android:name=\"android.permission.READ_PHONE_STATE\"/>","<uses-permission android:name=\"android.permission.VIBRATE\"/>","<uses-permission android:name=\"android.permission.READ_LOGS\"/>","<uses-permission android:name=\"android.permission.WAKE_LOCK\"/>","<uses-permission android:name=\"android.permission.CALL_PHONE\"/>","<uses-permission android:name=\"android.permission.FLASHLIGHT\"/>","<uses-permission android:name=\"android.permission.ACCESS_WIFI_STATE\"/>","<uses-permission android:name=\"android.permission.ACCESS_COARSE_LOCATION\"/>","<uses-feature android:name=\"android.hardware.camera.autofocus\"/>","<uses-permission android:name=\"android.permission.WRITE_CONTACTS\"/>","<uses-feature android:name=\"android.hardware.camera\"/>","<uses-permission android:name=\"android.permission.ACCESS_FINE_LOCATION\"/>","<uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\"/>","<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\"/>","<uses-permission android:name=\"android.permission.WRITE_SETTINGS\"/>","<uses-permission android:name=\"android.permission.CAMERA\"/>"]
+			},
+			"orientation": [
+				"portrait-primary",
+				"portrait-secondary"
+			],/*应用支持的方向，portrait-primary：竖屏正方向；portrait-secondary：竖屏反方向；landscape-primary：横屏正方向；landscape-secondary：横屏反方向*/
+			"icons": {
+				"ios": {
+					"prerendered": true, /*应用图标是否已经高亮处理，在iOS6及以下设备上有效*/
+					 /*应用图标，分辨率：512x512，用于自动生成各种尺寸程序图标*/
+					"iphone": {
+						"normal": "unpackage/res/icons/57x57.png", /*iPhone3/3GS程序图标，分辨率：57x57*/
+						"retina": "unpackage/res/icons/114x114.png", /*iPhone4程序图标，分辨率：114x114*/
+						 /*iPhone4S/5/6程序图标，分辨率：120x120*/
+						 /*iPhone6 Plus程序图标，分辨率：180x180*/
+						"spotlight-normal": "unpackage/res/icons/29x29.png", /*iPhone3/3GS Spotlight搜索程序图标，分辨率：29x29*/
+						"spotlight-retina": "unpackage/res/icons/58x58.png", /*iPhone4 Spotlight搜索程序图标，分辨率：58x58*/
+						 /*iPhone4S/5/6 Spotlight搜索程序图标，分辨率：80x80*/
+						"settings-normal": "unpackage/res/icons/29x29.png", /*iPhone4设置页面程序图标，分辨率：29x29*/
+						 /*iPhone4S/5/6设置页面程序图标，分辨率：58x58*/
+						"app@3x":"unpackage/res/icons/180x180.png","app@2x":"unpackage/res/icons/120x120.png","settings@2x":"unpackage/res/icons/58x58.png","settings@3x":"unpackage/res/icons/87x87.png","spotlight@2x":"unpackage/res/icons/80x80.png","spotlight@3x":"unpackage/res/icons/120x120.png","notification@2x":"unpackage/res/icons/40x40.png","notification@3x":"unpackage/res/icons/60x60.png"
+					},
+					"ipad": {
+						"normal": "unpackage/res/icons/72x72.png", /*iPad普通屏幕程序图标，分辨率：72x72*/
+						"retina": "unpackage/res/icons/144x144.png", /*iPad高分屏程序图标，分辨率：144x144*/
+						 /*iPad iOS7程序图标，分辨率：76x76*/
+						 /*iPad iOS7高分屏程序图标，分辨率：152x152*/
+						"spotlight-normal": "unpackage/res/icons/50x50.png", /*iPad Spotlight搜索程序图标，分辨率：50x50*/
+						"spotlight-retina": "unpackage/res/icons/100x100.png", /*iPad高分屏Spotlight搜索程序图标，分辨率：100x100*/
+						/*iPad iOS7 Spotlight搜索程序图标，分辨率：40x40*/
+						/*iPad iOS7高分屏Spotlight搜索程序图标，分辨率：80x80*/
+						/*iPad设置页面程序图标，分辨率：29x29*/
+						"app":"unpackage/res/icons/76x76.png","app@2x":"unpackage/res/icons/152x152.png","settings":"unpackage/res/icons/29x29.png","spotlight":"unpackage/res/icons/40x40.png","proapp@2x":"unpackage/res/icons/167x167.png","settings@2x":"unpackage/res/icons/58x58.png","spotlight@2x":"unpackage/res/icons/80x80.png","notification":"unpackage/res/icons/20x20.png","notification@2x":"unpackage/res/icons/40x40.png"
+					},"appstore":"unpackage/res/icons/1024x1024.png"
+				},
+				"android": {
+					"mdpi": "unpackage/res/icons/48x48.png", /*普通屏程序图标，分辨率：48x48*/
+					"ldpi": "unpackage/res/icons/48x48.png", /*大屏程序图标，分辨率：48x48*/
+					"hdpi": "unpackage/res/icons/72x72.png", /*高分屏程序图标，分辨率：72x72*/
+					"xhdpi": "unpackage/res/icons/96x96.png",/*720P高分屏程序图标，分辨率：96x96*/
+					"xxhdpi": "unpackage/res/icons/144x144.png",
+					"xxxhdpi": "unpackage/res/icons/192x192.png"
+				}
+			},
+			"splashscreen": {
+				"ios": {
+					"iphone": {
+						"default": "", /*iPhone3启动图片选，分辨率：320x480*/
+						"retina35": "unpackage/img/splash/splash/960_640.png",/*3.5英寸设备(iPhone4)启动图片，分辨率：640x960*/
+						"retina40": "unpackage/img/splash/splash/1136_640.png",/*4.0 英寸设备(iPhone5/iPhone5s)启动图片，分辨率：640x1136*/
+						"retina47": "unpackage/img/splash/splash/1334_750.png",/*4.7 英寸设备(iPhone6)启动图片，分辨率：750x1334*/
+						"retina55": "unpackage/img/splash/splash/2208_1242.png"
+					},
+					"ipad": {
+						"portrait": "", /*iPad竖屏启动图片，分辨率：768x1004*/
+						"portrait-retina": "",/*iPad高分屏竖屏图片，分辨率：1536x2008*/
+						"landscape": "", /*iPad横屏启动图片，分辨率：1024x748*/
+						"landscape-retina": "", /*iPad高分屏横屏启动图片，分辨率：2048x1496*/
+						"portrait7": "", /*iPad iOS7竖屏启动图片，分辨率：768x1024*/
+						"portrait-retina7": "",/*iPad iOS7高分屏竖屏图片，分辨率：1536x2048*/
+						"landscape7": "", /*iPad iOS7横屏启动图片，分辨率：1024x768*/
+						"landscape-retina7": ""
+					}
+				},
+				"android": {
+					"mdpi": "", /*普通屏启动图片，分辨率：240x282*/
+					"ldpi": "", /*大屏启动图片，分辨率：320x442*/
+					"hdpi": "unpackage/img/splash/splash/480_762.png", /*高分屏启动图片，分辨率：480x762*/
+					 /*720P高分屏启动图片，分辨率：720x1242*/
+					"xxhdpi": "unpackage/img/splash/splash/1080_1882.png"
+				}
+			}
+		}
+	},
+	"dependencies": {
+		"pages": {
+			"login.html": {
+				"resources": [
+					"js/locales/i18nextXHRBackend.js",
+					"js/locales.js",
+					"js/locales/i18nextBrowserLanguageDetector.js",
+					"js/app.js",
+					"js/mui.jsonp.js",
+					"js/wistorm/wspub.js",
+					"js/wistorm/md5.js",
+					"fonts/mui.ttf",
+					"js/locales/loc-i18next.js",
+					"js/wistorm/define.js",
+					"css/style.css",
+					"css/icons-extra.css",
+					"js/mui.enterfocus.js",
+					"js/immersed.js",
+					"fonts/mui-icons-extra.ttf",
+					"js/locales/i18nextLocalStorageCache.js",
+					"js/mui.min.js",
+					"js/wistorm/wistorm.js",
+					"css/mui.min.css",
+					"js/locales/i18next.js",
+					"locales/dev/translation.json",
+					"images/default.png",
+					"locales/en/translation.json",
+					null
+				],
+				"refer": [
+					"tab-webview-main.html",
+					"forget_password.html",
+					"reg.html"
+				],
+				"priority": 0
+			},
+			"tab-webview-main.html": {
+				"resources": [
+					"css/iconfont.css",
+					"tab-webview-subpage-control.html",
+					"fonts/iconfont.ttf",
+					"js/menu.js",
+					"locales/dev/translation.json",
+					"css/mui.min.css",
+					"fonts/mui.ttf",
+					"css/style.css",
+					"js/mui.min.js",
+					"js/locales.js",
+					"js/immersed.js",
+					"js/wistorm/wspub.js",
+					"js/wistorm/define.js",
+					"js/wistorm/wistorm.js",
+					"js/wistorm/md5.js",
+					"js/app.js",
+					"locales/en/translation.json",
+					"ui/tabbar2.png",
+					"ui/back2.png",
+					"ui/navbar.png",
+					"js/locales/i18nextXHRBackend.js",
+					"js/locales/i18nextBrowserLanguageDetector.js",
+					"js/locales/loc-i18next.js",
+					"js/locales/i18nextLocalStorageCache.js",
+					"js/locales/i18next.js",
+					"js/mapjs/baidu_MarkerClusterer.js",
+					"js/mapjs/baidu_TextIconOverlay.js",
+					"js/mapjs/gomap.js",
+					"imagecar/max_light.png",
+					"imagecar/min_light1.png",
+					"tab-webview-subpage-map.html",
+					"tab-webview-subpage-more.html",
+					"imagecar/lockon.png",
+					"ui/greenStatus.png"
+				],
+				"refer": [
+					"vehicle-list.html",
+					"vehicle.html",
+					"playback.html",
+					"alert-list-main2.html",
+					null,
+					"tab-webview-subpage-map-bak.html",
+					"tab-webview-subpage-badumap.html",
+					"about.html",
+					"tab-webview-subpage-more-set.html"
+				],
+				"priority": 0
+			},
+			"tab-webview-subpage-map.html": {
+				"resources": [
+					"js/mapjs/gomap.js",
+					"js/mapjs/wisemap.js",
+					"js/mapjs/markerwithlabel.js",
+					"css/font-awesome.min.css",
+					"images/objects/normal_alert_0.gif",
+					"images/objects/normal_stop_0.gif",
+					"js/mui.min.js",
+					"js/mui.jsonp.js",
+					"js/wistorm/define.js",
+					"js/wistorm/wistorm.js",
+					"js/wistorm/md5.js",
+					"js/app.js",
+					"js/mapjs/define.js",
+					"js/mapjs/global.js",
+					"font/fontawesome-webfont.woff",
+					"font/fontawesome-webfont.ttf",
+					"css/mui.min.css",
+					"fonts/mui.ttf",
+					"css/style.css",
+					"css/icons-extra.css",
+					"fonts/mui-icons-extra.ttf",
+					"css/iconfont.css",
+					"fonts/iconfont.ttf",
+					"images/objects/normal_offline_0.gif",
+					"images/objects/normal_stop_45.gif",
+					"images/objects/normal_run_45.gif",
+					"images/traffic_off.png",
+					"js/mapjs/bmap.js",
+					"images/vicon.png",
+					"images/traffic_on.png",
+					"js/mapjs/baidu_MarkerClusterer.js",
+					"js/mapjs/baidu_TextIconOverlay.js",
+					"js/locales/i18nextXHRBackend.js",
+					"js/locales.js",
+					"js/locales/i18nextBrowserLanguageDetector.js",
+					"js/locales/loc-i18next.js",
+					"js/locales/i18nextLocalStorageCache.js",
+					"js/locales/i18next.js",
+					"locales/dev/translation.json"
+				],
+				"refer": [
+					"tab-webview-main.html"
+				],
+				"priority": 0
+			},
+			"tab-webview-subpage-more.html": {
+				"resources": [
+					"locales/dev/translation.json",
+					"js/mui.min.js",
+					"js/locales.js",
+					"js/wistorm/wspub.js",
+					"js/wistorm/define.js",
+					"js/wistorm/wistorm.js",
+					"js/wistorm/md5.js",
+					"js/immersed.js",
+					"js/app.js",
+					"css/mui.min.css",
+					"fonts/mui.ttf",
+					"css/iconfont.css",
+					"fonts/iconfont.ttf",
+					"css/style.css",
+					"locales/en/translation.json",
+					"js/locales/i18nextXHRBackend.js",
+					"js/locales/i18nextBrowserLanguageDetector.js",
+					"js/locales/i18nextLocalStorageCache.js",
+					"js/locales/loc-i18next.js",
+					"js/locales/i18next.js"
+				],
+				"refer": [
+					"forget_password.html",
+					"vehicle-manege-list.html",
+					"alert-list-main.html",
+					"alert-list-main2.html"
+				],
+				"priority": 0
+			},
+			"vehicle-list.html": {
+				"resources": [
+					"js/mapjs/global.js",
+					"css/icons-car.css",
+					"js/mapjs/define.js",
+					"images/objects/normal_alert_0.gif",
+					"images/objects/normal_stop_0.gif",
+					"css/mui.min.css",
+					"fonts/mui.ttf",
+					"css/style.css",
+					"images/objects/normal_offline_0.gif",
+					"images/objects/normal_run_0.gif",
+					"css/iconfont.css",
+					"fonts/iconfont.ttf",
+					"js/mui.min.js",
+					"js/immersed.js",
+					"images/vicon.png",
+					"js/wistorm/define.js",
+					"js/wistorm/wistorm.js",
+					"js/wistorm/md5.js",
+					"js/app.js",
+					null,
+					"images/waiting.gif"
+				],
+				"refer": [
+					"tab-webview-subpage-map.html",
+					"tab-webview-subpage-control.html"
+				],
+				"priority": 0
+			},
+			"tab-webview-subpage-control.html": {
+				"resources": [
+					"images/alert.png",
+					"images/unlock.png",
+					"images/doorClose.png",
+					"images/redStatus.png",
+					"images/battery.png",
+					"images/lock.png",
+					"images/flameOutOff.png",
+					"images/greenStatus.png",
+					"js/map.js",
+					"js/mui.min.js",
+					"js/wistorm/define.js",
+					"js/wistorm/md5.js",
+					"js/wistorm/wistorm.js",
+					"js/app.js",
+					"js/mapjs/define.js",
+					"js/mapjs/global.js",
+					"images/flameOut.png",
+					"images/unlockOff.png",
+					"images/lockOff.png",
+					"images/doorOpen.png",
+					"images/unlockOn.png",
+					"images/lockOn.png",
+					"css/mui.min.css",
+					"fonts/mui.ttf",
+					null,
+					"ui/cutPower.png",
+					"ui/redStatus.png",
+					"ui/unlockoff.png",
+					"ui/backsign.png",
+					"ui/doorOpen.png",
+					"ui/start.png",
+					"ui/engineStartActive.png",
+					"ui/battery.png",
+					"ui/lockon.png",
+					"ui/flameout.png",
+					"ui/alert.png",
+					"ui/unlockon.png",
+					"ui/lockoff.png",
+					"ui/greenStatus.png",
+					"ui/engineStart.png"
+				],
+				"refer": [
+					"alert-list-main2.html"
+				],
+				"priority": 0
+			},
+			"alert-list-main2.html": {
+				"href": "alert-list-main2.html",
+				"resources": [
+					"css/mui.min.css",
+					"fonts/mui.ttf",
+					"css/style.css",
+					"css/iconfont.css",
+					"fonts/iconfont.ttf",
+					"js/mui.min.js",
+					"js/immersed.js",
+					"js/wistorm/define.js",
+					"js/wistorm/wistorm.js",
+					"js/wistorm/md5.js",
+					"js/app.js",
+					"js/mui.pullToRefresh.js",
+					"js/mui.pullToRefresh.material.js"
+				],
+				"priority": 1,
+				"refer": []
+			},
+			"barcode_scan.html": {
+				"href": "barcode_scan.html",
+				"resources": [
+					"js/common.js",
+					"css/common.css"
+				],
+				"priority": 2
+			},
+			"vehicle.html": {
+				"href": "vehicle.html",
+				"resources": [
+					"css/mui.min.css",
+					"fonts/mui.ttf",
+					"css/icons-extra.css",
+					"fonts/mui-icons-extra.ttf",
+					"css/iconfont.css",
+					"fonts/iconfont.ttf",
+					"css/style.css",
+					"js/mui.min.js",
+					"js/wistorm/define.js",
+					"js/wistorm/wistorm.js",
+					"js/wistorm/md5.js",
+					"js/app.js",
+					"js/immersed.js"
+				],
+				"refer": [
+					"barcode_scan.html",
+					"vehicle-type-list.html"
+				],
+				"priority": 2
+			},
+			"forget_password.html": {
+				"href": "forget_password.html",
+				"resources": [
+					"css/mui.min.css",
+					"fonts/mui.ttf",
+					"css/style.css",
+					"css/icons-extra.css",
+					"fonts/mui-icons-extra.ttf",
+					"css/iconfont.css",
+					"fonts/iconfont.ttf",
+					"js/mui.min.js",
+					"js/wistorm/define.js",
+					"js/wistorm/wistorm.js",
+					"js/wistorm/md5.js",
+					"js/app.js",
+					"js/immersed.js"
+				],
+				"priority": 3
+			},
+			"playback.html": {
+				"href": "playback.html",
+				"resources": [
+					"js/mui.min.js",
+					"js/mui.jsonp.js",
+					"js/immersed.js",
+					"js/wistorm/wspub.js",
+					"js/wistorm/define.js",
+					"js/wistorm/wistorm.js",
+					"js/wistorm/md5.js",
+					"js/app.js",
+					"js/mapjs/define.js",
+					"js/mapjs/global.js",
+					"js/mapjs/gomap.js",
+					"js/mapjs/wisemap.js",
+					"css/mui.min.css",
+					"fonts/mui.ttf",
+					"css/style.css",
+					"css/icons-extra.css",
+					"fonts/mui-icons-extra.ttf",
+					"css/iconfont.css",
+					"fonts/iconfont.ttf",
+					"js/mapjs/bmap.js",
+					"js/locales/i18nextXHRBackend.js",
+					"js/locales.js",
+					"js/locales/i18nextBrowserLanguageDetector.js",
+					"js/locales/loc-i18next.js",
+					"js/locales/i18nextLocalStorageCache.js",
+					"js/locales/i18next.js",
+					"locales/dev/translation.json",
+					"images/traffic_off.png"
+				],
+				"priority": 4,
+				"refer": []
+			},
+			"reg.html": {
+				"href": "reg.html",
+				"resources": [
+					"css/mui.min.css",
+					"fonts/mui.ttf",
+					"css/icons-extra.css",
+					"fonts/mui-icons-extra.ttf",
+					"css/iconfont.css",
+					"fonts/iconfont.ttf",
+					"css/style.css",
+					"js/mui.min.js",
+					"js/wistorm/define.js",
+					"js/wistorm/wistorm.js",
+					"js/wistorm/md5.js",
+					"js/app.js",
+					"js/immersed.js"
+				],
+				"priority": 2
+			},
+			"tab-webview-subpage-map-bak.html": {
+				"resources": [
+					"js/mapjs/bmap.js",
+					"js/mapjs/wisemap.js",
+					"css/font-awesome.min.css",
+					"css/icons-extra.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"tab-webview-subpage-badumap.html": {
+				"resources": [
+					"tab-webview-subpage-map.html"
+				],
+				"refer": [
+					"tab-webview-subpage-more.html",
+					"vehicle-list.html",
+					"vehicle.html",
+					"alert-list-main2.html",
+					"playback.html",
+					"tab-webview-main.html"
+				],
+				"priority": 0
+			},
+			"alert-list-main.html": {
+				"resources": [
+					"alert-list.html"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"vehicle-manege-list.html": {
+				"resources": [
+					"manege-list.html"
+				],
+				"refer": [
+					"vehicle.html"
+				],
+				"priority": 0
+			},
+			"tab-webview-subpage-more-set.html": {
+				"resources": [
+					"locales/dev/translation.json"
+				],
+				"refer": [
+					"vehicle-manege-list.html",
+					"alert-list-main2.html",
+					"forget_password.html"
+				],
+				"priority": 0
+			},
+			"manege-list.html": {
+				"resources": [],
+				"refer": [
+					"vehicle.html"
+				],
+				"priority": 0
+			}
+		},
+		"idle": {
+			"resources": [
+				"test.html",
+				"images/cbd.jpg",
+				"images/objects/normal_run_135.gif",
+				"js/upload.js",
+				"poi/buildings.png",
+				"images/ad2.png",
+				"images/stand_off.png",
+				"images/objects/normal_offline_135.gif",
+				"security.html",
+				"ad.html",
+				"images/objects/normal_offline_90.gif",
+				"images/objects/normal_alert_315.gif",
+				"js/mui.poppicker.js",
+				"images/60x60.gif",
+				"images/objects/normal_offline_180.gif",
+				"js/city.data.js",
+				"images/objects/normal_run_180.gif",
+				"js/mui.view.js",
+				"README.md",
+				"images/objects/normal_offline_45.gif",
+				"images/objects/normal_alert_135.gif",
+				"js/wistorm/test.js",
+				"images/objects/normal_offline_225.gif",
+				"js/city.data-3.js",
+				"images/objects/normal_stop_90.gif",
+				"tab-webview-subpage-home.html",
+				"images/icon.png",
+				"images/objects/normal_run_315.gif",
+				"js/update.js",
+				"article-detail.html",
+				"js/feedback.js",
+				"images/objects/normal_run_225.gif",
+				"tab-webview-subpage-setting.html",
+				"js/cache.js",
+				"images/muwu.jpg",
+				"images/power_off.png",
+				"images/objects/normal_stop_225.gif",
+				"images/Group.jpg",
+				"images/weixin.png",
+				"images/objects/normal_stop_135.gif",
+				"images/iconfont-tianjia.png",
+				"js/mapjs/markerclusterer.js",
+				"js/mui.back.5+.js",
+				"locales/zh_CN/translation.json",
+				"images/logo.png",
+				"images/nophoto.jpg",
+				"images/objects/normal_alert_270.gif",
+				"account.html",
+				"images/sinaweibo.png",
+				"images/icon-geofence.png",
+				"images/objects/normal_alert_90.gif",
+				"libs/easymob-webim-sdk/jquery-1.11.1.js",
+				"service-list.html",
+				"css/img/devs.png",
+				"images/locate.png",
+				"geofence-list-main2.html",
+				"images/objects/normal_stop_270.gif",
+				"images/objects/normal_alert_45.gif",
+				"images/objects/normal_alert_225.gif",
+				"js/locales/i18nextBrowserLanguageDetector.min.js",
+				"img/logo.png",
+				"js/mui.locker.js",
+				"service.html",
+				"css/feedback.css",
+				"js/mui.picker.min.js",
+				"tab-webview-subpage-chat.html",
+				"images/zj_logo.png",
+				"images/shuijiao.jpg",
+				"js/locales/i18next.min.js",
+				"images/objects/alert.png",
+				"poi/convenience_store.png",
+				"images/objects/normal_offline_270.gif",
+				"images/objects/run.png",
+				"images/qihoo.png",
+				"poi/bank.png",
+				"css/mui.picker.min.css",
+				"images/ad1.jpg",
+				"images/lock_on.png",
+				"images/objects/stop.png",
+				"poi/fast_food.png",
+				"poi/hospital.png",
+				"libs/easymob-webim-sdk/easemob.im-1.0.5.js",
+				"poi/fuel.png",
+				"images/objects/normal_offline_315.gif",
+				"images/locate_on.png",
+				"images/locate_off.png",
+				"geofence-set.html",
+				"js/locales/loc-i18next.min.js",
+				"booking.html",
+				"geofence-list.html",
+				"images/qrcode.png",
+				"poi/other.png",
+				"images/lockAndUnlock.png",
+				"images/myicon.png",
+				"images/stand_on.png",
+				"js/mapjs/convertor.js",
+				"js/core.js",
+				"css/feedback-page.css",
+				"images/user-photo.png",
+				"js/locales/i18nextXHRBackend.min.js",
+				"images/objects/normal_stop_180.gif",
+				"images/movecar-back.png",
+				"images/objects/normal_run_270.gif",
+				"images/qq.png",
+				"images/refresh.png",
+				"tab-webview-subpage-discover.html",
+				"libs/easymob-webim-sdk/json2.js",
+				"images/objects/normal_run_90.gif",
+				"css/mui.poppicker.css",
+				"images/Oval.png",
+				"js/feedback-page.js",
+				"images/login-1.png",
+				"tab-webview-subpage-contact.html",
+				"poi/mail_post.png",
+				"images/power.png",
+				"images/objects/normal_alert_180.gif",
+				"images/120x120.png",
+				"images/lock_off.png",
+				"vehicle-list2.html",
+				"locales.html",
+				"libs/easymob-webim-sdk/quickstart.md",
+				"js/mapjs/RichMarker_min.js",
+				"images/objects/normal_stop_315.gif",
+				"search.html",
+				"css/mui.picker.css",
+				"geofence.html",
+				"js/locales/i18nextLocalStorageCache.min.js",
+				"poi/school.png",
+				"geofence-list-main.html",
+				"images/yuantiao.jpg",
+				"poi/parking.png",
+				"libs/easymob-webim-sdk/strophe-custom-2.0.0.js",
+				"images/cheweishi.png",
+				"images/objects/offline.png",
+				"poi/house.png"
+			]
+		}
+	},
+	"unpackage": []
+}

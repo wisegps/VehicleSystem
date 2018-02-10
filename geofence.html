@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>Hello MUI</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<link rel="stylesheet" href="css/mui.min.css">
+		<link href="css/style.css" rel="stylesheet" />
+		<link href="css/icons-extra.css" rel="stylesheet" />
+		<link href="css/iconfont.css" rel="stylesheet" />
+		<style>
+			html {
+				height: 100%
+			}
+					
+			body {
+				height: 100%;
+				margin: 0px;
+				padding: 0px
+			}
+			
+			#container {
+				height: 100%;
+				text-align: center;
+				font-size: 14px
+			}
+			#date-select {
+				width: 100%;
+				height: 45px;
+				left: 0px;
+			    right: 0px;
+			    margin: 0px;
+				background-color: #FFFFFF;
+				padding-top: 5px;
+				padding-left: 10px;
+				padding-right: 10px;
+				text-align: center;
+				border-top: solid;
+				border-top-color: #EFEFF4;
+				border-top-width: 1px;
+			}
+			#nav {
+				width: 100%;
+				height: 140px;
+				left: 0px;
+			    right: 0px;
+			    position: fixed;
+			    bottom: 0px;
+			    margin: 0px;
+				background-color: #FFFFFF;
+				padding-top: 10px;
+				padding-left: 10px;
+				padding-right: 10px;
+			}
+			#addr{
+				font-size: 12px;
+			}
+			
+			header {
+				background-color: #FFFFFF!important;
+				box-shadow: 0 0 0!important;
+			}
+			
+			.range-label {
+				font-size: 12px;
+				padding-top: 20px;
+				line-height: 36px;
+				color: #8F8F94;
+			}
+			.mui-input-row.mui-input-range {
+			     padding-right: 0px; 
+			}
+			.mui-input-range input[type=range] {
+			    height: 1px;
+			    background-color: #C7C7CC
+			}
+		</style>
+	</head>
+
+	<body>
+		<header id="header" class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<a id="search" class="mui-icon mui-icon-search mui-pull-right"></a>
+			<h1 id="title" class="mui-title">设置电子围栏</h1>
+		</header>	
+		<div id="content" class="mui-content">
+			<!--日期选择面板-->
+			<div id="date-select" class="mui-row">
+				<div class="mui-col-sm-2 mui-col-xs-2">
+					<span class="range-label">100米</span>
+				</div>			
+				<div class="mui-col-sm-8 mui-col-xs-8">
+					<div class="mui-input-row mui-input-range">
+			            <input type="range" id='block-range' value="200" min="100" max="2000" >
+			        </div>
+				</div>
+				<div class="mui-col-sm-2 mui-col-xs-2">
+					<span class="range-label">2公里</span>
+				</div>
+			</div>
+			<!--地图-->
+			<div id="container">
+				
+			</div>
+			<!--信息展示面板-->
+			<div id="nav" class="mui-row">
+				<div class="mui-col-sm-12 mui-col-xs-12">
+					<div class="mui-row">
+						<h4>家</h4>
+					</div>
+					<div class="mui-row">
+						<p id="addr">深圳市南山区龙珠大道</p>
+					</div>
+					<div class="mui-row">
+						<button type="button" class="mui-btn mui-btn-danger mui-btn-block" data-loading-text="保存中...">设置电子围栏</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</body>
+	<script src="js/mui.min.js "></script>
+	<script src="js/map.js" type="text/javascript"></script>
+	<script src="js/immersed.js" ></script>
+	<script src="js/app.js"></script>
+	<script>
+		mui.init({
+			swipeBack:true //启用右滑关闭功能
+		});
+		mui.plusReady(function() {
+			var searchPage = mui.preload({
+					"id": 'search',
+					"url": 'search.html'
+				});	
+				var serachButton = document.getElementById('search');
+				serachButton.addEventListener('tap', function(event) {
+					searchPage.show("pop-in");
+			});
+		});
+        
+		map = new BMap.Map("container"); //创建地图
+		map.addControl(new BMap.NavigationControl());
+		map.addControl(new BMap.ScaleControl());
+		map.addControl(new BMap.OverviewMapControl());
+		var point = new BMap.Point(116.404, 39.915); // 创建点坐标  
+		map.centerAndZoom(point, 15);
+		
+		var t = document.getElementById('container');
+		t.style.height = (document.body.clientHeight - 235) + 'px';
+		
+		mui(document.body).on('tap', '.mui-btn', function(e) {
+            mui(this).button('loading');
+            setTimeout(function() {
+                mui(this).button('reset');
+            }.bind(this), 2000);
+        });
+	</script>
+
+</html>

@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<link rel="stylesheet" href="css/mui.min.css">
+		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" href="css/icons-car.css" />
+		<link href="css/iconfont.css" rel="stylesheet" />
+		<style>
+			body, .mui-content {
+				background-color: #efeff4;
+				color: #000;
+			}
+			
+			header {
+				background-color: #fff!important;
+			}
+			header.mui-bar{
+				/*display: none;*/
+			}
+			.mui-bar-nav~.mui-content{
+				padding: 0;
+			}
+			 .title{
+			  	margin: 20px;
+			  }
+			  .title+.content{
+			  	margin: 10px 15px 35px;
+			  	color: #bbb;
+			  	text-indent: 1em;
+			  	font-size: 14px;
+			  	line-height: 24px;
+			  }
+			  .mui-table-view{
+			  	margin-bottom: 35px;
+			  }
+			  
+			  .mui-table-view-cell {
+			  	font-size: 14px;
+			  }
+			  
+			  #info {
+			  	line-height: 40px;
+			  	padding: 20px;
+			  	text-align: center;
+			  }
+			  
+			  #info img {
+			  	vertical-align: middle;
+			  }
+			  
+			  .mui-media-object {
+			  	padding: 5px;
+			  }
+			  
+			  .mui-table-view-cell.mui-collapse .mui-collapse-content {
+				    /* display: none; */
+				     overflow: visible; 
+				     padding: 0px; 
+				     margin-left: -40px;
+    					padding-right: 10px;
+				}
+				
+				.search input[type=search] {
+					margin-bottom: 0px;
+					font-size: 12px;
+					background-color: #fff;
+				}
+				
+				.mui-search .mui-placeholder {
+					padding-top: 3px;
+					font-size: 13px;
+				}
+				
+				.mui-search.mui-active:before {
+				    margin-top: -20px;
+				}
+				
+				.mui-icon-search:before {
+				    /*padding-right: 90px;*/
+				}
+				
+				.mui-ellipsis {
+					font-size: 10px;
+				}
+
+				.mui-scroll-wrapper {
+					padding-top: 44px;
+				}
+				
+				.vehicle-list, .customer, .vehicle, .customer-list, .customer-name, .vehicle-name, .gpsTime, .status {
+					
+				}
+				
+				.mui-table-view-cell.vehicle-selected {
+				    background-color: #f7f7f7;
+				}
+				
+				.mui-bar .mui-input-row .mui-input-clear~.mui-icon-clear {
+				    top: 4px;
+				    right: 6px;
+				}
+		</style>
+	</head>
+	<body>
+		<header id="header" class="mui-bar mui-bar-nav">
+			<div class="mui-input-row mui-search">
+				<input id="search" type="search" class="mui-input-clear" placeholder="搜索设备">
+			</div>
+		</header>
+		<div class="mui-content">
+			<!--<div class="title">
+				<span data-i18n="vehicle-list.title">车辆列表</span><a id="add" class="mui-icon iconfont icon-tianjia1 mui-pull-right"></a>
+			</div>-->
+			<div id="mui-scroll-wrapper" class="mui-scroll-wrapper">
+				<div class="mui-scroll">
+					<ul class="mui-table-view customer-list">
+						<p id="info"><img src="images/waiting.gif">&nbsp;&nbsp;加载设备中...</p>
+						<!--<li id="c_Tan Logistics" class="mui-table-view-cell mui-collapse customer">
+							<a class="mui-navigate-right" href="#">Tan Logistics</a>
+				            <div class="mui-collapse-content">
+				            		<ul class="mui-table-view mui-table-view-chevron">
+									<li class="mui-table-view-cell vehicle">
+										<a class="mui-navigate-right">
+											<div class="caricon-ambulance"></div> 
+											<div class="mui-media-body">
+												测试车辆1
+												<div class="mui-row">
+													<p class='mui-ellipsis mui-pull-right gpsTime'>10-01 16:35</p>
+													<p class='mui-ellipsis status'>启动</p>
+												</div>
+											</div>
+										</a>
+									</li>
+								</ul>
+				            </div>
+				          </a>	
+						</li>-->
+					</ul>
+				</div>
+			</div>
+		</div>
+		<script src="js/mui.min.js"></script>
+		<script src="js/mui.jsonp.js" ></script>
+		<script src="js/locales.js" ></script>
+		<script src="js/immersed.js" ></script>
+		<script src="js/wistorm/wspub.js"></script>
+		<script src="js/wistorm/define.js"></script>
+		<script src="js/wistorm/wistorm.js"></script>
+		<script src="js/wistorm/md5.js"></script>
+		<script src="js/app.js"></script>
+		<script type="text/javascript" charset="utf-8">
+			mui.init({
+				keyEventBind: {
+					backbutton: false,
+					menubutton: false
+				}
+			});
+			mui('.mui-scroll-wrapper').scroll({
+				deceleration: 0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
+			});
+			//获得侧滑主窗口webview对象
+			var main = null;
+			var timerRefresh = null;
+			var search = document.getElementById("search");
+			mui.plusReady(function () {
+				main = plus.webview.currentWebview().opener();
+				// 加载车辆列表			
+				loadVehicle();
+			})
+			function closeMenu () {
+				mui.fire(main,"menu:swipeleft");
+			}
+			//优化显示出来的侧滑菜单，只需监听该菜单的左滑事件，然后将其关闭即可；在菜单上右滑，不做任何操作；
+			window.addEventListener("swipeleft", closeMenu);  
+			mui.menu = closeMenu;
+			
+			//更新车辆列表
+			window.addEventListener('refresh', function(event) {
+				loadVehicle();
+			});
+			
+			var searchVehicle = function(key){
+				var vehicles = document.querySelectorAll(".vehicle");
+//				console.log(JSON.stringify(vehicles));
+				[].forEach.call(vehicles, function(vehicle){
+					if(vehicle.querySelector(".vehicle-name").innerHTML.indexOf(key) > -1){
+						vehicle.classList.remove("mui-hidden");
+					}else{
+						vehicle.classList.add("mui-hidden");
+					};
+				});		
+				
+				var customers = document.querySelector(".customer-list").querySelectorAll(".customer");
+				[].forEach.call(customers, function(customer){
+					var vc = customer.getElementsByTagName("li").length;
+					var vh = customer.querySelectorAll(".mui-hidden").length;
+					if(vc == vh){
+						customer.classList.add("mui-hidden");
+					}else{
+						customer.classList.remove("mui-hidden");
+					}
+					var name = customer.getAttribute('name');
+					customer.querySelector('.customer-name').innerHTML = name + '(' + (vc - vh) + ')';
+				});	
+			};
+			
+			search.addEventListener('keyup', function(event){
+				var key = this.value;
+//				console.log(key);
+				searchVehicle(key);
+			});
+			
+			mui('.mui-search').on('tap', '.mui-icon-clear', function(e) {
+				var key = search.value;
+//				console.log(key);
+				searchVehicle(key);
+			});
+			
+			var GetCarIcon = function(VehicleType){
+			    var icon = "caricon-car";
+			    switch (VehicleType){
+			        case 0:
+			            icon = "caricon-car";
+			            break;
+			        case 1:
+			            icon = "caricon-ambulance";
+			            break;
+			        case 2:
+			            icon = "caricon-truck";
+			            break;
+			        case 3:
+			            icon = "caricon-ship";
+			            break;
+			        case 4:
+			            icon = "caricon-police";
+			            break;
+			        case 5:
+			            icon = "caricon-ldbus";
+			            break;
+			        case 6:
+			            icon = "caricon-bus";
+			            break;
+			        case 7:
+			            icon = "caricon-taxi";
+			            break;
+			        case 8:
+			            icon = "caricon-motocycle";
+			            break;
+			        case 9:
+			            icon = "caricon-heavy";
+			            break;
+			        case 10:
+			            icon = "caricon-cementtruck";
+			            break;
+			        case 11:
+			            icon = "caricon-people";
+			            break;
+			        case 12:
+			            icon = "caricon-trailer";
+			            break;
+			        default :
+			            icon = "caricon-car";
+			            break;
+			    }
+			    return icon;
+			}
+			
+			var createVehicle = function(vehicle) {
+				li = document.createElement('li');
+				li.className = 'mui-table-view-cell vehicle';
+//				console.log('createVehicle: ' + JSON.stringify(vehicle))
+				var id = vehicle.ObjectID;
+				li.id = id;
+				vehicle.icon = GetCarIcon(vehicle.ObjectType);
+				vehicle.name = vehicle.ObjectRegNum;
+				vehicle.did = vehicle.SIM;
+				vehicle.rcvTime = formatDate(vehicle.GpsTime).format("MM-dd hh:mm");
+				vehicle.status = vehicle.MDTStatus;
+				li.setAttribute("plate", vehicle.name); 
+				li.setAttribute("did", vehicle.did);
+				li.setAttribute("cname", vehicle.cname);
+				var div =
+					'<a class="mui-navigate-right">' +
+					'<div class="{{icon}}"></div>' +
+					'<div class="mui-media-body">' +
+					'<span class="vehicle-name">{{name}}</span>' +
+					'<div class="mui-row">' +
+					'<p class="mui-ellipsis mui-pull-right gpsTime">{{rcvTime}}</p>' +
+					'<p class="mui-ellipsis status">{{status}}</p>' +
+					'</div>' +
+					'</div>' +
+					'</a>';
+				div = div.format(vehicle);
+//				console.log(div);
+				li.innerHTML = div;
+				return li;
+			};
+			
+			var createCustomer = function(customer) {
+				li = document.createElement('li');
+				customer.name = customer.Customer_Name;
+				li.id = 'c_' + customer.Customer_Name;
+				li.setAttribute("name", customer.name); 
+				li.className = 'mui-table-view-cell mui-collapse customer';
+				var div =
+					'<a class="mui-navigate-right customer-name" href="#">{{name}}</a>' +
+						'<div class="mui-collapse-content">' +
+							'<ul class="mui-table-view mui-table-view-chevron vehicle-list"></ul>' +
+						'</div>' +
+					'</a>';
+				div = div.format(customer);
+				li.innerHTML = div;
+				return li;
+			};
+			var activeLi = null;
+			var bindVehicleClick = function() {
+				console.log("bindVehicleClick");
+				//添加列表项的点击事件
+				mui('.vehicle-list').on('tap', '.vehicle', function(e) {
+					if(activeLi){
+						activeLi.classList.remove("vehicle-selected");
+					}
+					this.classList.add("vehicle-selected");
+					activeLi = this;
+					var id = this.getAttribute('id');
+					var name = this.getAttribute('plate');
+					var did = this.getAttribute('did');
+					var vehicle = {
+						id: id,
+						name: name,
+						did: did
+					};
+					console.log(id);
+//					vehicle = app.getLocalVehicle(did) || vehicle;
+//					app.setCurrentVehicle(vehicle);
+					// 刷新定位页面
+					var gpsPage = plus.webview.getWebviewById('tab-webview-subpage-map.html');
+					mui.fire(gpsPage, 'findVehicle', {id: id});
+					// 自动关闭菜单
+					setTimeout(function(){
+						closeMenu();
+					}, 200);
+				});
+			};
+			
+			var compare = function (prop) {
+			    return function (obj1, obj2) {
+			        var val1 = obj1[prop];
+			        var val2 = obj2[prop];
+			        if (!isNaN(Number(val1)) && !isNaN(Number(val2))) {
+			            val1 = Number(val1);
+			            val2 = Number(val2);
+			        }
+			        if (val1 < val2) {
+			            return -1;
+			        } else if (val1 > val2) {
+			            return 1;
+			        } else {
+			            return 0;
+			        }            
+			    } 
+			}
+			
+			//加载或者刷新车辆
+			var loadVehicle = function() {
+				var ul = document.querySelector('.mui-table-view');
+				var _customers = [];
+				var _vehicles = {};
+				app.listVehicle(function(vehicles){  
+//					console.log(JSON.stringify(vehicles));
+					for(var i = 0; i < vehicles.data.length; i++){
+						var id = vehicles.data[i].objectId || vehicles.data[i].ObjectID;
+						_vehicles[id] = vehicles.data[i];
+					}
+					var gpsPage = plus.webview.getWebviewById('tab-webview-subpage-map.html');
+					mui.fire(gpsPage, 'loadVehicle', {vehicles: vehicles.data});
+					app.listCustomer(function(customers){
+//						console.log(JSON.stringify(customers));
+						//对数组进行排序
+						customers.data = customers.data.sort(compare("Customer_Name")); 
+						var customer = {};
+						var vehicle = {};
+						var old_name = "";
+						var liCustomer;
+						ul.innerHTML = "";
+						var vc = 0;
+						for(var i = 0; i < customers.data.length; i++){
+							var name = customers.data[i].name || customers.data[i].Customer_Name;
+//							console.log(name);
+							if(name != old_name){
+								if(liCustomer){
+									liCustomer.querySelector('.customer-name').innerHTML = old_name + '(' + vc + ')';
+									ul.appendChild(liCustomer);									
+								}
+								liCustomer = createCustomer(customers.data[i]);	
+//								console.log('liCustomer: ' + liCustomer.innerHTML);
+								var id = customers.data[i].ObjectID;
+								vehicle = _vehicles[id];
+								vehicle.cname = name;
+//								console.log('v: ' + vehicle);
+								var liVehicle = createVehicle(vehicle);
+								liCustomer.querySelector('.mui-table-view').appendChild(liVehicle);
+								old_name = name;
+								vc = 1;
+							}else{
+								var id = customers.data[i].ObjectID;
+								vehicle = _vehicles[id];
+								vehicle.cname = name;
+								var liVehicle = createVehicle(vehicle);
+								vc++;
+								liCustomer.querySelector('.mui-table-view').appendChild(liVehicle);
+							}		
+						}	
+						if(liCustomer){
+							liCustomer.querySelector('.customer-name').innerHTML = old_name + '(' + vc + ')';							
+							ul.appendChild(liCustomer);									
+						}
+						bindVehicleClick();
+//						searchVehicle('');
+					});	
+				});	
+			};
+			
+			var refreshVehicle = function() {
+				app.listVehicle(function(vehicles){  
+//					console.log(JSON.stringify(vehicles));
+					for(var i = 0; i < vehicles.data.length; i++){
+						var id = vehicles.data[i].ObjectID;
+						var vehicleLi = document.getElementById(id);
+						var gpsTime = formatDate(vehicles.data[i].GpsTime).format("MM-dd hh:mm");
+						var status = vehicles.data[i].MDTStatus;
+						vehicleLi.querySelector(".gpsTime").innerHTML = gpsTime;
+						vehicleLi.querySelector(".status").innerHTML = status;
+					}
+					var gpsPage = plus.webview.getWebviewById('tab-webview-subpage-map.html');
+					mui.fire(gpsPage, 'refreshVehicle', {vehicles: vehicles.data});
+				});	
+			};
+			if(timerRefresh){
+				clearInterval(timerRefresh);
+			}
+			timerRefresh = setInterval(function(){
+				var state = app.getState();
+				if(state.token && state.token != ""){
+					console.log("timer refresh");
+					refreshVehicle();					
+				}
+			}, 30000);
+		</script>
+</body>
+
+</html>

@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>Hello MUI</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<link rel="stylesheet" href="./css/mui.min.css">
+		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" href="css/mui.picker.min.css" />
+		<link rel="stylesheet" href="css/mui.poppicker.css" />
+		<link href="css/icons-extra.css" rel="stylesheet" />
+		<link href="css/iconfont.css" rel="stylesheet" />
+		<style>
+			html,
+			body {
+				background-color: #efeff4;
+			}
+			header {
+				background-color: #FFFFFF!important;
+				box-shadow: 0 0 0!important;
+			}
+			.mui-bar~.mui-content .mui-fullscreen {
+				top: 44px;
+				height: auto;
+			}
+			.mui-pull-top-tips {
+				position: absolute;
+				top: -20px;
+				left: 50%;
+				margin-left: -25px;
+				width: 40px;
+				height: 40px;
+				border-radius: 100%;
+				z-index: 1;
+			}
+			.mui-bar~.mui-pull-top-tips {
+				top: 24px;
+			}
+			.mui-pull-top-wrapper {
+				width: 42px;
+				height: 42px;
+				display: block;
+				text-align: center;
+				background-color: #efeff4;
+				border: 1px solid #ddd;
+				border-radius: 25px;
+				background-clip: padding-box;
+				box-shadow: 0 4px 10px #bbb;
+				overflow: hidden;
+			}
+			.mui-pull-top-tips.mui-transitioning {
+				-webkit-transition-duration: 200ms;
+				transition-duration: 200ms;
+			}
+			.mui-pull-top-tips .mui-pull-loading {
+				/*-webkit-backface-visibility: hidden;
+				-webkit-transition-duration: 400ms;
+				transition-duration: 400ms;*/
+				
+				margin: 0;
+			}
+			.mui-pull-top-wrapper .mui-icon,
+			.mui-pull-top-wrapper .mui-spinner {
+				margin-top: 7px;
+			}
+			.mui-pull-top-wrapper .mui-icon.mui-reverse {
+				/*-webkit-transform: rotate(180deg) translateZ(0);*/
+			}
+			.mui-pull-bottom-tips {
+				text-align: center;
+				background-color: #efeff4;
+				font-size: 15px;
+				line-height: 40px;
+				color: #777;
+			}
+			.mui-pull-top-canvas {
+				overflow: hidden;
+				background-color: #fafafa;
+				border-radius: 40px;
+				box-shadow: 0 4px 10px #bbb;
+				width: 40px;
+				height: 40px;
+				margin: 0 auto;
+			}
+			.mui-pull-top-canvas canvas {
+				width: 40px;
+			}
+			.mui-slider-indicator.mui-segmented-control {
+				background-color: #efeff4;
+				padding-top: 2px;
+				padding-left: 10px;
+			}
+			
+			.mui-segmented-control.mui-scroll-wrapper .mui-control-item {
+			    padding: 0 10px;
+			}
+			
+			.service {
+				
+			}
+			.service span {
+				color: #999;
+			}
+			.service p {
+				font-size:12px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header id="header" class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<!--<a id="map" class="mui-icon iconfont icon-map mui-pull-right"></a>-->
+			<a id="filter" class="mui-icon iconfont icon-guolv mui-pull-right"></a>
+			<h1 class="mui-title">服务网点</h1>
+		</header>
+		<div class="mui-content">
+			<div id="slider" class="mui-slider mui-fullscreen">
+				<div class="mui-slider-group">
+					<div id="item1mobile" class="mui-slider-item mui-control-content mui-active">
+						<div id="scroll1" class="mui-scroll-wrapper">
+							<div class="mui-scroll">
+								<ul id="serviceList" class="mui-table-view service">
+									<!--<li class="mui-table-view-cell">
+										<div class="mui-slider-handle">
+											<span class="mui-media-object mui-pull-left iconfont icon-shouhuodizhi"></span>
+											<div class="mui-media-body">
+												创兴达商务大厦
+												<p class='mui-ellipsis'>宝安区留仙三路36号</p>
+											</div>
+										</div>
+									</li>-->
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script src="./js/mui.min.js"></script>
+		<script type="text/javascript" src="js/city.data.js" ></script>
+		<script type="text/javascript" src="js/mui.picker.min.js" ></script>
+		<script type="text/javascript" src="js/mui.poppicker.js" ></script>
+		<script src="js/immersed.js" ></script>		
+		<script src="./js/mui.pullToRefresh.js"></script>
+		<script src="./js/mui.pullToRefresh.material.js"></script>
+		<script src="js/wistorm/define.js"></script>
+		<script src="js/wistorm/wistorm.js"></script>
+		<script src="js/wistorm/md5.js"></script>
+		<script src="js/app.js"></script>				
+		<script>
+			mui.init();
+			(function($) {
+				var city = "";
+				var _min_id = 0;
+				var _max_id = 0;
+				var firstLoad = true;
+				//阻尼系数
+				var deceleration = mui.os.ios?0.003:0.0009;
+				$('.mui-scroll-wrapper').scroll({
+					bounce: false,
+					indicators: true, //是否显示滚动条
+					deceleration:deceleration
+				});
+				$.ready(function() {
+					
+				});
+				$.plusReady(function() {		
+					var servicePage = mui.preload({
+						"id": 'service',
+						"url": 'service.html'
+					});
+					var cityPicker = new $.PopPicker({
+						layer: 2
+					});
+					cityPicker.setData(cityData);
+					var filter = document.getElementById("filter");
+					filter.addEventListener('tap', function(){
+						cityPicker.show(function(items) {
+							city = items[1].text;
+							clearServiceList();
+							initServiceList();
+						});
+					}, false);
+					var clearServiceList = function(){
+						_min_id = 0;
+						_max_id = 0;
+						var ul = document.getElementById('serviceList');
+						ul.innerHTML = "";
+						loads = false;
+					};
+					var initServiceList = function(){
+						loadServiceList(city, 0, 0, true, function(fragment){
+							var ul = document.getElementById('serviceList');
+							ul.appendChild(fragment);
+							loads = true;
+							bindListClicked();
+						});	
+					};					
+					var bindListClicked = function(){
+						//添加确认安全按钮的点击事件
+						mui('.service').off('tap', '.mui-table-view-cell');
+						mui('.service').on('tap', '.mui-table-view-cell', function(e) {
+							var id = this.id;
+							var lon = this.getAttribute('lon');
+							var lat = this.getAttribute('lat');
+							console.log(lon + "," + lat);
+							mui.fire(servicePage, 'refreshList', {lon: lon, lat: lat, id: id});	
+//							servicePage.show("pop-in");
+						});	
+					}
+					var loadServiceList = function(city, min_id, max_id, firstLoad, callback) {
+						app.listBranch(city, min_id, max_id, function(obj){
+							var fragment = document.createDocumentFragment();
+							var li;
+							var data;
+							var finished = obj.data && obj.data.length == 0;
+							if(obj.status_code == 0 && obj.data.length > 0){
+								for (var i = 0; i < obj.data.length; i++) {
+									data = obj.data[i];
+									data.status = data.status || 0;
+									if((firstLoad || max_id != 0) && i == 0){ 
+										_max_id = data.createdAt;
+//										console.log("max_id: " + _max_id[alertType.toString()]);
+									}
+									if((firstLoad || min_id != 0) && i == obj.data.length - 1){
+										_min_id = data.createdAt;
+										console.log("min_id: " +_min_id);
+									}
+									li = createLi(obj.data[i]);
+									fragment.appendChild(li);
+								}	
+							}
+							callback(fragment, finished);
+						});
+					};
+					
+					var createLi = function(service){
+						var li = document.createElement('li');
+						li.className = 'mui-table-view-cell';
+						li.id = service.objectId.toString();
+						li.setAttribute('lon', service.lon);
+						li.setAttribute('lat', service.lat);
+						var div = '<div class="mui-slider-handle">' +
+									'<span class="mui-media-object mui-pull-left iconfont icon-shouhuodizhi"></span>' +
+									'<div class="mui-media-body">{{name}}' +
+										'<p class="mui-ellipsis">{{address}}</p>' +
+									'</div>' +
+								  '</div>';
+						div = div.format(service);
+						li.innerHTML = div;
+						return li;
+					}
+					
+					$.each(document.querySelectorAll('.mui-slider-group .mui-scroll'), function(index, pullRefreshEl) {
+						$(pullRefreshEl).pullToRefresh({
+							down: {
+								height: 50,
+								callback: function() {
+									var self = this;
+									self.endPullDownToRefresh();
+								}
+							},
+							up: {
+								auto: false,
+								callback: function() {
+									var self = this;
+									loadServiceList(city, _min_id, 0, false, function(fragment, finished){
+										var ul = self.element.querySelector('.mui-table-view');
+										ul.appendChild(fragment);
+										bindListClicked();
+										self.endPullUpToRefresh(finished);
+									});
+								}
+							}
+						});
+					});
+					// 初始加载服务网点列表
+					initServiceList();	
+				});
+				
+			})(mui);
+		</script>
+	</body>
+
+</html>
