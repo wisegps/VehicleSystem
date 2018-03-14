@@ -363,29 +363,39 @@
 				var result = '无数据';
 				var status = 'offline';
 			    if(vehicle.activeGpsData){
-			    		if (!getOnline(vehicle)) {
+			    	var expireIn = new Date(vehicle.params.serviceExpireIn);
+					var now = new Date();
+			    		if(expireIn < now ){
+			    			result = "服务已到期";	
+			    			status = 'alert';
+			    		}else if (!getOnline(vehicle)) {
 			    			var now = new Date();
 			    			var rcvTime = new Date(vehicle.activeGpsData.rcvTime);
 			    			var m = dateDiff(now, rcvTime, "mm");
 			    			if(m < 60){
-			    				result = "离线1小时";	
-			    			}else if(m >= 60 && m < 240){
-			    				result = '离线4小时';
-			    			}else if(m >= 240 && m < 480){
-			    				result = '离线8小时';
-			    			}else if(m >= 480 && m < 720){
-			    				result = '离线12小时';
-			    			}else if(m >= 720 && m < 960){
-			    				result = '离线16小时';
-			    			}else if(m >= 960 && m < 1200){
-			    				result = '离线20小时';
-			    			}else if(m >= 1200 && m < 1440){
-			    				result = '离线1天';
+			    				result = '离线' + parseInt(m) + '分钟';	
+			    			}else if(m >= 60 && m < 1440){
+			    				if(m%60 == 0){
+			    					result = '离线' + parseInt(m/60) + '小时';
+			    				}else{
+			    					result = '离线' + parseInt(m/60) + '小时'+ parseInt(m%60)+'分钟';
+			    				}
 			    			}else if(m >= 1440 && m < 129600){
-			    				result = '离线' + parseInt(m/60/24) + '天';
+			    				result = '离线' + parseInt(m/60/24) + '天'+ parseInt(m/60%24)+'小时';
 			    			}else if(m >= 129600){
 			    				result = '离线90多天';
 			    			}
+//			    			else if(m >= 240 && m < 480){
+//			    				result = '离线8小时';
+//			    			}else if(m >= 480 && m < 720){
+//			    				result = '离线12小时';
+//			    			}else if(m >= 720 && m < 960){
+//			    				result = '离线16小时';
+//			    			}else if(m >= 960 && m < 1200){
+//			    				result = '离线20小时';
+//			    			}else if(m >= 1200 && m < 1440){
+//			    				result = '离线1天';
+//			    			}
 			    			status = 'offline';
 				    } else {
 				        if (vehicle.activeGpsData.alerts.length > 0) {
@@ -433,9 +443,11 @@
 				li.id = id;
 				vehicle.icon = GetCarIcon(vehicle);
 				vehicle.did = vehicle.did;
+				vehicle.expireIn = vehicle.serviceExpireIn;
 				li.setAttribute("plate", vehicle.name); 
 				li.setAttribute("did", vehicle.did);
 				li.setAttribute("objectId", vehicle.objectId);
+				li.setAttribute("expireIn", vehicle.serviceExpireIn);
 //				var div =
 //					'<a class="mui-navigate-right">' +
 //					'<div class="{{icon}}"></div>' +
@@ -482,7 +494,7 @@
 				app.updateTime = new Date(0);
 				// 刷新主页标题
 				mainPage = plus.webview.getWebviewById('main');
-				mui.fire(mainPage, 'refreshTitle', {name: 'Vehicle Start'});
+				mui.fire(mainPage, 'refreshTitle', {name: '车管云'});
 				console.log('get state before logout: ' + JSON.stringify(app.getState()));
 				plus.webview.getLaunchWebview().show("pop-in");	
 			};
@@ -501,6 +513,7 @@
 				// 刷新定位页面
 				var gpsPage = plus.webview.getWebviewById('tab-webview-subpage-badumap');
 				mui.fire(gpsPage, 'findVehicle', {
+//					alert('地理位置刷新了');
 					id: did
 				});
 				// 刷新控制界面
@@ -522,7 +535,18 @@
 					var name = this.getAttribute('plate');
 					var did = this.getAttribute('did');
 					var objectId = this.getAttribute('objectId');
-					selectVehicle(objectId, name, did);
+					var expireIn = new Date(this.getAttribute('expireIn'));
+					var currentVehicle = app.getCurrentVehicle();
+					var now = new Date();
+//					alert(expireIn);
+					if(expireIn < now){
+						//过期提示，充值续费	
+						alert("服务已到期，请充值续费！");
+						renew(currentVehicle);
+						
+					}else{
+						selectVehicle(objectId, name, did);						
+					}
 //					var vehicle = {
 //						id: id,
 //						name: name,
@@ -563,6 +587,8 @@
 			}
 			
 			//加载或者刷新车辆
+			var stop_time  = null;
+			var overTime;
 			var loadVehicle = function() {
 				var ul = document.querySelector('.customer-list');
 				var _customers = [];
@@ -603,6 +629,10 @@
 						for(var i = 0; i < vehicles.data.length; i++){
 							var liVehicle = createVehicle(vehicles.data[i]);
 //							console.log('liVehicle: ' + liVehicle.outerHTML);
+							stop_time = vehicles.data[i].serviceExpireIn.slice(0,vehicles.data[i].serviceExpireIn.indexOf('T'))
+							var dataTime = new Date();
+							var current_time = dataTime.toLocaleDateString();
+							overTime = (new Date(current_time.replace(/-/g,"\/"))) > (new Date(stop_time.replace(/-/g,"\/")));
 							liCustomer = liCustomers[vehicles.data[i].uid.toString()];
 							if(liCustomer){
 								liCustomer.querySelector('.vehicle-list').appendChild(liVehicle);								
@@ -622,6 +652,7 @@
 						bindVehicleClick(); 
 						// 更新定位数据
 						app.updateTime = new Date(0);
+//						alert(uids)
 						app.listDevices(uids, function(devices, err){
 							if(err){
 								app.toast(err);
@@ -631,6 +662,7 @@
 							console.log('show vehicle on map = ' + JSON.stringify(devices.data));
 							var gpsPage = plus.webview.getWebviewById('tab-webview-subpage-badumap');
 							console.log('page id = ' + gpsPage);
+//							alert(devices.data+'dd')
 							mui.fire(gpsPage, 'loadVehicle', {vehicles: devices.data});
 							for(var i = 0; i < devices.data.length; i++){
 								var liVehicle = document.getElementById(devices.data[i].did);
@@ -643,12 +675,12 @@
 									liVehicle.querySelector('.vehicle-status').innerHTML = ret.desc;
 									liVehicle.classList.add(ret.status);
 									var iconStatus = liVehicle.querySelector('.status').classList;
-									console.log('old icon:' + iconStatus[0]);
+//									console.log('old icon:' + iconStatus[0]);
 									iconStatus.remove(iconStatus[0]);
-									console.log('old icon:' + iconStatus[0]);
+//									console.log('old icon:' + iconStatus[0]);
 									iconStatus.remove(iconStatus[0]);
 									var icon = GetCarIcon(devices.data[i]);
-									console.log('new icon:' + icon);
+//									console.log('new icon:' + icon);
 									iconStatus.add(icon);
 									iconStatus.add('status'); 
 								}
@@ -667,6 +699,19 @@
 							setTimeout('refreshVehicle()', 5000);
 						});
 					});	
+					
+//					function CompareDate(d1,d2)
+//				{
+//				  return ((new Date(d1.replace(/-/g,"\/"))) < (new Date(d2.replace(/-/g,"\/")))); 
+//				}
+//				 
+////				var current_time1 = "2007-2-2 7:30";
+////				var stop_time1 = "2007-3-31 8:30";
+//				var dataTime = new Date();
+//				var current_time = dataTime.toLocaleDateString();
+//				alert(stop_time);
+//				alert(dataTime.toLocaleDateString());
+//			 	alert(CompareDate(current_time,stop_time));
 				});	
 			};
 			
@@ -688,7 +733,7 @@
 							if(liVehicle){
 	//							liVehicle.querySelector('.vehicle-status').innerHTML = ' (' + getStatusDesc(devices.data[i]) + ') ';
 								var ret = getStatus(devices.data[i]);
-								console.log("refresh vehicle list");
+//								console.log("refresh vehicle list");
 								console.log(JSON.stringify(ret));
 								liVehicle.querySelector('.vehicle-status').innerHTML = ret.desc;
 								liVehicle.classList.remove('offline');
@@ -697,18 +742,19 @@
 								liVehicle.classList.remove('alert');
 								liVehicle.classList.add(ret.status);
 								var iconStatus = liVehicle.querySelector('.status').classList;
-								console.log('old icon:' + iconStatus[0]);
+//								console.log('old icon:' + iconStatus[0]);
 								iconStatus.remove(iconStatus[0]);
-								console.log('old icon:' + iconStatus[0]);
+//								console.log('old icon:' + iconStatus[0]);
 								iconStatus.remove(iconStatus[0]);
 								var icon = GetCarIcon(devices.data[i]);
-								console.log('new icon:' + icon);
+//								console.log('new icon:' + icon);
 								iconStatus.add(icon);
 								iconStatus.add('status'); 
 							}
 							var currentVehicle = app.getCurrentVehicle();
 							if(currentVehicle && currentVehicle.did === devices.data[i].did){
 //								var devicePage = plus.webview.getWebviewById('tab-webview-subpage-control.html');
+								mainPage = plus.webview.getWebviewById('main');
 								mui.fire(mainPage, 'refreshVehicle', {vehicle: devices.data[i]});
 							}
 						}						
@@ -716,6 +762,80 @@
 					setTimeout('refreshVehicle()', 5000);
 				});	
 			};
+			
+			function renew(currentVehicle){
+					var pay_count = 1;
+					var state = app.getState();
+					var parent_month_fee = state.parent_month_fee || 5;
+				    var parent_year_fee = state.parent_year_fee || 60;
+				    var pay_fee = 0;
+				    var remark;
+				    var mode;
+					var btnArray = [{title:"1年(" + parent_year_fee.toFixed(2) + "元)"},{title:"2年(" + (parent_year_fee*2).toFixed(2) + "元)"}];
+					plus.nativeUI.actionSheet( {
+						title:"续费管理",
+						cancel:"取消",
+						buttons:btnArray
+					}, function(e){
+//						alert(e.index);
+						var index = e.index;
+						switch (index){
+							case 0:
+								break;
+							case 1:
+								pay_count = 1;
+								pay_fee = parent_year_fee * 1;
+								remark = currentVehicle.did + ' - 续费1年'
+								break;
+							case 2:
+								pay_count = 2;
+								pay_fee = parent_year_fee * 2;
+								remark = currentVehicle.did + ' - 续费2年'
+								break;								
+						}
+						if(index === 0){
+							return;
+						}
+						var bts=["取消","确认"];
+							app.getUser(function(user){
+								var balance = user.data.balance || 0;
+								var chargePage = mui.preload({
+										"id": 'charge',
+										"url": 'charge.html'
+									});	
+								if(balance < pay_fee){
+									plus.nativeUI.confirm("余额不足，请充值后再试 !", function(e) {
+										var i = e.index;
+										if(i == 1) {
+											chargePage.show("pop-in");
+										}	
+									}, "确认充值", bts);
+								}else{
+									if(remark != null){
+										plus.nativeUI.confirm("确认[" + remark + "]吗？", function(e) {
+											var i = e.index;
+											if(i == 1) {
+												app.toast('续费成功');
+												var vehiclePage = plus.webview.getWebviewById('vehicle-list');
+												mui.fire(vehiclePage, 'refreshVehicle', null);
+												var vehicleManege = plus.webview.getWebviewById('vehicle-manege-list');
+												mui.fire(vehicleManege, 'refreshVehicle', null);
+												app.pay(1, pay_count, remark, currentVehicle.did, function(err){
+														if(err){
+															app.toast(err);
+															return;
+														}else{
+															currentPage = mui.currentWebview;
+															mui.fire(currentPage, 'show', {mode: 1});
+														}
+												});
+											}
+										}, "确认续费", bts);
+									}
+								}	
+						});
+					});
+				}
 //			if(timerRefresh){
 //				clearInterval(timerRefresh);
 //			}
@@ -727,6 +847,7 @@
 //				}
 //			};
 //			timerRefresh();
+
 		</script>
 </body>
 

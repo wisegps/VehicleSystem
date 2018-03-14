@@ -7,7 +7,7 @@
 	"id": "H554C81CE",/*应用的标识，创建应用时自动生成，勿手动修改*/
 	"name": "车管云",/*应用名称，程序桌面图标名称*/
 	"version": {
-		"name": "1.2.3",/*应用版本名称*/
+		"name": "1.2.4",/*应用版本名称*/
 		"code": "47"
 	},
 	"description": "车管云",/*应用描述信息*/
@@ -102,7 +102,7 @@
 		},
 		"Contacts":{
 			"description": "通讯录"
-		}
+		},"Payment":{}
 	},
 	"plus": {
 		"splashscreen": {
@@ -113,7 +113,7 @@
 		"runmode": "liberate",/*应用的首次启动运行模式，可取liberate或normal，liberate模式在第一次启动时将解压应用资源（Android平台File API才可正常访问_www目录）*/
 		"signature": "Sk9JTiBVUyBtYWlsdG86aHIyMDEzQGRjbG91ZC5pbw==",/*可选，保留给应用签名，暂不使用*/
 		"distribute": {
-			"plugins": {
+			"plugins": {"payment":{"weixin":{"description":"微信支付","appid":"wx3cdba71f3b345a4d"},"alipay":{"description":"阿里支付","scheme":""}},
 				"push": {}
 			},
 			"apple": {
@@ -203,7 +203,7 @@
 					"xxhdpi": "unpackage/img/splash/splash/1080_1882.png"
 				}
 			}
-		}
+		},"ads":{"rp":false,"splash":false,"push":false,"spot":false},"adid":""
 	},
 	"dependencies": {
 		"pages": {
@@ -287,7 +287,8 @@
 					"tab-webview-subpage-map-bak.html",
 					"tab-webview-subpage-badumap.html",
 					"about.html",
-					"tab-webview-subpage-more-set.html"
+					"tab-webview-subpage-more-set.html",
+					"fee-list.html"
 				],
 				"priority": 0
 			},
@@ -583,7 +584,8 @@
 			},
 			"tab-webview-subpage-badumap.html": {
 				"resources": [
-					"tab-webview-subpage-map.html"
+					"tab-webview-subpage-map.html",
+					"images/objects/normal_stop_0.gif"
 				],
 				"refer": [
 					"tab-webview-subpage-more.html",
@@ -604,7 +606,8 @@
 			},
 			"vehicle-manege-list.html": {
 				"resources": [
-					"manege-list.html"
+					"manege-list.html",
+					"images/objects/normal_run_0.gif"
 				],
 				"refer": [
 					"vehicle.html"
@@ -618,7 +621,9 @@
 				"refer": [
 					"vehicle-manege-list.html",
 					"alert-list-main2.html",
-					"forget_password.html"
+					"forget_password.html",
+					"wallet.html",
+					"geofence-set.html"
 				],
 				"priority": 0
 			},
@@ -627,6 +632,28 @@
 				"refer": [
 					"vehicle.html"
 				],
+				"priority": 0
+			},
+			"wallet.html": {
+				"resources": [],
+				"refer": [
+					"charge.html",
+					"fee-list.html"
+				],
+				"priority": 0
+			},
+			"charge.html": {
+				"resources": [
+					"js/app.js",
+					"js/wistorm/md5.js",
+					"js/mui.min.js",
+					"js/wistorm/wistorm.js",
+					"js/wistorm/define.js",
+					"css/mui.min.css",
+					"js/pay.js",
+					"js/immersed.js"
+				],
+				"refer": [],
 				"priority": 0
 			}
 		},
@@ -718,7 +745,6 @@
 				"images/objects/normal_offline_315.gif",
 				"images/locate_on.png",
 				"images/locate_off.png",
-				"geofence-set.html",
 				"js/locales/loc-i18next.min.js",
 				"booking.html",
 				"geofence-list.html",

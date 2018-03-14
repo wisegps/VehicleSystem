@@ -164,25 +164,29 @@
 			var saveButton = document.getElementById('save');
 			var currentVehicle;
 			var getGeofence = function() {
-				currentVehicle = app.getCurrentVehicle();
-				if(currentVehicle) {
-					app.getDevice(currentVehicle.did, function(device) {
-						console.log(JSON.stringify(device));
-						if(device && device.params && device.params.geofenceWidth){
-							range.value = device.params.geofenceWidth.toString();
-							rangeText.innerHTML = range.value + '米';
-							saveButton.disabled = true;
-						}else{
-							range.value = "200";
-							rangeText.innerHTML = '未设置';
-							saveButton.disabled = false;
-						}
-					});
+//				currentVehicle = app.getCurrentVehicle();
+				state = app.getState();
+				if(state && state.geofenceWidth) {
+//					app.getDevice(currentVehicle.did, function(device) {
+//						console.log(JSON.stringify(device));
+//						if(device && device.params && device.params.geofenceWidth){
+//							range.value = device.params.geofenceWidth.toString();
+//							rangeText.innerHTML = range.value + '米';
+//							saveButton.disabled = true;
+//						}else{
+//							range.value = "200";
+//							rangeText.innerHTML = '未设置';
+//							saveButton.disabled = false;
+//						}
+//					});
+					range.value = state.geofenceWidth.toString();
+					rangeText.innerHTML = range.value + '米';
+					saveButton.disabled = true;
 				} else {
 					range.value = "200";
 					rangeText.innerHTML = '200米';
-					plus.nativeUI.toast('没有选择有效车辆，请重新选择');
-					mui.back();
+//					plus.nativeUI.toast('没有选择有效车辆，请重新选择');
+//					mui.back();
 				}
 			};
 //			getGeofence();
@@ -192,20 +196,24 @@
 			saveButton.addEventListener('tap', function(e) {
 	            mui(this).button('loading');
 	            var _this = this;
-	            if(currentVehicle){
-	            		app.setGeofenceWidth(currentVehicle.did, parseInt(range.value), function(err){
-	            			if (err) {
-							plus.nativeUI.toast(err);
-							return;
-						}
-		            		currentVehicle.geofenceWidth = parseInt(range.value);
-		            		app.setCurrentVehicle(currentVehicle);
-						plus.nativeUI.toast('保存电子栅栏参数成功');
-						mui(_this).button('reset');
-						mui.back();
-	            		});
-	            }else{
-	            		plus.nativeUI.toast('没有选择有效车辆，请返回重新选择');
+	            state = app.getState();
+	            if(state){
+//	            		app.setGeofenceWidth(currentVehicle.did, parseInt(range.value), function(err){
+//	            			if (err) {
+//							plus.nativeUI.toast(err);
+//							return;
+//						}
+//		            		currentVehicle.geofenceWidth = parseInt(range.value);
+//		            		app.setCurrentVehicle(currentVehicle);
+//						plus.nativeUI.toast('保存电子栅栏参数成功');
+//						mui(_this).button('reset');
+//						mui.back();
+//	            		});
+					state.geofenceWidth = parseInt(range.value);
+					app.setState(state);
+					plus.nativeUI.toast('保存电子栅栏参数成功');
+					mui(_this).button('reset');
+					mui.back();
 	            }
         		});
 		});

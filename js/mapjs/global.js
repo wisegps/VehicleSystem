@@ -1,4 +1,4 @@
-﻿//自动关闭提示框  
+﻿//自动关闭提示框
 function Alerts(str) {
     var msgw, msgh, bordercolor;
     msgw = 350; //提示窗口的宽度  
@@ -195,7 +195,7 @@ function getIcon(vehicle, map_type, if_playback, offset) {
             icon_direct = getDirect(vehicle.activeGpsData.direct);
 //          icon.size = new google.maps.Size(28, 28);
 //          icon.anchor = new google.maps.Point(10, 10);
-            icon.url = "images/objects/" + icon_name + "_" + icon_status + "_" + icon_direct + ".gif";
+            icon.url = "images/objects/" + icon_name + "_" + icon_status + "_0.gif";
 			return icon;
             break;
         case MAP_TYPE_BAIDU:
@@ -203,7 +203,7 @@ function getIcon(vehicle, map_type, if_playback, offset) {
         	var icon_name = getIconName(vehicle);
             var icon_status = getIconStatus(vehicle, if_playback);
             icon_direct = getDirect(vehicle.activeGpsData.direct);
-			var icon = new BMap.Icon("images/objects/" + icon_name + "_" + icon_status + "_" + icon_direct + ".gif", new BMap.Size(24, 31));
+			var icon = new BMap.Icon("images/objects/" + icon_name + "_" + icon_status + "_0.gif", new BMap.Size(24, 31));
 //         var icon = new BMap.Icon("images/vicon.png", new BMap.Size(24, 31));
            return icon;
             break;

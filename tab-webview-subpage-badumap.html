@@ -112,6 +112,7 @@
 			mui.init(); 
 			var wimap;
 			var currentVehicle = app.getCurrentVehicle();
+//			alert(currentVehicle);
 			var cp = currentVehicle ? currentVehicle.point || {lon:106.8719, lat:-6.312013}: {lon:106.8719, lat:-6.312013};
 			var addr = document.getElementById('location');
 			var height = document.body.clientHeight == 0 ? app.getSettings().height : document.body.clientHeight;
@@ -126,6 +127,11 @@
 			};
 			initMap();
 			var timerRefresh;
+			
+			window.addEventListener('refreshBaidumap', function(event) {
+				addr.style.display = "none";
+				addr.innerHTML = '';
+			});
 				
 			var showLocation = function(fullAddr) {
 				addr.style.display = "block";
@@ -164,6 +170,7 @@
 				console.log("loadVehicle");
 				wimap.clearVehicle();
 				var vehicles = event.detail.vehicles;
+//				alert(vehicles);
 				wimap.addVehicles(vehicles);
 			});
 			

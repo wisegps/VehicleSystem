@@ -55,11 +55,20 @@
 				padding-right: 15px;
 			}
 			
+			.myWallet {
+				color: #FFFF00
+			}
 			.password {
 				color: #007AFF
 			}
+			.manages{
+				color: #B4EEB4
+			}
 			.security {
 				color: #DD524D
+			}
+			.enclosure{
+				color: #CD0000
 			}
 			.contact {
 				color: #FFCC33
@@ -94,30 +103,46 @@
 			</h1>
 		</header>
 		<div id="content" class="mui-content">
+			
+			<ul class="mui-table-view mui-table-view-chevron">
+				<li class="mui-table-view-cell">
+					<a id="my-wallet" class="mui-navigate-right"><i class="mui-icon iconfont icon-zhifu-fenqi list_icon myWallet"></i>我的钱包</a>
+				</li>
+			</ul>
+			
+			<div class="title"></div>
 			<ul class="mui-table-view mui-table-view-chevron">
 				<li class="mui-table-view-cell">
 					<a id="password" class="mui-navigate-right"><i class="mui-icon iconfont icon-xiugaimima list_icon password"></i>修改密码</a>
 				</li>
 			</ul>
 			
-			
 			<div class="title"></div>
 			<ul class="mui-table-view mui-table-view-chevron">
 				<li class="mui-table-view-cell">
-					<a id="Vehicle_management" class="mui-navigate-right"><i class="mui-icon iconfont icon-cheliangguanli list_icon security"></i>车辆管理</a>
+					<a id="Vehicle_management" class="mui-navigate-right"><i class="mui-icon iconfont icon-cheliangguanli list_icon manages"></i>车辆管理</a>
 				</li>
 			</ul>
 			
 			<div class="title"></div>
 			<ul class="mui-table-view mui-table-view-chevron">
 				<li class="mui-table-view-cell">
-					<a id="alert" class="mui-navigate-right"><i class="mui-icon iconfont icon-anquan list_icon security"></i>报警</a>
+					<a id="alert" class="mui-navigate-right"><i class="mui-icon iconfont icon-anquan list_icon security"></i>车辆报警</a>
 				</li>
 			</ul>
 			<div class="title"></div>
+			
+			<div class="title"></div>
 			<ul class="mui-table-view mui-table-view-chevron">
 				<li class="mui-table-view-cell">
-					<a id="about" class="mui-navigate-right">版本号<i id="version" class="mui-pull-right update">V1.0.0</i></a>
+					<a id="enclosureGPS" class="mui-navigate-right"><i class="mui-icon iconfont icon-diliweilan1 list_icon enclosure"></i>围栏设置</a>
+				</li>
+			</ul>
+			<div class="title"></div>
+			
+			<ul class="mui-table-view mui-table-view-chevron">
+				<li class="mui-table-view-cell">
+					<a id="about" class="mui-navigate-right">版本号<i id="version" class="mui-pull-right update">V1.2.4</i></a>
 				</li>
 			</ul>
 			<div class="title">
@@ -156,6 +181,16 @@
 				mobile.innerHTML = state.account;
 			};
 			
+			var myWalletpage = mui.preload({
+				"id":'wallet',
+				"url":'wallet.html'
+			});
+			
+			var myWallet = document.getElementById('my-wallet');
+				myWallet.addEventListener('tap', function(event) {
+					mui.fire(myWalletpage, 'loadBalance');
+					myWalletpage.show("pop-in");
+			});	
 			
 			var alertPage = mui.preload({
 				"id":'alert-list-main2',
@@ -167,6 +202,19 @@
 				mui.fire(alertPage, 'refreshAlertList', null);	
 				setTimeout(function(){
 					alertPage.show("pop-in");
+				}, 200);
+			});	
+			
+			var enclosurePage = mui.preload({
+				"id":'geofence-set',
+				"url":'geofence-set.html'
+			});
+
+			var enclosureButton = document.getElementById('enclosureGPS');
+			enclosureButton.addEventListener('tap', function(event) {
+				mui.fire(enclosurePage, 'show');
+				setTimeout(function(){
+					enclosurePage.show("pop-in");
 				}, 200);
 			});	
 			
@@ -240,6 +288,8 @@
 							 */
 							console.log('get state before logout: ' + JSON.stringify(app.getState()));
 							plus.webview.getLaunchWebview().show("pop-in");
+							var gpsPage = plus.webview.getWebviewById('tab-webview-subpage-badumap');
+							mui.fire(gpsPage, 'refreshBaidumap', '');
 							break;
 						case 2: 
 							plus.runtime.quit();

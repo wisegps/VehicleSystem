@@ -55,7 +55,9 @@
 				var state = owner.getState();
 				state.account = loginInfo.account;
 				state.password = loginInfo.password;
-				state.uid = obj.uid;
+				state.uid = obj.user_type === 11 ? obj.pid : obj.uid;
+				state.adminUser = obj.adminUser || 0;
+				state.pay = obj.payEngine;				
 				state.group = obj.group;
 				state.token = obj.access_token;
 				state.expire_in = new Date(obj.expire_in);
@@ -64,10 +66,36 @@
 					var query_json = {
 						uid: obj.uid
 					};
-					wistorm_api._get('customer', query_json, 'logo,name', state.token, function(customer){
+					wistorm_api._get('customer', query_json, 'name,contact,tel,treePath,other,logo', state.token, function(customer){
 						if(customer && customer.data){
 							state.logo = customer.data.logo || 'images/default.png';
 							state.name = customer.data.name || loginInfo.account;
+							var treePath = customer.data.treePath;
+				            var trees = treePath.split(",");
+				            trees = trees.filter(function(value){
+				               return value !== "";
+				            });
+				            var query_json = {
+				                uid: trees.join("|")
+				            };
+				            var parent_month_fee = 0;
+				            var parent_year_fee = 0;
+				            wistorm_api._list('customer', query_json, 'uid,other', 'uid', 'uid', 0, 0, 1, -1, state.token, function(custs){
+				                console.log('custs: ' + JSON.stringify(custs));
+				                if(custs.status_code === 0 && custs.total > 0){
+				                    for(var i = 0; i < custs.total; i++){
+				                        if(custs.data[i].uid !== obj.uid.toString()){
+				                            parent_month_fee += parseFloat(custs.data[i].other.monthFee || 0);
+				                            parent_year_fee += parseFloat(custs.data[i].other.yearFee || 0);
+				                        }
+				                    }
+				                }
+				                state.parent_month_fee = parent_month_fee;
+				                state.parent_year_fee = parent_year_fee;
+				                owner.setState(state);
+								console.log(JSON.stringify(owner.getState()));
+								return callback();
+				            });
 						}else{
 							state.logo = 'images/default.png';
 							state.name = loginInfo.account;
@@ -150,7 +178,7 @@
 	owner.checkValidPhone = function(mobile) {
 		var flag = false;
 		var message = "";
-		var myreg = /^(((13[0-9]{1})|(14[0-9]{1})|(17[0]{1})|(15[0-3]{1})|(15[5-9]{1})|(18[0-9]{1}))+\d{8})$/;
+		var myreg = /^(((13[0-9]{1})|(14[0-9]{1})|(17[0-9]{1})|(15[0-9]{1})|(18[0-9]{1})|(16[0-9]{1}))+\d{8})$/;
 		var emailreg = /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/;
 		if(mobile == '') {
 			message = "账号不能为空.";
@@ -264,7 +292,7 @@
 		var query = {
 			did: deviceId
 		};
-		wistorm_api._get('_iotDevice', query, 'binded,uid,activedIn', owner.getToken(), function(dev){
+		wistorm_api._get('_iotDevice', query, 'binded,uid,activedIn,params', owner.getToken(), function(dev){
 			console.log('dev:' + JSON.stringify(dev));
 			//判断设备ID是否已被其他用户绑定
 			if(dev.status_code == 0 && dev.data == null){
@@ -285,7 +313,12 @@
 							if(customer.data){
 								result.parentId = customer.data.uid;
 								result.treePath = customer.data.treePath;
-								result.activedIn = new Date();
+//								result.activedIn = new Date();
+								result.activedIn = dev.data.activeIn || new Date();
+								var serviceRegDate = new Date();
+								var serviceExpireIn = new Date(serviceRegDate.setMonth(serviceRegDate.getMonth() + 6));
+								result.serviceRegDate = dev.data.params && dev.data.params.serviceRegDate ? dev.data.params.serviceRegDate : serviceRegDate;
+								result.serviceExpireIn = dev.data.params && dev.data.params.serviceExpireIn ? dev.data.params.serviceExpireIn : serviceExpireIn;
 								result.flag = true;
 							}else{
 								result.message = "用户不存在.";
@@ -544,11 +577,11 @@
 	/*
 	 * 添加车辆
 	 */
-	owner.addVehicle = function(did, plate, brand, battery, buyDate, color, parentId, treePath, activedIn, callback){
+	owner.addVehicle = function(did, plate, brand, battery, buyDate, color, parentId, treePath, activedIn, serviceRegDate, serviceExpireIn, callback){
 		var state = owner.getState();
 		if(state){
-			var serviceRegDate = new Date(activedIn);
-			var serviceExpireIn = new Date(activedIn.setMonth(activedIn.getMonth() + 6));
+//			var serviceRegDate = new Date(activedIn);
+//			var serviceExpireIn = new Date(activedIn.setMonth(activedIn.getMonth() + 6));
 			var create = {
 				uid: state.uid,
 				did: did,
@@ -739,14 +772,15 @@
 	owner.listDevices = function(uids, callback){
 		var state = owner.getState();
 		if(state){
-			var startTime = owner.updateTime.format("yyyy-MM-dd hh:mm:ss");
+//			var startTime = owner.updateTime.format("yyyy-MM-dd hh:mm:ss");''
+			var startTime = "1970-01-01 00:00:00"
 			var query = {
 				uid: uids.join('|'),
 //				map: 'GOOGLE',BAIDU
 				map: 'BAIDU',
 				'activeGpsData.rcvTime': startTime + '@2100-01-01'
 			};	
-			wistorm_api._list('_iotDevice', query, 'vehicleId,vehicleName,did,accOffTime,activeGpsData,params', '-activeGpsData.rcvTime', '-activeGpsData.rcvTime', 0, 0, 1, -1, state.token, function(obj){
+			wistorm_api._list('_iotDevice', query, 'vehicleId,vehicleName,did,accOffTime,activeGpsData,params,uid', '-activeGpsData.rcvTime', '-activeGpsData.rcvTime', 0, 0, 1, -1, state.token, function(obj){
 				console.log('get devices: ' + JSON.stringify(obj));
 				if(obj.status_code == 0){
 					if(obj.data.length > 0){
@@ -763,6 +797,26 @@
 		}else{
 			return callback('未知错误，请重新尝试登陆');
 		}
+	};	
+	
+	
+	/*
+	 * 获取我的账号明细
+	 */
+	owner.listBill = function(startTime, endTime, callback){
+		var state = owner.getState();
+		if(state){
+			wistorm_api.getBillList(state.uid, startTime, endTime, state.token, function(obj){
+				console.log(JSON.stringify(obj));
+				if(obj.status_code == 0){
+					return callback(obj);
+				}else{
+					return callback('获取账单明细数据失败，请稍后重试');
+				}
+			});
+		}else{
+			return callback('出现异常，请重新登录后重试');
+		}	
 	};	
 	
 	/*
@@ -860,7 +914,7 @@
 				did: did,
 				map: owner.getMapType()
 			};
-			wistorm_api._get('_iotDevice', query, 'activeGpsData,params', state.token, function(obj){
+			wistorm_api._get('_iotDevice', query, 'activeGpsData,params,uid', state.token, function(obj){
 				console.log(JSON.stringify(obj));
 				if(obj.status_code == 0){
 					return callback(obj.data);
@@ -894,14 +948,14 @@
 				}
 			});
 		}else{
-			return callback('未知错误，请重新尝试登陆');
+			return callback('出现异常，请重新登录后重试');
 		}
 	};	
 	
 	/*
 	 * 保存电子栅栏中心点
 	 */
-	owner.setGeofence = function(did, lon, lat, callback){
+	owner.setGeofence = function(did, lon, lat, width, callback){
 		var state = owner.getState();
 		if(state){
 			var query = {
@@ -909,7 +963,8 @@
 			};
 			var update = {
 				'params.geofenceLon': lon,
-				'params.geofenceLat': lat
+				'params.geofenceLat': lat,
+				'params.geofenceWidth': width
 			};
 //			console.log(JSON.stringify(update));
 			wistorm_api._update('_iotDevice', query, update, state.token, function(obj){
@@ -921,7 +976,7 @@
 				}
 			});
 		}else{
-			return callback('未知错误，请重新尝试登陆');
+			return callback('出现异常，请重新登录后重试');
 		}
 	};	
 	
@@ -932,22 +987,31 @@
 	owner.sendCommand = function(did, cmdType, params, type, remark, duration, callback){
 		var state = owner.getState();
 		if(state){
-			var type = type || 0;
-			var remark = remark || '';
+//			var type = type || 0;
+//			var remark = remark || '';
 			console.log('send command, no = ' + owner.sendCount);
 			owner.sendCount++;
 			wistorm_api.createCommand(did, cmdType, params, type, remark, duration, state.token, function(obj){
 				console.log(JSON.stringify(obj));
 				if(obj.status_code == 0){
 					owner.sendCount = 0;
-					return callback();
+					if(type == 0 && obj.send_status === false){
+						return callback(remark + '失败.');	
+					}else{
+						return callback();
+					}
 				}else if(obj.status_code == 0x1001){
 					return callback(obj.err_msg);
 				}else if(obj.status_code == 0x0006){
 					owner.sendCount = 0;
 					return callback('设备离线，请检查并重试.');
+				}else if(obj.status_code == 0x9012 && type == 1){
+					owner.sendCount = 0;
+//					alert('车型设定成功！');
+					return callback('车型设定成功！');
 				}else{
-					if(owner.sendCount < 3){
+//					alert(obj.status_code);
+					if(owner.sendCount < 3 && type == 0){
 						owner.sendCommand(did, cmdType, params, type, remark, duration, callback);
 					}else{
 						owner.sendCount = 0;
@@ -1313,6 +1377,25 @@
 			verticalAlign: 'center'
 		});
 	}
-
+/*
+	 * 余额支付
+	 */
+	owner.pay = function(pay_type, pay_count, remark, did, callback){
+		var state = owner.getState();
+		if(state){
+			wistorm_api.payService(state.uid, state.adminUser, 11, pay_type, pay_count, remark, did, function(obj){
+				console.log(JSON.stringify(obj));
+				if(obj.status_code == 0){
+					return callback();
+				}else if(obj.status_code == 8196){
+					return callback('余额不足，请充值后再试');
+				}else{
+					return callback('支付异常[code=' + obj.status_code + ']');
+				}
+			});	
+		}else{
+			return callback('出现异常，请重新登录后重试');
+		}
+	}		
 	owner.online = true;
 }(mui, window.app = {}));

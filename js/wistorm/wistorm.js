@@ -618,6 +618,35 @@ WiStormAPI.prototype.createOrderAndPay = function (cust_id, open_id, trade_type,
     });
 };
 
+// 余额支付服务费
+// 参数:
+//    uid: 支付用户ID;
+//    to_uid: 收款用户ID, 如果为0, 则表示向平台支付
+//    bill_type: 交易类型: (1: 交易， 2: 充值 3: 扣费 4: 提现 5: 退款 11：续费)
+//    amount: 金额;
+//    remark: 描述;
+//    attach: 附加信息;
+// 返回：
+//    微信JSAPI支付参数
+WiStormAPI.prototype.payService = function (uid, to_uid, bill_type, pay_type, pay_count, remark, did, callback) {
+    this.sign_obj.method = 'wicare.pay.service';
+    this.sign_obj.dev_key = this.dev_key;
+    this.sign_obj.uid = uid;
+    this.sign_obj.to_uid = to_uid;
+    this.sign_obj.bill_type = bill_type;
+    this.sign_obj.pay_type = pay_type;
+    this.sign_obj.pay_count = pay_count;
+    this.sign_obj.remark = remark;
+    this.sign_obj.attach = did;
+    this.sign_obj.sign = this.sign();
+    var params = raw2(this.sign_obj);
+    var path = API_URL + "/router/rest?" + params;
+    _get(path, function (obj) {
+        callback(obj);
+    });
+};
+
+
 // 获取微信支付参数
 // 参数:
 //    open_id: 微信用户OpenID;
@@ -865,6 +894,26 @@ WiStormAPI.prototype.getCache = function (key, callback) {
 	this.sign_obj.method = 'wicare.cache.getObj';
     // this.sign_obj.dev_key = this.dev_key;
     this.sign_obj.key = key;
+    this.sign_obj.sign = this.sign();
+    var params = raw2(this.sign_obj);
+    var path = API_URL + "/router/rest?" + params;
+    _get(path, function (obj) {
+        callback(obj);
+    });
+};
+
+
+// 获取账单列表
+// 参数:
+// uid: 用户ID
+// start_time: 开始时间
+// end_time: 结束时间
+WiStormAPI.prototype.getBillList = function (uid, start_time, end_time, token, callback) {
+    this.sign_obj.method = 'wicare.bill.list';
+    this.sign_obj.access_token = token;
+    this.sign_obj.uid = uid;
+    this.sign_obj.start_time = start_time;
+    this.sign_obj.end_time = end_time;
     this.sign_obj.sign = this.sign();
     var params = raw2(this.sign_obj);
     var path = API_URL + "/router/rest?" + params;

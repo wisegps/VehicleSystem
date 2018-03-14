@@ -279,8 +279,10 @@
 								vehiclePage = plus.webview.getWebviewById('vehicle-list');
 								$.fire(vehiclePage, 'refreshVehicle', null);
 								mainPage = plus.webview.getWebviewById('main');
-								$.fire(mainPage, 'show', null);
-								$.fire(mainPage, 'refreshTitle', null);
+								setTimeout(function(){
+									$.fire(mainPage, 'show', null);
+									$.fire(mainPage, 'refreshTitle', null);
+								}, 1000);
 							});						
 							//使用定时器的原因：
 							//可能执行太快，main页面loaded事件尚未触发就执行自定义事件，此时必然会失败
@@ -292,7 +294,7 @@
 										mainPage.show("pop-in");
 									}, 300);
 								}
-							},100);
+							},1000);
 						}else{
 							console.log("login after logout.");
 							var mainPage = $.preload({
@@ -303,9 +305,11 @@
 							vehiclePage = plus.webview.getWebviewById('vehicle-list');
 							$.fire(vehiclePage, 'refreshVehicle', null);
 							mainPage = plus.webview.getWebviewById('main');
-							$.fire(mainPage, 'show', null);
-							$.fire(mainPage, 'refreshTitle', null);
-							mainPage.show("pop-in");
+							setTimeout(function(){
+								$.fire(mainPage, 'show', null);
+								$.fire(mainPage, 'refreshTitle', null);
+								mainPage.show("pop-in");
+							}, 1000);
 						}
 					};
 					//检查 "登录状态/锁屏状态" 开始

@@ -258,13 +258,13 @@ function vehicleMarker(vehicles, if_track, if_show_line) {
     this.obj_name = vehicles.vehicleName;
     
     if(if_show_line != false){
-    this.lon = vehicles.activeGpsData.lon;
-    this.lat = vehicles.activeGpsData.lat;
+	    this.lon = vehicles.activeGpsData.lon;
+	    this.lat = vehicles.activeGpsData.lat;
 //  console.log("车牌名称==============="+JSON.stringify(vehicles.activeGpsData.vehicleName));
     }
-//  console.log("车辆数据信息。。。。。。。。。。。。。。。。。。。。。"+JSON.stringify(vehicles));
+//  else{
 //  this.b_lon = vehicle.active_gps_data.b_lon;
-//  this.b_lat = vehicle.active_gps_data.b_lat;
+//  this.b_lat = vehicle.active_gps_data.b_lat;}
 //  this.speed = vehicle.active_gps_data.speed;
 //  this.direct = vehicle.active_gps_data.direct;s
     this.if_track = if_track;
@@ -439,53 +439,60 @@ bmap.prototype.addVehicles = function (vehicles, is_infowin, is_playback) {
     var latLng = null;
     var icon = "";
     var title = "";
-    for (var i = 0; i < vehicles.length; i++) {
-    	
-    	if (vehicles[i] != null) {
-        var v = this.vehicles[vehicles[i].did];
-        // 判断车辆是否存在，存在则更新数据，不存在则添加
-        if (v != null) {
-            this.updateVehicle(vehicles[i], false, false, false, '#FF0000', 3, is_playback);
-        } else {
-            latLng = new BMap.Point(vehicles[i].activeGpsData.lon, vehicles[i].activeGpsData.lat);
-            v = new vehicleMarker(vehicles[i], is_infowin, is_playback);
-            icon = getIcon(vehicles[i], MAP_TYPE_BAIDU, is_playback);
-            title = vehicles[i].vehicleName + workTypeDesc[vehicles[i].workType||0];
-            v.marker_ = new BMap.Marker(latLng, {icon: icon});
-            v.marker_.setRotation(vehicles[i].activeGpsData.direct);
-//          v.marker_.setLabel(new BMap.Label(vehicles[i].vehicleName, {offset: new BMap.Size(30, 0)}));
-//          v.marker_.getLabel().setStyle({border: "0px solid red", backgroundColor: "transparent", fontWeight: "bold", fontFamily: "PingFang SC", fontSize: "13px", textShadow: "#fff 1px 0 0,#fff 0 1px 0,#fff -1px 0 0,#fff 0 -1px 0"});
-            v.marker_.setTitle = title;
-	        vehicles[i].name = vehicles[i].vehicleName;
-	        content = getVehicleContent(vehicles[i]);
-//	        console.log(content);
-	        //打开该车辆的信息窗体
-	        
-	        var opts = {
-			    width: 200, // 信息窗口宽度
-			    title: title, // 信息窗口标题
-			    enableAutoPan: false
-			}
-	    		var infowin = new BMap.InfoWindow(content, opts);
-	        v.infowin_ = infowin;
-	        	var fn = markerClickFunction(v);    
-//          if(is_infowin){       
-                v.marker_.addEventListener("click", fn);
-//          }
-
-            this.vehicles[vehicles[i].did] = v;
-            this.markers.push(v.marker_);
-//          var markerClusterer = new BMapLib.MarkerClusterer(this.map, {markers: this.markers});
-            this.map.addOverlay(v.marker_);
-//
-//          var obj_id = vehicles[i].obj_id;
-//
-//          var geoFn = geoFunction(obj_id);
-//          this.geocoder.getLocation(latLng, geoFn, {"poiRadius": "500", "numPois": "10"});
-        }
-        
-        }
-    }
+//  alert(vehicles)
+if(vehicles.length){
+		    for (var i = 0; i < vehicles.length; i++) {
+		    	
+		    	if (vehicles[i] != null) {
+		        	var v = this.vehicles[vehicles[i].did];
+		        // 判断车辆是否存在，存在则更新数据，不存在则添加
+		        if (v != null) {
+		            this.updateVehicle(vehicles[i], false, false, false, '#FF0000', 3, is_playback);
+		        } else {
+		            latLng = new BMap.Point(vehicles[i].activeGpsData.lon, vehicles[i].activeGpsData.lat);
+		//          alert(vehicles[i].activeGpsData.lon );
+		            v = new vehicleMarker(vehicles[i], is_infowin, is_playback);
+		            icon = getIcon(vehicles[i], MAP_TYPE_BAIDU, is_playback);
+		            title = vehicles[i].vehicleName + workTypeDesc[vehicles[i].workType||0];
+		            v.marker_ = new BMap.Marker(latLng, {icon: icon});
+		            v.marker_.setRotation(vehicles[i].activeGpsData.direct);
+		//          v.marker_.setLabel(new BMap.Label(vehicles[i].vehicleName, {offset: new BMap.Size(30, 0)}));
+		//          v.marker_.getLabel().setStyle({border: "0px solid red", backgroundColor: "transparent", fontWeight: "bold", fontFamily: "PingFang SC", fontSize: "13px", textShadow: "#fff 1px 0 0,#fff 0 1px 0,#fff -1px 0 0,#fff 0 -1px 0"});
+		            v.marker_.setTitle = title;
+			        vehicles[i].name = vehicles[i].vehicleName;
+			        content = getVehicleContent(vehicles[i]);
+		//	        console.log(content);
+			        //打开该车辆的信息窗体
+			        
+			        var opts = {
+					    width: 200, // 信息窗口宽度
+					    title: title, // 信息窗口标题
+					    enableAutoPan: false
+					}
+			    		var infowin = new BMap.InfoWindow(content, opts);
+			        v.infowin_ = infowin;
+			        	var fn = markerClickFunction(v);    
+		//          if(is_infowin){       
+		                v.marker_.addEventListener("click", fn);
+		//          }
+		
+		            this.vehicles[vehicles[i].did] = v;
+		            this.markers.push(v.marker_);
+		//          var markerClusterer = new BMapLib.MarkerClusterer(this.map, {markers: this.markers});
+		            this.map.addOverlay(v.marker_);
+		//
+		//          var obj_id = vehicles[i].obj_id;
+		//
+		//          var geoFn = geoFunction(obj_id);
+		//          this.geocoder.getLocation(latLng, geoFn, {"poiRadius": "500", "numPois": "10"});
+		        }
+		        
+		        }
+		    }
+	    }else{
+	        	latLng = new BMap.Point(114.302786,30.631178);
+	        	this.map.centerAndZoom(latLng, 11); 
+	        }
 };
 
 var markerClickFunction = function (v) {

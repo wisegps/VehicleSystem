@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>钱包充值</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<link rel="stylesheet" href="css/mui.min.css">
+		<link href="css/style.css" rel="stylesheet" />
+		<style>
+			html,
+			body {
+				background-color: #fff;
+			}
+			
+			.mui-content {
+				background-color: #fff;
+			}
+			.head {
+				height: 40px;
+			}
+			#head {
+				line-height: 40px;
+			}
+			.head-img {
+				width: 40px;
+				height: 40px;
+			}
+			#head-img1 {
+				position: absolute;
+				bottom: 10px;
+				right: 40px;
+				width: 40px;
+				height: 40px;
+			}
+			.title{
+				margin: 20px 15px 7px;
+				color: #6d6d72;
+				font-size: 15px;
+			}
+			.update {
+				font-style: normal;
+				color: #999999;
+				margin-right: -25px;
+				font-size: 15px
+			}
+			header {
+				background-color: #FFFFFF!important;
+				box-shadow: 0 0 0!important;
+			}
+			
+			.mui-table-view-cell {
+			    padding: 20px 15px;
+			}
+			
+			.label {
+				font-size: 14px;
+				color: #999;
+				line-height: 40px;
+			}
+			
+			.amount {
+				text-align: center;
+			}
+			
+			.amount .mui-btn {
+				border: 1px solid #0062cc;
+			}
+			
+			.amount .mui-btn.active {
+				color: #fff;
+    				background-color: #007aff;
+			}
+			
+			.mui-btn {
+				line-height: 40px;
+				width: 49%;
+				border-top-left-radius: 5px;
+			    border-top-right-radius: 5px;
+			    border-bottom-right-radius: 5px;
+			    border-bottom-left-radius: 5px;
+			}
+			
+			.mui-row {
+				padding: 10px;
+			}
+			
+			.charge-btn {
+				padding: 10px;
+			}
+			
+			.pay-label {
+				font-size: 14px;
+				color: #666;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header id="header" class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">充值</h1>
+		</header>
+		<div id="content" class="mui-content">
+				<div class="mui-row">
+					<span class="label">充值金额</span>
+					<!--<div class="mui-row amount">
+						<button type="button" class="mui-btn active" onclick="amountClick(this,100)">充100元</button>
+						<button type="button" class="mui-btn" onclick="amountClick(this,50)">充50元</button>
+					</div>
+					<div class="mui-row amount">
+						<button type="button" class="mui-btn" onclick="amountClick(this,20)">充20元</button>
+						<button type="button" class="mui-btn" onclick="amountClick(this,10)">充10元</button>
+					</div>-->
+					<div class="mui-input-row">
+						<input id='amount' type="number" class="mui-input" placeholder="输入充值金额，比如60">						
+					</div>
+				</div>
+				<div class="mui-row">
+					<span class="label">选择支付方式</span>
+						<!--<div class="mui-input-row mui-radio">
+							<label class="pay-label">支付宝支付</label>
+							<input class="pay-type" name="payType" type="radio" value="1" checked onclick="payTypeClick(this.value)">
+						</div>-->
+						<div class="mui-input-row mui-radio">
+							<label class="pay-label">微信支付</label>
+							<input class="pay-type" name="payType" type="radio" value="2" checked onclick="payTypeClick(this.value)">
+						</div>
+				</div>
+				<div class="mui-row charge-btn">
+					<button id="charge" type="button" class="mui-btn-block mui-btn-primary">立即充值</button>
+				</div>
+			</ul>
+		</div>
+	</body>
+	<script src="js/mui.min.js "></script>
+	<script src="js/immersed.js" ></script>
+	<script src="js/wistorm/define.js"></script>
+	<script src="js/wistorm/wistorm.js"></script>
+	<script src="js/wistorm/md5.js"></script>
+	<script type="text/javascript" src="js/app.js" ></script>
+	<script src="js/pay.js" ></script>
+	<script>		
+		var selectAmount = document.querySelector('.active');
+		var pay_type = 2;
+		var amount = 60;
+		document.addEventListener('plusready', plusReady, false);
+		mui.init({
+			swipeBack:true //启用右滑关闭功能
+		});
+
+//		var amountClick = function(obj, val){
+//			if(selectAmount){
+//				selectAmount.classList.remove("active");	
+//			};
+//			if(obj){
+//				obj.classList.add("active");
+//			}
+//			selectAmount = obj;
+//			amount = val;
+//		};
+		var payTypeClick = function(val){
+			pay_type = parseInt(val);
+			console.log('pay type = ' + pay_type);
+		}
+		mui.plusReady(function() {
+			var chargeButton = document.getElementById('charge');
+			var amountBox = document.getElementById('amount');
+			chargeButton.addEventListener('tap', function(event) {
+				console.log('amount: ' + amountBox.value);
+				if(amountBox.value === ''){
+					amountBox.focus();
+					app.toast('请输入有效金额！');
+					return;
+				}
+				amount = parseInt(amountBox.value);
+				pay(pay_type, amount, '充值', 2, function(){
+					walletPage = plus.webview.getWebviewById('wallet');
+					mui.fire(walletPage, 'loadBalance', null);
+					mui.back();
+				});
+			});
+		});
+	</script>
+</html>
