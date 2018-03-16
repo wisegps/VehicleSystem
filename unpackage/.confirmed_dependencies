@@ -32,7 +32,8 @@
 			"js/locales/i18nextLocalStorageCache.js",
 			"js/locales/i18next.js",
 			"locales/dev/translation.json",
-			"locales/en/translation.json"
+			"locales/en/translation.json",
+			"js/update.js"
 		],
 		"refer": [
 			"main.html",
@@ -102,7 +103,25 @@
 			"imagecar/min_light1.png",
 			"tab-webview-subpage-more.html",
 			"imagecar/lockon.png",
-			"ui/greenStatus.png"
+			"ui/greenStatus.png",
+			"imagecar/open_front_behind.png",
+			"imagecar/front_left_window.png",
+			"imagecar/unlockoff.png",
+			"imagecar/stop.png",
+			"imagecar/front_right_window.png",
+			"imagecar/close_door_left_back.png",
+			"imagecar/open_behind_light2.png",
+			"imagecar/close_door_right_back.png",
+			"ui/redStatus.png",
+			"imagecar/close_door_left_front.png",
+			"imagecar/findoff.png",
+			"ui/battery.png",
+			"imagecar/car_body.png",
+			"imagecar/lockoff.png",
+			"imagecar/close_door_right_front.png",
+			"imagecar/back_right_window.png",
+			"imagecar/tailoff.png",
+			"imagecar/back_left_window.png"
 		],
 		"refer": [
 			"tab-webview-subpage-about.html",
@@ -824,7 +843,23 @@
 	"tab-webview-subpage-badumap.html": {
 		"resources": [
 			"tab-webview-subpage-map.html",
-			"images/objects/normal_stop_0.gif"
+			"images/objects/normal_stop_0.gif",
+			"js/mapjs/bmap.js",
+			"js/app.js",
+			"js/mapjs/global.js",
+			"js/mapjs/wisemap.js",
+			"js/wistorm/md5.js",
+			"js/wistorm/define.js",
+			"css/style.css",
+			"css/icons-extra.css",
+			"js/immersed.js",
+			"js/mui.min.js",
+			"js/wistorm/wistorm.js",
+			"css/iconfont.css",
+			"css/mui.min.css",
+			"js/mapjs/define.js",
+			"images/traffic_off.png",
+			"images/refresh.png"
 		],
 		"refer": [
 			"tab-webview-subpage-map.html",

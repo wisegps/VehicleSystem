@@ -526,7 +526,7 @@
 						toggleNav(true);
 					}else{
 						var cp = {lon:114.302786, lat:30.631178};
-						var map = new wiseMap(document.getElementById('container'), cp, 11);
+						var map = new wiseMap(MAP_TYPE_BAIDU, document.getElementById('container'), cp, 11);
 						plus.nativeUI.toast('车辆没有数据.');
 						toggleNav(false);
 					}
@@ -544,7 +544,7 @@
 		var wimap;
 		var cp = {lon:106.8719, lat:-6.312013};
 		var cpp = {lon:114.302786, lat:30.631178};
-		wimap = new wiseMap(document.getElementById('container'), cp, 15);
+		wimap = new wiseMap(MAP_TYPE_BAIDU, document.getElementById('container'), cp, 15);
 		var showLocation = function(fullAddr) {
 //				console.log('show location: ' + fullAddr);
 				if(_play || _first){

@@ -439,8 +439,7 @@ bmap.prototype.addVehicles = function (vehicles, is_infowin, is_playback) {
     var latLng = null;
     var icon = "";
     var title = "";
-//  alert(vehicles)
-if(vehicles.length){
+	if(vehicles.length){
 		    for (var i = 0; i < vehicles.length; i++) {
 		    	
 		    	if (vehicles[i] != null) {
@@ -867,14 +866,16 @@ bmap.prototype.openAddGeoTool = function () {
 }
 
 bmap.prototype.addCircle = function (center, width) {
+	
 	if(circle){
-		this.map.removeOverlay(circle);
+		this.map.removeOverlay(circle);  
 		circle = null;
 	}
 	var latLng = new BMap.Point(center.lon, center.lat);
 	var opt = {
+    		fillColor:"blue",
     		strokeWeight: 1,
-    		strokeOpacity: 1,
+    		strokeOpacity: 1, 
     		fillOpacity: 0.3
     }
     circle = new BMap.Circle(latLng, width, opt);

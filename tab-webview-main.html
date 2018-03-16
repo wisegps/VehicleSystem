@@ -553,6 +553,8 @@
 				var maps = document.getElementById('address');
 				maps.addEventListener('tap', function(evet){
 						_baidumap.show("pop-in");
+						
+						
 				});
 				
 				var more_setpage = mui.preload({
@@ -984,7 +986,7 @@
 									app.toast('设防成功.');
 									StandStatus = true;
 									unlock.src = 'imagecar/unlockoff.png';
-									lock.src = 'imagecar/lockon.png';
+									lock.src = 'imagecar/lockon.png'; 
 								});
 							});
 						});
@@ -1017,7 +1019,7 @@
 									app.toast(err);
 									return;
 								}
-								var width = app.getState().geofenceWidth || 200;
+								var width = 0;
 								var lon = 0;
 								var lat = 0;
 								app.setGeofence(currentVehicle.did, lon, lat, width, function(err) {

@@ -309,8 +309,6 @@ function formatDirect(theta)
 }
 
 function getVehicleContent(vehicle, if_playback, if_track){
-//	console.log(JSON.stringify(vehicle));
-	vehicle.gpsTime = new Date(vehicle.activeGpsData.gpsTime).format("yyyy-MM-dd hh:mm:ss");
 	vehicle.gpsTime = new Date(vehicle.activeGpsData.gpsTime).format("yyyy-MM-dd hh:mm:ss");
 	vehicle.rcvTime = new Date(vehicle.activeGpsData.rcvTime).format("yyyy-MM-dd hh:mm:ss");
 	vehicle.status = getStatusDesc(vehicle.activeGpsData);

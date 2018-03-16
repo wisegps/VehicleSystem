@@ -118,9 +118,17 @@
 			var height = document.body.clientHeight == 0 ? app.getSettings().height : document.body.clientHeight;
 			var width = document.body.clientWidth == 0 ? app.getSettings().width : document.body.clientWidth;
 
-			wimap = new wiseMap(document.getElementById('container'), cp, 15);
+//			var opt =  {
+//		    		traffic: true,
+//		    		trace: true,
+//		    		myPos: true,
+//		    		refresh: true,
+//		    		lock: {show: false, stat: false},
+//		    		stand: {show: false, stat: false}
+//		    } 
+			wimap = new wiseMap(MAP_TYPE_BAIDU, document.getElementById('container'), cp, 15);
 
-			var initMap = function(){
+			var initMap = function(){ 
 				var t = document.getElementById('container');
 				t.style.height = height + 'px';
 				t.style.width = width + 'px';
@@ -163,26 +171,52 @@
 //				alert(id)
 				console.log("findVehicle id = " + id);
 				wimap.findVehicle(id, true, true);
+//				addCircles();
 			});
-			
+			  
 			// 加载所有车辆
 			window.addEventListener('loadVehicle', function(event) {
 				console.log("loadVehicle");
 				wimap.clearVehicle();
 				var vehicles = event.detail.vehicles;
-//				alert(vehicles);
 				wimap.addVehicles(vehicles);
+//				setTimeout(function(){
+					addCircles();  
+//				}, 1000);
 			});
 			
 			// 加载所有车辆
 			window.addEventListener('refreshVehicle', function(event) {
-				console.log("refreshVehicle");
+//				console.log("refreshVehicle");
 				var vehicles = event.detail.vehicles;
-				wimap.addVehicles(vehicles);
-//				console.log("显示车辆。。。。。。。。。。。。。。。。。。。。"+vehicles);
-//				refreshLocation();
+					wimap.addVehicles(vehicles);
+//				setTimeout(function(){
+					addCircles(); 
+//				}, 1000);
 			});
-			
+			 
+			function addCircles(){
+				app.getDevice(currentVehicle.did, function(vehicle){
+					wimap.removeCircle(); 
+					if(vehicle){
+						currentVehicle.point = {
+								lon: vehicle.activeGpsData.lon,
+								lat: vehicle.activeGpsData.lat
+							};
+						currentVehicle.geofenceWidth = parseInt(vehicle.params.geofenceWidth || 200);
+						wimap.setCenter(vehicle.activeGpsData.lon, vehicle.activeGpsData.lat);
+						app.setCurrentVehicle(currentVehicle);
+						wimap.setZoom(17);
+						var lon = parseFloat(vehicle.params.geofenceLon);
+						var lat = parseFloat(vehicle.params.geofenceLat);
+//						var width = parseInt(currentVehicle.geofenceWidth); 
+						var width = app.getState().geofenceWidth || 200;
+						if(lon > 0){ 
+							wimap.addCircle({ lon: lon, lat: lat }, width); 
+						}
+					}
+				});			
+			}
 			// 加载POI
 			var loadPOI = function(){
 				app.listPOI(function(pois){

@@ -1,7 +1,6 @@
 ﻿var baidumap;
 var map_type = MAP_TYPE_BAIDU;
-
-function wiseMap(div_map, center_point, zoom, opt) {
+function wiseMap(map_type, div_map, center_point, zoom, opt) {
     var map = null;
     switch (map_type) {
         case MAP_TYPE_GOOGLE:

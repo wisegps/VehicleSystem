@@ -232,7 +232,8 @@
 					"locales/dev/translation.json",
 					"images/default.png",
 					"locales/en/translation.json",
-					null
+					null,
+					"js/update.js"
 				],
 				"refer": [
 					"tab-webview-main.html",
@@ -276,7 +277,26 @@
 					"tab-webview-subpage-map.html",
 					"tab-webview-subpage-more.html",
 					"imagecar/lockon.png",
-					"ui/greenStatus.png"
+					"ui/greenStatus.png",
+					"tab-webview-subpage-home.html",
+					"imagecar/open_front_behind.png",
+					"imagecar/front_left_window.png",
+					"imagecar/unlockoff.png",
+					"imagecar/stop.png",
+					"imagecar/front_right_window.png",
+					"imagecar/close_door_left_back.png",
+					"imagecar/open_behind_light2.png",
+					"imagecar/close_door_right_back.png",
+					"ui/redStatus.png",
+					"imagecar/close_door_left_front.png",
+					"imagecar/findoff.png",
+					"ui/battery.png",
+					"imagecar/car_body.png",
+					"imagecar/lockoff.png",
+					"imagecar/close_door_right_front.png",
+					"imagecar/back_right_window.png",
+					"imagecar/tailoff.png",
+					"imagecar/back_left_window.png"
 				],
 				"refer": [
 					"vehicle-list.html",
@@ -288,7 +308,8 @@
 					"tab-webview-subpage-badumap.html",
 					"about.html",
 					"tab-webview-subpage-more-set.html",
-					"fee-list.html"
+					"fee-list.html",
+					"tab-webview-subpage-discover.html"
 				],
 				"priority": 0
 			},
@@ -332,7 +353,8 @@
 					"js/locales/loc-i18next.js",
 					"js/locales/i18nextLocalStorageCache.js",
 					"js/locales/i18next.js",
-					"locales/dev/translation.json"
+					"locales/dev/translation.json",
+					"images/power.png"
 				],
 				"refer": [
 					"tab-webview-main.html"
@@ -396,7 +418,8 @@
 				],
 				"refer": [
 					"tab-webview-subpage-map.html",
-					"tab-webview-subpage-control.html"
+					"tab-webview-subpage-control.html",
+					"vehicle.html"
 				],
 				"priority": 0
 			},
@@ -585,7 +608,23 @@
 			"tab-webview-subpage-badumap.html": {
 				"resources": [
 					"tab-webview-subpage-map.html",
-					"images/objects/normal_stop_0.gif"
+					"images/objects/normal_stop_0.gif",
+					"js/mapjs/bmap.js",
+					"js/app.js",
+					"js/mapjs/global.js",
+					"js/mapjs/wisemap.js",
+					"js/wistorm/md5.js",
+					"js/wistorm/define.js",
+					"css/style.css",
+					"css/icons-extra.css",
+					"js/immersed.js",
+					"js/mui.min.js",
+					"js/wistorm/wistorm.js",
+					"css/iconfont.css",
+					"css/mui.min.css",
+					"js/mapjs/define.js",
+					"images/traffic_off.png",
+					"images/refresh.png"
 				],
 				"refer": [
 					"tab-webview-subpage-more.html",
@@ -684,10 +723,8 @@
 				"images/objects/normal_offline_225.gif",
 				"js/city.data-3.js",
 				"images/objects/normal_stop_90.gif",
-				"tab-webview-subpage-home.html",
 				"images/icon.png",
 				"images/objects/normal_run_315.gif",
-				"js/update.js",
 				"article-detail.html",
 				"js/feedback.js",
 				"images/objects/normal_run_225.gif",
@@ -762,8 +799,6 @@
 				"images/movecar-back.png",
 				"images/objects/normal_run_270.gif",
 				"images/qq.png",
-				"images/refresh.png",
-				"tab-webview-subpage-discover.html",
 				"libs/easymob-webim-sdk/json2.js",
 				"images/objects/normal_run_90.gif",
 				"css/mui.poppicker.css",
@@ -772,7 +807,6 @@
 				"images/login-1.png",
 				"tab-webview-subpage-contact.html",
 				"poi/mail_post.png",
-				"images/power.png",
 				"images/objects/normal_alert_180.gif",
 				"images/120x120.png",
 				"images/lock_off.png",
