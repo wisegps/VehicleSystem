@@ -452,7 +452,7 @@
 					};
 					wimap.updateVehicle(vehicle, true, false, false, '#0000ff', 2, true);
 					setGpsInfo(p, vehicle);
-					console.log("更新数据是。。。。。。。。。。。。。。。。。"+vehicle);
+//					console.log("更新数据是。。。。。。。。。。。。。。。。。"+vehicle);
 					p++;
 					playback();
 				}, _interval);
@@ -525,10 +525,9 @@
 						// 显示回放面板
 						toggleNav(true);
 					}else{
-						var cp = {lon:114.302786, lat:30.631178};
-						var map = new wiseMap(MAP_TYPE_BAIDU, document.getElementById('container'), cp, 11);
 						plus.nativeUI.toast('车辆没有数据.');
 						toggleNav(false);
+						wimap.addVehicles(vehicle);
 					}
 					plus.nativeUI.closeWaiting();
 				});
@@ -542,8 +541,7 @@
 			toggleNav(false);	
 		});	
 		var wimap;
-		var cp = {lon:106.8719, lat:-6.312013};
-		var cpp = {lon:114.302786, lat:30.631178};
+		var cp = {lon:114.302786, lat:30.631178};
 		wimap = new wiseMap(MAP_TYPE_BAIDU, document.getElementById('container'), cp, 15);
 		var showLocation = function(fullAddr) {
 //				console.log('show location: ' + fullAddr);

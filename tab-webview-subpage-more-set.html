@@ -97,10 +97,8 @@
 
 	<body>
 		<header id="header" class="mui-bar mui-bar-nav headers" style="box-shadow: 0 1px 6px  #ccc;"> 
-			<!--<a id="vehicle" class="mui-action-menu mui-icon iconfont mui-pull-left mui-action-back"  style="color: #fff"  href="javascript :;" onClick="javascript :history.back(1);" ><img src="ui/icon_back.png" style="width: 25px; height: 25px;"/> </a>-->
-			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" style="color: white;"></a>
-			<h1 id="title" class="mui-title" >更多设置
-			</h1>
+			<a id="back" class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" style="color: white;"></a>
+			<h1 id="title" class="mui-title" >更多设置</h1>
 		</header>
 		<div id="content" class="mui-content">
 			
@@ -142,7 +140,7 @@
 			
 			<ul class="mui-table-view mui-table-view-chevron">
 				<li class="mui-table-view-cell">
-					<a id="about" class="mui-navigate-right">版本号<i id="version" class="mui-pull-right update">V1.2.4</i></a>
+					<a id="about" class="mui-navigate-right">版本号<i id="version" class="mui-pull-right update">V1.2.5</i></a>
 				</li>
 			</ul>
 			<div class="title">
@@ -196,7 +194,6 @@
 				"id":'alert-list-main2',
 				"url":'alert-list-main2.html'
 			});
-
 			var alertButton = document.getElementById('alert');
 			alertButton.addEventListener('tap', function(event) {
 				mui.fire(alertPage, 'refreshAlertList', null);	
@@ -290,6 +287,11 @@
 							plus.webview.getLaunchWebview().show("pop-in");
 							var gpsPage = plus.webview.getWebviewById('tab-webview-subpage-badumap');
 							mui.fire(gpsPage, 'refreshBaidumap', '');
+//							var mainPage = plus.webview.getWebviewById('tab-webview-main.html');
+//							var mainPage = plus.webview.getLaunchWebview();
+//							mainPage.evalJS('faqme()');
+//							plus.webview.close(mainPage);
+//							mui.fire(mainPage, 'refreshMain', '');
 							break;
 						case 2: 
 							plus.runtime.quit();

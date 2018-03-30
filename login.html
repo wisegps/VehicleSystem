@@ -256,10 +256,10 @@
 					});
 					var settings = app.getSettings();
 					var state = app.getState();
-//					var mainPage = $.preload({
-//						"id": 'main',
-//						"url": 'tab-webview-main.html'
-//					});
+					var mainPage = $.preload({
+						"id": 'main',
+						"url": 'tab-webview-main.html'
+					});
 //					mainPage.addEventListener("loaded",function () {
 //						main_loaded_flag = true;
 //					});
@@ -268,7 +268,7 @@
 					var main_loaded_flag = false;
 					var toMain = function() {
 						console.log("main_loaded_flag: " + main_loaded_flag);
-						if(!main_loaded_flag){
+						if(main_loaded_flag != false){
 							var mainPage = $.preload({
 								"id": 'main',
 								"url": 'tab-webview-main.html'
@@ -282,6 +282,7 @@
 								setTimeout(function(){
 									$.fire(mainPage, 'show', null);
 									$.fire(mainPage, 'refreshTitle', null);
+									$.fire(mainPage, 'refreshMain', null);
 								}, 1000);
 							});						
 							//使用定时器的原因：
@@ -308,6 +309,7 @@
 							setTimeout(function(){
 								$.fire(mainPage, 'show', null);
 								$.fire(mainPage, 'refreshTitle', null);
+								$.fire(mainPage, 'refreshMain', null);
 								mainPage.show("pop-in");
 							}, 1000);
 						}

@@ -7,7 +7,7 @@
 	"id": "H554C81CE",/*应用的标识，创建应用时自动生成，勿手动修改*/
 	"name": "车管云",/*应用名称，程序桌面图标名称*/
 	"version": {
-		"name": "1.2.4",/*应用版本名称*/
+		"name": "1.2.5",/*应用版本名称*/
 		"code": "47"
 	},
 	"description": "车管云",/*应用描述信息*/
@@ -296,7 +296,9 @@
 					"imagecar/close_door_right_front.png",
 					"imagecar/back_right_window.png",
 					"imagecar/tailoff.png",
-					"imagecar/back_left_window.png"
+					"imagecar/back_left_window.png",
+					"imagecar/start.png",
+					"imagecar/unlockon.png"
 				],
 				"refer": [
 					"vehicle-list.html",
@@ -624,7 +626,8 @@
 					"css/mui.min.css",
 					"js/mapjs/define.js",
 					"images/traffic_off.png",
-					"images/refresh.png"
+					"images/refresh.png",
+					"images/objects/normal_offline_0.gif"
 				],
 				"refer": [
 					"tab-webview-subpage-more.html",
@@ -662,7 +665,8 @@
 					"alert-list-main2.html",
 					"forget_password.html",
 					"wallet.html",
-					"geofence-set.html"
+					"geofence-set.html",
+					"tab-webview-main.html"
 				],
 				"priority": 0
 			},

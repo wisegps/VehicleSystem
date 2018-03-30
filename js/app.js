@@ -41,14 +41,15 @@
 		loginInfo.account = loginInfo.account || '';
 		loginInfo.password = hex_md5(loginInfo.password) || '';
 		var ret = owner.checkValidPhone(loginInfo.account);
-		if (!ret.flag) {
+		if (ret.flag == false) {
 			return callback(ret.message);
 		}
 		if (loginInfo.password.length < 6) {
 			return callback('密码长度至少为6个字符');
 		}
 		var server = owner.getServer();
-		
+		var trees;
+		var query_json;
 		wistorm_api.login(loginInfo.account, loginInfo.password, function(obj){
 			console.log(JSON.stringify(obj));
 			if(obj.status_code == 0){
@@ -71,13 +72,21 @@
 							state.logo = customer.data.logo || 'images/default.png';
 							state.name = customer.data.name || loginInfo.account;
 							var treePath = customer.data.treePath;
-				            var trees = treePath.split(",");
-				            trees = trees.filter(function(value){
-				               return value !== "";
-				            });
-				            var query_json = {
-				                uid: trees.join("|")
-				            };
+							trees = treePath ? treePath.split(","):null;
+//				            trees = treePath.split(",");
+//							if(treePath != null){
+//								trees = treePath.split(",");
+//							}else{
+//								trees = null;
+//							}
+							if(trees != null){
+								 trees = trees.filter(function(value){
+				               		return value !== "";
+				            	});
+					            query_json = {
+					                uid: trees.join("|")
+					           	};
+				           }
 				            var parent_month_fee = 0;
 				            var parent_year_fee = 0;
 				            wistorm_api._list('customer', query_json, 'uid,other', 'uid', 'uid', 0, 0, 1, -1, state.token, function(custs){

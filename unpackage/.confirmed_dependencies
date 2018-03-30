@@ -121,7 +121,9 @@
 			"imagecar/close_door_right_front.png",
 			"imagecar/back_right_window.png",
 			"imagecar/tailoff.png",
-			"imagecar/back_left_window.png"
+			"imagecar/back_left_window.png",
+			"imagecar/start.png",
+			"imagecar/unlockon.png"
 		],
 		"refer": [
 			"tab-webview-subpage-about.html",
@@ -859,7 +861,8 @@
 			"css/mui.min.css",
 			"js/mapjs/define.js",
 			"images/traffic_off.png",
-			"images/refresh.png"
+			"images/refresh.png",
+			"images/objects/normal_offline_0.gif"
 		],
 		"refer": [
 			"tab-webview-subpage-map.html",
@@ -887,7 +890,8 @@
 			"alert-list-main2.html",
 			"forget_password.html",
 			"wallet.html",
-			"geofence-set.html"
+			"geofence-set.html",
+			"tab-webview-main.html"
 		],
 		"resources": [
 			"locales/dev/translation.json"

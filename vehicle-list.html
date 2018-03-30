@@ -215,6 +215,7 @@
 			});
 			//获得侧滑主窗口webview对象
 			var uids = [];
+			var geoDid = null;
 			var main = null;
 			var timerRefresh = null;
 			var search = document.getElementById("search");
@@ -505,6 +506,7 @@
 					name: name,
 					did: did
 				};
+				
 				console.log(did);
 				app.setCurrentVehicle(vehicle);
 				// 刷新主页标题
@@ -516,6 +518,7 @@
 //					alert('地理位置刷新了');
 					id: did
 				});
+				
 				// 刷新控制界面
 //				var devicePage = plus.webview.getWebviewById('tab-webview-subpage-control.html');
 				mui.fire(mainPage, 'refreshVehicle', {
@@ -538,6 +541,7 @@
 					var expireIn = new Date(this.getAttribute('expireIn'));
 					var currentVehicle = app.getCurrentVehicle();
 					var now = new Date();
+					geoDid = did;
 //					alert(expireIn);
 					if(expireIn < now){
 						//过期提示，充值续费	
@@ -662,7 +666,6 @@
 							console.log('show vehicle on map = ' + JSON.stringify(devices.data));
 							var gpsPage = plus.webview.getWebviewById('tab-webview-subpage-badumap');
 							console.log('page id = ' + gpsPage);
-//							alert(devices.data+'dd')
 							mui.fire(gpsPage, 'loadVehicle', {vehicles: devices.data});
 							for(var i = 0; i < devices.data.length; i++){
 								var liVehicle = document.getElementById(devices.data[i].did);
@@ -677,7 +680,7 @@
 									var iconStatus = liVehicle.querySelector('.status').classList;
 //									console.log('old icon:' + iconStatus[0]);
 									iconStatus.remove(iconStatus[0]);
-//									console.log('old icon:' + iconStatus[0]);
+									console.log('old icon:' + iconStatus[0]);
 									iconStatus.remove(iconStatus[0]);
 									var icon = GetCarIcon(devices.data[i]);
 //									console.log('new icon:' + icon);
@@ -724,41 +727,48 @@
 //						logout();
 						return;
 					}
-					if(devices.status_code === 0 && devices.data){
-						var all = plus.webview.all();
-						var gpsPage = plus.webview.getWebviewById('tab-webview-subpage-badumap');
-						mui.fire(gpsPage, 'refreshVehicle', {vehicles: devices.data});
-						for(var i = 0; i < devices.data.length; i++){
-							var liVehicle = document.getElementById(devices.data[i].did);
-							if(liVehicle){
-	//							liVehicle.querySelector('.vehicle-status').innerHTML = ' (' + getStatusDesc(devices.data[i]) + ') ';
-								var ret = getStatus(devices.data[i]);
-//								console.log("refresh vehicle list");
-								console.log(JSON.stringify(ret));
-								liVehicle.querySelector('.vehicle-status').innerHTML = ret.desc;
-								liVehicle.classList.remove('offline');
-								liVehicle.classList.remove('stop');
-								liVehicle.classList.remove('run');
-								liVehicle.classList.remove('alert');
-								liVehicle.classList.add(ret.status);
-								var iconStatus = liVehicle.querySelector('.status').classList;
-//								console.log('old icon:' + iconStatus[0]);
-								iconStatus.remove(iconStatus[0]);
-//								console.log('old icon:' + iconStatus[0]);
-								iconStatus.remove(iconStatus[0]);
-								var icon = GetCarIcon(devices.data[i]);
-//								console.log('new icon:' + icon);
-								iconStatus.add(icon);
-								iconStatus.add('status'); 
-							}
-							var currentVehicle = app.getCurrentVehicle();
-							if(currentVehicle && currentVehicle.did === devices.data[i].did){
-//								var devicePage = plus.webview.getWebviewById('tab-webview-subpage-control.html');
-								mainPage = plus.webview.getWebviewById('main');
-								mui.fire(mainPage, 'refreshVehicle', {vehicle: devices.data[i]});
-							}
-						}						
+					if(devices.status_code != null){
+						if(devices.status_code === 0 && devices.data){
+							var all = plus.webview.all();
+							var gpsPage = plus.webview.getWebviewById('tab-webview-subpage-badumap');
+							mui.fire(gpsPage, 'refreshVehicle', {vehicles: devices.data});
+							for(var i = 0; i < devices.data.length; i++){
+								var liVehicle = document.getElementById(devices.data[i].did);
+								if(liVehicle){
+		//							liVehicle.querySelector('.vehicle-status').innerHTML = ' (' + getStatusDesc(devices.data[i]) + ') ';
+									var ret = getStatus(devices.data[i]);
+	//								console.log("refresh vehicle list");
+									console.log(JSON.stringify(ret));
+									liVehicle.querySelector('.vehicle-status').innerHTML = ret.desc;
+									liVehicle.classList.remove('offline');
+									liVehicle.classList.remove('stop');
+									liVehicle.classList.remove('run');
+									liVehicle.classList.remove('alert');
+									liVehicle.classList.add(ret.status);
+									var iconStatus = liVehicle.querySelector('.status').classList;
+	//								console.log('old icon:' + iconStatus[0]);
+									iconStatus.remove(iconStatus[0]);
+	//								console.log('old icon:' + iconStatus[0]);
+									iconStatus.remove(iconStatus[0]);
+									var icon = GetCarIcon(devices.data[i]);
+	//								console.log('new icon:' + icon);
+									iconStatus.add(icon);
+									iconStatus.add('status'); 
+								}
+								var currentVehicle = app.getCurrentVehicle();
+								if(currentVehicle && currentVehicle.did === devices.data[i].did){
+	//								var devicePage = plus.webview.getWebviewById('tab-webview-subpage-control.html');
+	//								geoDid = currentVehicle.did;
+									mainPage = plus.webview.getWebviewById('main');
+									mui.fire(mainPage, 'refreshVehicle', {vehicle: devices.data[i]});
+	//								var gpsPage = plus.webview.getWebviewById('tab-webview-subpage-badumap');
+	//								mui.fire(gpsPage, 'refreshGeofence', {geoId: geoDid});
+								}
+							}						
+						}
 					}
+//					var gpsPage = plus.webview.getWebviewById('tab-webview-subpage-badumap');
+//					mui.fire(gpsPage, 'refreshGeofence', {geoId: geoDid});
 					setTimeout('refreshVehicle()', 5000);
 				});	
 			};

@@ -297,23 +297,14 @@
 		</div>-->
 		<div id="content" class="mui-content">
 			<div class="show-vehicle" id="show-car-image">
-				
-				<!--<div id="location">
-					<a href="tab-webview-subpage-map.html">
-						深圳市宝安区留仙三路36号创兴达商务大厦5楼，5012室
-					</a>
-				</div>-->
-				
 				<div class="mui-row status1" style="position: relative;z-index: 999;">
 					<span class="mui-pull-left">
 						<span style="line-height: 20px; margin-left: -9px;"><img class="light" id="gps" src="ui/redStatus.png">GPS</span><br/>
 						<span style="line-height: 20px; margin-left: -9px;"><img class="light" id="online" src="ui/redStatus.png"><span id="on-text">离线</span></span>
 					</span>
-					
 					<span  id="address" class="title-add" >
 						<!--深圳市宝安区留仙三路36号创兴达商务大厦5楼，5012室-->
 					</span>
-					
 					<span class="mui-pull-right" style="line-height: 50px">
 						<img class="battery" src="ui/battery.png" style=""><span id='battery'>0.0V</span>
 					</span>
@@ -343,7 +334,7 @@
 					<img src="imagecar/sporte_car_show_bg.jpg" class="sport-car" />
 				</div>	-->
 				
-				<div class="show-car-bg" style="z-index: 1; width: 100%">
+				<div class="show-car-bg" style="width: 100%">
 					<div style="width: 100%; left: 18%; margin: 0 auto; position: relative; top: -50px; ">
 						<img id="front-left-door" src="imagecar/close_door_left_front.png" class="car-image" />
 						<img id="back-left-door" src="imagecar/close_door_left_back.png" class="car-image" />
@@ -359,7 +350,6 @@
 					</div>
 				</div>
 			</div>
-		
 		<div class="tab-bottom-nav">
 			<div class="tab-bottom-nav-lock">
 				<div class="lock-unlock">
@@ -373,12 +363,8 @@
 				</div>
 			</div>
 		</div>
-	
-		<div id="content1" class="mui-content" style="display: none;">
-			
-		</div>
+		<div id="content1" class="mui-content" style="display: none;"></div>
 		<script src="./js/mui.min.js"></script>
-		<!--<script src="./js/locales.js" ></script>-->
 		<script src="./js/immersed.js" ></script>
 		<script src="./js/menu.js" ></script>		
 		<script src="js/wistorm/wspub.js"></script>
@@ -386,8 +372,6 @@
 		<script src="js/wistorm/wistorm.js"></script>
 		<script src="js/wistorm/md5.js"></script>
 		<script src="js/app.js"></script>	
-		<!--<script src="js/map.js" type="text/javascript"></script>
-		<script src="js/mapjs/define.js" type="text/javascript"></script>-->
 		<script src="js/mapjs/global.js" type="text/javascript"></script>
 		<script src="js/mapjs/define.js" type="text/javascript"></script>
 		<script src="js/mapjs/global.js" type="text/javascript"></script>
@@ -398,178 +382,14 @@
 		<!--<script src="js/mapjs/gomap.js" type="text/javascript"></script>-->		
 		<script src="js/mapjs/bmap.js" type="text/javascript"></script>
 		<script src="js/mapjs/wisemap.js" type="text/javascript"></script>
-		
+		<!--<script src="js/base-loading.js"></script>-->
 		<script type="text/javascript" charset="utf-8"> 
 			 //mui初始化
 			 mui.init();
-//			 var wimap;
-//			 wimap = new wiseMap(document.getElementById('container'), {lon:106.8719, lat:-6.312013}, 15);
-			var _map = new bmap(document.getElementById('content1'), {lon:106.8719, lat:-6.312013}, 15);
-			 var titleAddress;
-			 console.log(window.innerWidth)
-			 console.log(window.innerHeight)
-			 var _windowWidth = window.innerWidth
-			 var _windowHeight = window.innerHeight;
-			 var show_car_height = _windowHeight - _windowHeight*0.3 - 44 +'px'
-			 var show_car_image = document.getElementById('show-car-image');
-//			 var mapiframe = document.getElementById('mapiframe');
-			 
-//			 show_car_image.style.height = show_car_height;
-//			 mapiframe.style.height = _windowHeight-50+'px';
-			 var lock = document.getElementById('lock');
-			 var unlock = document.getElementById('unlock');
-			 var tail = document.getElementById('tail');
-			 var find = document.getElementById('find');
-			 var start_or_stop = document.getElementById('start-or-stop');
-//			 unlock.style.width = _windowWidth/2 + 'px '
-//			 unlock.style.height = _windowHeight*0.3/2 + 'px';
-//			 lock.style.height = _windowHeight*0.3/2 + 'px'
-//			 lock.style.width = _windowWidth/2 +'px';
-//			 tail.style.height = _windowHeight*0.3/2 + 'px'
-//			 tail.style.width = _windowWidth/2 + 'px ';
-//			 find.style.height = _windowHeight*0.3/2 + 'px'
-//			 find.style.width = _windowWidth/2 +'px';
-//			 start_or_stop.style.height = _windowHeight*0.3/2+ 10+'px'
-//			 start_or_stop.style.left = _windowWidth/2 - (_windowHeight*0.3/2 + 10)/2 + 'px'
-//			 start_or_stop.style.top = _windowHeight*0.3/2-  (_windowHeight*0.3/2 + 10)/2 + 'px';
-
-//			function CompareDate(d1,d2)
-//				{
-//				  return ((new Date(d1.replace(/-/g,"\/"))) > (new Date(d2.replace(/-/g,"\/"))));
-//				}
-//				 
-////				var current_time = "2007-2-2 7:30";
-//				var stop_time = "2007-3-31 8:30";
-//				var dataTime = new Date();
-//				var current_time = dataTime.toLocaleDateString();
-//			 	alert(CompareDate(current_time,stop_time));
-			 	
-//			 	alert(dataTime.toLocaleDateString());
-			 
-			var line1 = document.getElementById('open-behind-light');
-			 //车灯的闪烁
-			var flat = 0;
-			var timer;	
- 			function changeline (){
- 				flat++;
-				if(flat <5){
-					if(line1.style.display == 'none'){
-						line1.style.display = 'block';
-					}else {
-						line1.style.display = 'none';
-					}
-				}else {
-					flat = 0;
-					clearInterval(timer);
-				}
-//			 	console.log(line1.src.indexOf())
-				
-//			 	if(line1.src.indexOf('imagecar/open_behind_light2.png') >-1){
-////			 		line1.src = ''
-//			 	}else {
-//			 		line1.src = 'imagecar/open_behind_light2.png'
-//			 	}
-//			 	console.log(1)
-			 }
-			 
-//			plus.webview.getLaunchWebview().show("pop-in");
-			
-//			var clearline =  setInterval(changeline,1000)
-			
-//			var subpages = ['tab-webview-subpage-control.html', 'tab-webview-subpage-map.html', 'tab-webview-subpage-more.html'];
-//			alert(immersed);
-			
-			//创建子页面，首个选项卡页面显示，其它均隐藏；
-			mui.plusReady(function() {
-				playbackPage = mui.preload({
-					"id": 'playback',
-					"url": 'playback.html'
-				});	
-	
-				var backButtonPress = 0;
-				mui.back = function(event) {
-					console.log(backButtonPress);
-					backButtonPress++;
-					if (backButtonPress > 1) {
-						plus.runtime.quit();
-					} else {
-						app.toast("再按一次退出");
-					}
-					setTimeout(function() {
-						backButtonPress = 0;
-					}, 1000);
-					return false;
-				};
-			});
-			 //当前激活选项
-//			var activeTab = subpages[0];
-			var title = document.getElementById("title");
-			
-			 //自定义事件，模拟点击“首页选项卡”
-			document.addEventListener('gohome', function() {
-				var defaultTab = document.getElementById("location");
-				//模拟首页点击
-				mui.trigger(defaultTab, 'tap');
-				//切换选项卡高亮
-				var current = document.querySelector(".mui-bar-tab>.mui-tab-item.mui-active");
-				if (defaultTab !== current) {
-					current.classList.remove('mui-active');
-					defaultTab.classList.add('mui-active');
-				}
-			});	
-//			document.addEventListener('gogps', function() {
-//				showPage('tab-webview-subpage-map.html');
-//			});	
-//			
-//			document.addEventListener('gogps', function() {
-//				showPage('tab-webview-subpage-map-bak.html');
-//			});	
-
-			window.addEventListener('refreshTitle', function(event){
-				if(event.detail.name != null){
-					title.innerHTML = event.detail.name;
-				}
-				
-				console.log("更新详情信息。。。。。。。。。。。。。。。。。"+JSON.stringify(title.innerHTML));
-			});				
-			
-			mui.plusReady(function(){	
-				var playbackPage = mui.preload({
-					"id": 'playback',
-					"url": 'playback.html'
-				});	
-				
-				// 报警列表界面
-//				alertPage = mui.preload({
-//					"id": 'alert-list-main',
-//					"url": 'alert-list-main2.html'
-//				});	
-				
-				_baidumap = mui.preload({
-					"id":'tab-webview-subpage-badumap',
-					"url":'tab-webview-subpage-badumap.html'
-				});
-				
-				var maps = document.getElementById('address');
-				maps.addEventListener('tap', function(evet){
-						_baidumap.show("pop-in");
-						
-						
-				});
-				
-				var more_setpage = mui.preload({
-					"id":'tab-webview-subpage-more-set',
-					"url":'tab-webview-subpage-more-set.html'
-				});
-				 
-				var more_set = document.getElementById('more-set');
-				more_set.addEventListener('tap', function(evet){
-					more_setpage.show("pop-in");
-				});
-			});
-				
-			
-			mui.plusReady(function() {
+			 mui.plusReady(function() {
+				var titleAddress;
+				var _map = new bmap(document.getElementById('content1'), {lon:114.302786, lat:30.631178}, 15);
+				var start_or_stop = document.getElementById('start-or-stop');
 				var gps = document.getElementById('gps');
 				var online = document.getElementById('online');
 				var battery = document.getElementById("battery");
@@ -599,17 +419,76 @@
 				var accStatus = false;
 				var expireIn;
 				var now = new Date();
-				
-//				var getAlertCount = function(){
-//					var currentVehicle = app.getCurrentVehicle();
-//					if(currentVehicle){
-//						app.undealAlert(currentVehicle.did, function(count){
-//							console.log('alert count: ' + count);
-//							alert.style.display = count > 0 ? 'block': 'none';
-//						});
-//					}
-//				};
-				
+				var line1 = document.getElementById('open-behind-light');
+				//刷新主页面
+				window.addEventListener('refreshMain', function(event){
+//					history.go(0);
+					location.reload();
+				});
+				 //车灯的闪烁
+				var flat = 0;
+				var timer;	
+	 			function changeline (){
+	 				flat++;
+					if(flat <5){
+						if(line1.style.display == 'none'){
+							line1.style.display = 'block';
+						}else {
+							line1.style.display = 'none';
+						}
+					}else {
+						flat = 0;
+						clearInterval(timer);
+					}
+				 }
+				//创建子页面，首个选项卡页面显示，其它均隐藏；
+					var backButtonPress = 0;
+					mui.back = function(event) {
+						console.log(backButtonPress);
+						backButtonPress++;
+						if (backButtonPress > 1) {
+							plus.runtime.quit();
+						} else {
+							app.toast("再按一次退出");
+						}
+						setTimeout(function() {
+							backButtonPress = 0;
+						}, 1000);
+						return false;
+					};
+				var title = document.getElementById("title");
+				window.addEventListener('refreshTitle', function(event){
+					if(event.detail.name != null){
+						title.innerHTML = event.detail.name;
+					}
+				});				
+					var playbackPage = mui.preload({
+						"id": 'playback',
+						"url": 'playback.html'
+					});	
+					
+					_baidumap = mui.preload({
+						"id":'tab-webview-subpage-badumap',
+						"url":'tab-webview-subpage-badumap.html'
+					});
+					
+					var maps = document.getElementById('address');
+					maps.addEventListener('tap', function(evet){
+//						setTimeout(function(){
+							_baidumap.show("pop-in");
+//						},500);
+							
+					});
+					
+					var more_setpage = mui.preload({
+						"id":'tab-webview-subpage-more-set',
+						"url":'tab-webview-subpage-more-set.html'
+					});
+					 
+					var more_set = document.getElementById('more-set');
+					more_set.addEventListener('tap', function(evet){
+						more_setpage.show("pop-in");
+					});
 				var timerAlertCount = function(){
 //					getAlertCount();
 					setTimeout(function(){
@@ -630,11 +509,10 @@
 						alertPage.show("pop-in");
 					}, 200);
 				});	
-				
+				//地址描述
 				function locationTitle(lon, lat){
 					var myGeo = new BMap.Geocoder();     
                     // 根据坐标得到地址描述   
-//                                        alert(lat);
                     var point = new BMap.Point(lon, lat);
                      	myGeo.getLocation(point, function (result){     
                                 if (result){ 
@@ -654,16 +532,6 @@
 						            } else {
 						                address = result.address;
 						            }
-//						            alert(address)
-//						            
-//                              	var baidumapss = map;
-//                              	var rd = ra;
-//						            var addComp = result.addressComponents;
-//						            province = addComp.province;//获取省份
-//						            city = addComp.city;//获取城市
-//						            district = addComp.district;//区
-//						            street = addComp.street;//街
-////                              	address = rd;
                                 	titleAddress = address;
                                 	var baidumaps = document.getElementById('address');
                                 	if(titleAddress != ''){
@@ -677,15 +545,12 @@
                                 }
                        });
 				}
-				// 位置刷新事件
+				// 刷新主页面事件
 				window.addEventListener('refreshVehicle', function(event) {
 					var vehicle = event.detail.vehicle;
-//					alert(JSON.stringify(vehicle.params.vstatus.P20C_ENGINE))
 					if(vehicle){
 						console.log("control did = " + vehicle.did);
-//						alert(now);
 						expireIn = new Date(vehicle.params.serviceExpireIn);
-//						alert(expireIn);
 						if(expireIn < now){
 							var baidumaps = document.getElementById('address');
 								baidumaps.disabled = true;
@@ -702,6 +567,7 @@
 							accStatus = vehicle.activeGpsData.status.indexOf(8196) > -1;
 	//						accStatus = vehicle.params.vstatus.P20C_ACC;
 							acc.src = accStatus ? 'imagecar/start.png':'imagecar/stop.png';
+//							alert(accStatus);
 							unlock.src = vehicle.activeGpsData.status.indexOf(IOT_STATUS.STATUS_FORTIFY) > -1 ? 'imagecar/unlockoff.png':'imagecar/unlockon.png';
 							lock.src = vehicle.activeGpsData.status.indexOf(IOT_STATUS.STATUS_FORTIFY) > -1 ? 'imagecar/lockon.png':'imagecar/lockoff.png';
 							//赛车
@@ -724,7 +590,14 @@
 										backLeftDoor.src = backLeftDoorState ? 'imagecar/open_door_left_back.png':'imagecar/close_door_left_back.png';
 										tail.src = tailState ? 'imagecar/tailon.png':'imagecar/tailoff.png';
 										frontBehindLinght.style.display = vehicle.params.vstatus.P20C_LITTLE_LAMP == true ? 'block':'none';
-								}
+								}else{
+										frontRightDoor.src = 'imagecar/close_door_right_front.png';
+										frontLeftDoor.src = 'imagecar/close_door_left_front.png';
+										backRightDoor.src = 'imagecar/close_door_right_back.png';
+										backLeftDoor.src = 'imagecar/close_door_left_back.png';
+										tail.src = 'imagecar/tailoff.png';
+										frontBehindLinght.style.display = 'none';
+									}
 									
 	//						if(frontRightDoorState == false && frontRightWindowState == false){
 	//							frontRightDoor.src = 'imagecar/front_right_window.png';
@@ -813,8 +686,7 @@
 						var did = event.detail.did;
 						var v ;
 						app.getDevice(did, function(vehicle){
-							if(vehicle){
-//									alert(JSON.stringify(vehicle.params.vstatus.P20C_ENGINE))
+							if(vehicle != null){
 								expireIn = new Date(vehicle.params.serviceExpireIn);
 								if(expireIn < now){
 									var baidumaps = document.getElementById('address');
@@ -824,13 +696,14 @@
 									v = vehicle.activeGpsData;
 									if (v != null) {
 	                                	locationTitle(v.lon, v.lat);
-	                              	}	
+	                              		
 									gps.src = vehicle.activeGpsData.gpsFlag === 2 ? 'ui/greenStatus.png': 'ui/redStatus.png';
 									online.src = getOnLine(vehicle) ? 'ui/greenStatus.png': 'ui/redStatus.png';
 									onText.innerHTML = getOnLine(vehicle) ? '在线' : '离线';
 									battery.innerHTML = (vehicle.activeGpsData.battery||0).toFixed(1) + 'V';
 	//								acc.src = vehicle.activeGpsData.status.indexOf(8196) > -1 ? 'images/flameOut.png':'images/flameOutOff.png';
 									accStatus = vehicle.activeGpsData.status.indexOf(8196) > -1;
+//									alert(accStatus);
 	//								accStatus = vehicle.params.vstatus.P20C_ACC;
 									acc.src = accStatus ? 'imagecar/start.png':'imagecar/stop.png';
 									unlock.src = vehicle.activeGpsData.status.indexOf(IOT_STATUS.STATUS_FORTIFY) > -1 ? 'imagecar/unlockoff.png':'imagecar/unlockon.png';
@@ -845,7 +718,6 @@
 	//								lockStatus?changeline ():line1.src = 'imagecar/min_light1.png';
 									
 	//								door.style.display = vehicle.activeGpsData.status.indexOf(8212) > -1 ? 'block': 'none';
-									
 									if(vehicle.params.vstatus){
 										frontRightDoorState = vehicle.params.vstatus.P20C_RIGHT_FRONT_DOOR;
 										frontLeftDoorState = vehicle.params.vstatus.P20C_LEFT_FRONT_DOOR;
@@ -857,12 +729,20 @@
 										backLeftWindowState = vehicle.params.vstatus.P20C_LEFT_BACK_WIN;
 										tailState = vehicle.params.vstatus.P20C_TRUNK;
 										frontRightDoor.src = frontRightDoorState ? 'imagecar/open_door_right_front.png':'imagecar/close_door_right_front.png';
-										frontLeftDoor.src = frontLeftDoorState  ? 'imagecar/open_door_left_front.png':'imagecar/close_door_left_front.png';
+										frontLeftDoor.src = frontLeftDoorState ? 'imagecar/open_door_left_front.png':'imagecar/close_door_left_front.png';
 										backRightDoor.src = backRightDoorState ? 'imagecar/open_door_right_back.png':'imagecar/close_door_right_back.png';
 										backLeftDoor.src = backLeftDoorState ? 'imagecar/open_door_left_back.png':'imagecar/close_door_left_back.png';
 										tail.src = tailState ? 'imagecar/tailon.png':'imagecar/tailoff.png'
 										frontBehindLinght.style.display = vehicle.params.vstatus.P20C_LITTLE_LAMP == true ? 'block':'none';
+									}else{
+										frontRightDoor.src = 'imagecar/close_door_right_front.png';
+										frontLeftDoor.src = 'imagecar/close_door_left_front.png';
+										backRightDoor.src = 'imagecar/close_door_right_back.png';
+										backLeftDoor.src = 'imagecar/close_door_left_back.png';
+										tail.src = 'imagecar/tailoff.png';
+										frontBehindLinght.style.display = 'none';
 									}
+									
 				
 	//								if(frontRightDoorState == false && frontRightWindowState == false){
 	//									frontRightDoor.src = 'imagecar/front_right_window.png';
@@ -946,6 +826,7 @@
 	//								}
 	//								console.log('acc src:' + door.src);
 								}
+							}
 							}	
 						});
 					}
@@ -1041,15 +922,6 @@
 				
 				var tailButton = document.getElementById('tail');
 				tailButton.addEventListener('tap', function(event){
-//					tailButton.src= 'imagecar/tailon.png';
-//					setTimeout(function(){
-//						tailButton.src= 'imagecar/tailoff.png';
-//					},100)
-					
-					console.log('tail');
-					if(!StandStatus){
-//						return;
-					}
 					var cmdType = IOT_CMD.VEHICLE_CONTORL;
 					var type = 0;
 					var remark = '打开尾箱';
@@ -1091,15 +963,6 @@
 				
 				var findButton = document.getElementById('find');
 				findButton.addEventListener('tap', function(event){
-//					findButton.src= 'imagecar/findon.png';
-//					setTimeout(function(){
-//						findButton.src= 'imagecar/findoff.png';
-//					},100)
-					
-					console.log('find');
-					if(!StandStatus){
-//						return;
-					}
 					var cmdType = IOT_CMD.VEHICLE_CONTORL;
 					var type = 0;
 					var remark = '寻车';
@@ -1252,6 +1115,30 @@
 						});
 					});
 				}
+				
+//				window.addEventListener('refreshMain', function(event) {
+//					titleAddress = '';
+//					start_or_stop.innerHTML = '';
+//					gps.innerHTML = ''
+//					online.innerHTML = '';
+//					battery.innerHTML = '';
+//					acc.innerHTML = '';
+//					lock.innerHTML = '';
+//					unlock.innerHTML = '';
+//					tail.innerHTML = '';
+//					findCar.innerHTML = '';
+//					frontRightDoor.innerHTML = '';
+//					frontLeftDoor.innerHTML = '';
+//					backRightDoor.innerHTML = '';
+//					backLeftDoor.innerHTML = '';
+//					frontBackLinght.innerHTML = '';
+//					frontBehindLinght.innerHTML = '';
+//					frontRightWindow.innerHTML = '';
+//					frontLeftWindow.innerHTML = '';
+//					backRightWindow.innerHTML = '';
+//					backLeftWindow.innerHTML = '';
+//				});
+				
 			});
 			
 		</script>

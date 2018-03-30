@@ -210,6 +210,10 @@
 //						mui.back();
 //	            		});
 					state.geofenceWidth = parseInt(range.value);
+					var geoWidth = state.geofenceWidth;
+					var gpsPage = plus.webview.getWebviewById('tab-webview-subpage-badumap');
+						mui.fire(gpsPage, 'refreshGeofence', '');
+//					alert(state.geofenceWidth);
 					app.setState(state);
 					plus.nativeUI.toast('保存电子栅栏参数成功');
 					mui(_this).button('reset');

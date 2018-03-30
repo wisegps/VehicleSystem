@@ -191,16 +191,18 @@
 
 			var loadBalance = function(callback){
 				app.getUser(function(user){
-					balance = user.data.balance || 0;
-					deposite = user.data.deposite || 0;
-					payType = user.data.payType || '';
-					refundOid = user.data.oid || '';
-//					depositeButton.style.display = deposite > 0 ? 'none': 'block';
-//					refundButton.style.display = deposite > 0 ? 'block': 'none';
-					balanceBox.innerHTML = balance.toFixed(2);
-//					depositeBox.innerHTML = deposite.toFixed(2);
-					if(callback){
-						callback();	
+					if(user.data != null){
+						balance = user.data.balance || 0;
+						deposite = user.data.deposite || 0;
+						payType = user.data.payType || '';
+						refundOid = user.data.oid || '';
+	//					depositeButton.style.display = deposite > 0 ? 'none': 'block';
+	//					refundButton.style.display = deposite > 0 ? 'block': 'none';
+						balanceBox.innerHTML = balance.toFixed(2);
+	//					depositeBox.innerHTML = deposite.toFixed(2);
+						if(callback){
+							callback();	
+						}
 					}
 				});
 			};

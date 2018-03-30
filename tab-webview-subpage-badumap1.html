@@ -162,7 +162,7 @@
 				console.log("findVehicle id = " + id);
 				wimap.findVehicle(id, true, true);
 				history.go(0)
-				addCircles();
+//				addCircles();
 			});
 			// 加载所有车辆
 			window.addEventListener('loadVehicle', function(event) {
@@ -170,31 +170,32 @@
 				wimap.clearVehicle();
 				var vehicles = event.detail.vehicles; 
 				wimap.addVehicles(vehicles);
-				addCircles();  
+				addCircles(vehicles);  
 			});
 			
 			// 加载所有车辆
 			window.addEventListener('refreshVehicle', function(event) {
 				var vehicles = event.detail.vehicles;
 					wimap.addVehicles(vehicles);
-					addCircles(); 
+					addCircles(vehicles); 
 			});
-			function addCircles(){
+			function addCircles(vehicles){
 				mui.plusReady(function() {
-					if(currentVehicle){
-						app.getDevice(currentVehicle.did, function(vehicle){
+					if(vehicles){
+//						app.getDevice(currentVehicle.did, function(vehicle){
+						for(var i = 0; i < vehicles.length; i++){
 							wimap.removeCircle(); 
-							if(vehicle != null && vehicle.activeGpsData != null){
-								currentVehicle.point = {
-										lon: vehicle.activeGpsData.lon,
-										lat: vehicle.activeGpsData.lat
+							if(vehicles[i].activeGpsData != null){
+								vehicles[i].point = {
+										lon: vehicles[i].activeGpsData.lon,
+										lat: vehicles[i].activeGpsData.lat
 									};
-								currentVehicle.geofenceWidth = parseInt(vehicle.params.geofenceWidth || 200);
-								wimap.setCenter(vehicle.activeGpsData.lon, vehicle.activeGpsData.lat);
-								var lon = parseFloat(vehicle.params.geofenceLon);
-								var lat = parseFloat(vehicle.params.geofenceLat);
+								vehicles[i].geofenceWidth = parseInt(vehicles[i].params.geofenceWidth || 200);
+								wimap.setCenter(vehicles[i].activeGpsData.lon, vehicles[i].activeGpsData.lat);
+								var lon = parseFloat(vehicles[i].params.geofenceLon);
+								var lat = parseFloat(vehicles[i].params.geofenceLat);
 								var width = app.getState().geofenceWidth || 200;
-								if(vehicle.activeGpsData.status.indexOf(IOT_STATUS.STATUS_FORTIFY) > -1){
+								if(vehicles[i].activeGpsData.status.indexOf(IOT_STATUS.STATUS_FORTIFY) > -1){
 									wimap.addCircle({ lon: lon, lat: lat }, width);
 								}else{
 									wimap.removeCircle();
@@ -202,7 +203,9 @@
 							}else{
 								addr.innerHTML = '无法获取到具体位置';
 							}
-						});
+							}
+							
+//						});
 					}else{
 						addr.innerHTML = '';
 					}
