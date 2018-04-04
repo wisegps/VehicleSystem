@@ -575,6 +575,7 @@
 	//						showCarState.src = vehicle.activeGpsData.status.indexOf(IOT_STATUS.STATUS_FORTIFY) > -1 ? 'imagecar/sporte_car_open.png':'imagecar/sporte_car_close.png';
 	//						console.log('acc src:' + acc.src);
 								if(vehicle.params.vstatus){
+										
 										frontRightDoorState = vehicle.params.vstatus.P20C_RIGHT_FRONT_DOOR;
 										frontLeftDoorState = vehicle.params.vstatus.P20C_LEFT_FRONT_DOOR;
 										backRightDoorState = vehicle.params.vstatus.P20C_RIGHT_BACK_DOOR;
@@ -588,6 +589,14 @@
 										frontLeftDoor.src = frontLeftDoorState ? 'imagecar/open_door_left_front.png':'imagecar/close_door_left_front.png';
 										backRightDoor.src = backRightDoorState ? 'imagecar/open_door_right_back.png':'imagecar/close_door_right_back.png';
 										backLeftDoor.src = backLeftDoorState ? 'imagecar/open_door_left_back.png':'imagecar/close_door_left_back.png';
+//										if(vehicle.activeGpsData.status.indexOf(8212) > -1 && frontRightDoorState == false && frontLeftDoorState == false && backRightDoorState == false && backLeftDoorState == false){
+//											frontLeftDoor.src = 'imagecar/open_door_left_front.png';
+//										}else{
+//											frontRightDoor.src = 'imagecar/close_door_right_front.png';
+//											frontLeftDoor.src = 'imagecar/close_door_left_front.png';
+//											backRightDoor.src = 'imagecar/close_door_right_back.png';
+//											backLeftDoor.src = 'imagecar/close_door_left_back.png';	
+//										}
 										tail.src = tailState ? 'imagecar/tailon.png':'imagecar/tailoff.png';
 										frontBehindLinght.style.display = vehicle.params.vstatus.P20C_LITTLE_LAMP == true ? 'block':'none';
 								}else{
@@ -728,10 +737,22 @@
 										backRightWindowState = vehicle.params.vstatus.P20C_RIGHT_BACK_WIN;
 										backLeftWindowState = vehicle.params.vstatus.P20C_LEFT_BACK_WIN;
 										tailState = vehicle.params.vstatus.P20C_TRUNK;
+//										frontRightDoor.src = frontRightDoorState ? 'imagecar/open_door_right_front.png':'imagecar/close_door_right_front.png';
+//										frontLeftDoor.src = frontLeftDoorState ? 'imagecar/open_door_left_front.png':'imagecar/close_door_left_front.png';
+//										backRightDoor.src = backRightDoorState ? 'imagecar/open_door_right_back.png':'imagecar/close_door_right_back.png';
+//										backLeftDoor.src = backLeftDoorState ? 'imagecar/open_door_left_back.png':'imagecar/close_door_left_back.png';
 										frontRightDoor.src = frontRightDoorState ? 'imagecar/open_door_right_front.png':'imagecar/close_door_right_front.png';
 										frontLeftDoor.src = frontLeftDoorState ? 'imagecar/open_door_left_front.png':'imagecar/close_door_left_front.png';
 										backRightDoor.src = backRightDoorState ? 'imagecar/open_door_right_back.png':'imagecar/close_door_right_back.png';
 										backLeftDoor.src = backLeftDoorState ? 'imagecar/open_door_left_back.png':'imagecar/close_door_left_back.png';
+//										if(vehicle.activeGpsData.status.indexOf(8212) > -1 && frontRightDoorState == false && frontLeftDoorState == false && backRightDoorState == false && backLeftDoorState == false){
+//											frontLeftDoor.src = 'imagecar/open_door_left_front.png';
+//										}else{
+//											frontRightDoor.src = 'imagecar/close_door_right_front.png';
+//											frontLeftDoor.src = 'imagecar/close_door_left_front.png';
+//											backRightDoor.src = 'imagecar/close_door_right_back.png';
+//											backLeftDoor.src = 'imagecar/close_door_left_back.png';	
+//										}
 										tail.src = tailState ? 'imagecar/tailon.png':'imagecar/tailoff.png'
 										frontBehindLinght.style.display = vehicle.params.vstatus.P20C_LITTLE_LAMP == true ? 'block':'none';
 									}else{

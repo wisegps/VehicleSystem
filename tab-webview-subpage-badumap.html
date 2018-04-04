@@ -172,13 +172,21 @@
 				wimap.addVehicles(vehicles);
 				addCircles();  
 			});
-			
 			// 加载所有车辆
 			window.addEventListener('refreshVehicle', function(event) {
 				var vehicles = event.detail.vehicles;
 					wimap.addVehicles(vehicles);
-					addCircles(); 
+//					refreshLocation(vehicles);
+					addCircles();  
 			});
+//			var gpsTime;
+//			function refreshLocation(vehicles){
+//				for(var i = 0; i < vehicles.length; i++){
+//					gpsTime = vehicles[i].activeGpsData.gpsTime;
+//					if(){}
+//				}
+//			}
+			
 			function addCircles(){
 				mui.plusReady(function() {
 					if(currentVehicle){

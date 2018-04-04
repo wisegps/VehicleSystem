@@ -7,7 +7,7 @@
 	"id": "H554C81CE",/*应用的标识，创建应用时自动生成，勿手动修改*/
 	"name": "车管云",/*应用名称，程序桌面图标名称*/
 	"version": {
-		"name": "1.2.5",/*应用版本名称*/
+		"name": "1.2.6",/*应用版本名称*/
 		"code": "47"
 	},
 	"description": "车管云",/*应用描述信息*/
@@ -627,7 +627,8 @@
 					"js/mapjs/define.js",
 					"images/traffic_off.png",
 					"images/refresh.png",
-					"images/objects/normal_offline_0.gif"
+					"images/objects/normal_offline_0.gif",
+					"fonts/mui.ttf"
 				],
 				"refer": [
 					"tab-webview-subpage-more.html",

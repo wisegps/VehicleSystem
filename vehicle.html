@@ -159,7 +159,7 @@
 					<label style="padding: 8px 15px;"><span class="iconfont icon-dydjgl mui-icon-color"></label>
 					<input id='battery' type="number" class="mui-input" placeholder="电量" style="width: 40%; float: left;">
 				</div>
-				<div class="mui-input-row">
+				<div class="mui-input-row" id="bay-date-box">
 					<label style="padding: 8px 15px;"><span class="iconfont icon-shijian mui-icon-color"></label>
 					<input id='buyDate' type="text" class="mui-input-clear mui-input" placeholder="购买日期">
 				</div>
@@ -288,6 +288,7 @@
 				var brandBox = document.getElementById('brand');
 				var batteryBox = document.getElementById('battery');
 				var buyDateBox = document.getElementById('buyDate');
+				var buy_date_box = document.getElementById('bay-date-box');
 				var colorBox = document.getElementById('color');
 				var saveButton = document.getElementById('save');
 				var delButton = document.getElementById("delete");
@@ -309,7 +310,13 @@
 				var _serviceExpireIn = new Date();
 //				alert(currentVehicle.did);
 				var setButton = function(){
-					saveButton.disabled = !(((currentVehicle && deviceIdBox.value == currentVehicle.did) || valid) && plateBox.value != '' && brandBox.value != ' '&&((currentVehicle && plateBox.value == currentVehicle.name) || valid_plate));												
+					if(mode == 1){
+						saveButton.disabled = !(((currentVehicle && deviceIdBox.value == currentVehicle.did) || valid) && plateBox.value != '' && brandBox.value != ' '&&((currentVehicle && plateBox.value == currentVehicle.name) || valid_plate));	
+					}
+					if(mode == 0){
+						saveButton.disabled = !(deviceIdBox.value && valid && plateBox.value && valid_plate)
+					}
+//					saveButton.disabled = !(((currentVehicle && deviceIdBox.value == currentVehicle.did) || valid) && plateBox.value != '' && brandBox.value != ' '&&((currentVehicle && plateBox.value == currentVehicle.name) || valid_plate));												
 				}
 				var checkValid = function(){
 					console.log(deviceIdBox.value);
@@ -337,6 +344,7 @@
 				};
 				var checkPlate = function(){
 					app.checkPlate(plateBox.value, function(ret){
+//						alert(ret)
 						valid_plate = ret.flag;
 						setButton();
 						if(!valid_plate){
@@ -579,6 +587,7 @@
 					vehicle_type.style.display = mode == 0 ? 'none': 'block';
 					bluetoothInputBox.style.display = mode == 0 ? 'none': 'block';
 					payButton.style.display = mode == 0 ? 'none': 'block';
+					buy_date_box.style.display = mode == 0 ? 'none': 'block';
 					
 					switch(mode){
 						case 0:
@@ -647,6 +656,7 @@
 					}
 				});
 				buyDateBox.addEventListener('input',function(){
+					alert(input);
 					if(expireIn < activedIn){
 						alert("服务已到期，请充值续费！");
 					}else{
@@ -668,13 +678,25 @@
 					}
 				});
 				deviceIdBox.addEventListener('input', function(){
+					console.log(2)
 					if(expireIn < activedIn){
 						alert("服务已到期，请充值续费！");
 					}else{
-						checkPlate();
+//						checkPlate();
+    					checkValid()
+					}
+				});
+				deviceIdBox.addEventListener('change', function(){
+//					console.log(2)
+					if(expireIn < activedIn){
+						alert("服务已到期，请充值续费！");
+					}else{
+//						checkPlate();
+						checkValid()
 					}
 				});
 				plateBox.addEventListener('input', function(){
+//					alert(1)
 					if(expireIn < activedIn){
 						alert("服务已到期，请充值续费！");
 					}else{
@@ -765,6 +787,9 @@
 									$.fire(vehiclePage, 'refreshVehicle', null);			
 									var vehicleManege = plus.webview.getWebviewById('vehicle-manege-list');
 									$.fire(vehicleManege, 'refreshVehicle', null);
+									var vehicleList = plus.webview.getWebviewById('tab-webview-main.html');
+									$.fire(vehicleList, 'refreshMain', null);
+									
 								});		
 							break;
 						case 1:
@@ -1196,6 +1221,7 @@
 		    function scaned( t, r, f ) {
 				var deviceId = document.getElementById('deviceId');
 				deviceId.value = r;
+//				checkValid();
 				mui.trigger(deviceId, 'change');
 			}
 			// 处理点击事件
