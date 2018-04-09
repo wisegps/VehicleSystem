@@ -924,7 +924,7 @@
 				map: owner.getMapType()
 			};
 			wistorm_api._get('_iotDevice', query, 'activeGpsData,params,uid', state.token, function(obj){
-				console.log(JSON.stringify(obj));
+//				console.log(JSON.stringify(obj));
 				if(obj.status_code == 0){
 					return callback(obj.data);
 				}else{
@@ -998,12 +998,14 @@
 		if(state){
 //			var type = type || 0;
 //			var remark = remark || '';
-			console.log('send command, no = ' + owner.sendCount);
-			owner.sendCount++;
+//			console.log('send command, no = ' + owner.sendCount);
+//			owner.sendCount++;
 			wistorm_api.createCommand(did, cmdType, params, type, remark, duration, state.token, function(obj){
 				console.log(JSON.stringify(obj));
+//				alert(duration);
+//				alert(obj.status_code);
 				if(obj.status_code == 0){
-					owner.sendCount = 0;
+//					owner.sendCount = 0;
 					if(type == 0 && obj.send_status === false){
 						return callback(remark + '失败.');	
 					}else{
@@ -1012,20 +1014,22 @@
 				}else if(obj.status_code == 0x1001){
 					return callback(obj.err_msg);
 				}else if(obj.status_code == 0x0006){
-					owner.sendCount = 0;
+//					owner.sendCount = 0;
 					return callback('设备离线，请检查并重试.');
 				}else if(obj.status_code == 0x9012 && type == 1){
-					owner.sendCount = 0;
+//					owner.sendCount = 0;
 //					alert('车型设定成功！');
 					return callback('车型设定成功！');
 				}else{
 //					alert(obj.status_code);
-					if(owner.sendCount < 3 && type == 0){
-						owner.sendCommand(did, cmdType, params, type, remark, duration, callback);
-					}else{
-						owner.sendCount = 0;
+//					if(owner.sendCount < 3 && type == 0){
+//						console.log('发送指令次数============='+owner.sendCount);
+//						owner.sendCommand(did, cmdType, params, type, remark, duration, callback);
+//					}else{
+//						console.log('发送命令超时');
+//						owner.sendCount = 0;
 						return callback('发送命令超时，请稍后再试.');						
-					}
+//					}
 				}
 			})
 		}else{

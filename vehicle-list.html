@@ -719,7 +719,7 @@
 			};
 			
 			var refreshVehicle = function() {
-				console.log("timer refresh");
+//				console.log("timer refresh");
 				app.listDevices(uids, function(devices, err){
 					if(err){
 //						app.toast(err);
@@ -738,7 +738,7 @@
 		//							liVehicle.querySelector('.vehicle-status').innerHTML = ' (' + getStatusDesc(devices.data[i]) + ') ';
 									var ret = getStatus(devices.data[i]);
 	//								console.log("refresh vehicle list");
-									console.log(JSON.stringify(ret));
+//									console.log(JSON.stringify(ret));
 									liVehicle.querySelector('.vehicle-status').innerHTML = ret.desc;
 									liVehicle.classList.remove('offline');
 									liVehicle.classList.remove('stop');

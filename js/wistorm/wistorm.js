@@ -49,7 +49,7 @@ var ajax_function = function(obj){
 			data:obj.data,
 			dataType:obj.dataType,//服务器返回json格式数据
 			type:obj.type,//HTTP请求类型
-			timeout:10000,//超时时间设置为10秒；
+			timeout:20000,//超时时间设置为20秒；
 			headers:{'Content-Type':'application/json'},	              
 			success:obj.success,
 			error:function(xhr,type,errorThrown){
@@ -563,6 +563,7 @@ WiStormAPI.prototype.createCommand = function (did, cmd_type, params, type, rema
     this.sign_obj.sign = this.sign();
     var params = raw2(this.sign_obj);
     var path = API_URL + "/router/rest?" + params;
+    console.log(path);
     _get(path, function (obj) {
         callback(obj);
     });
