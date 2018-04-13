@@ -790,7 +790,7 @@
 				'activeGpsData.rcvTime': startTime + '@2100-01-01'
 			};	
 			wistorm_api._list('_iotDevice', query, 'vehicleId,vehicleName,did,accOffTime,activeGpsData,params,uid', '-activeGpsData.rcvTime', '-activeGpsData.rcvTime', 0, 0, 1, -1, state.token, function(obj){
-				console.log('get devices: ' + JSON.stringify(obj));
+//				console.log('get devices: ' + JSON.stringify(obj));
 				if(obj.status_code == 0){
 					if(obj.data.length > 0){
 			            owner.updateTime = new Date(obj.data[0].activeGpsData.rcvTime);

@@ -242,8 +242,11 @@
 			//退出操作******************
 			document.getElementById('exit').addEventListener('tap', function() {
 				if (mui.os.ios) {
-					app.setState({});
-//					var state = app.getState();
+					app.setState({
+						token: ""
+					});
+					var state = app.getState();
+					console.log('logout state: ' + JSON.stringify(state));
 //					state.token = "";
 //					app.setState(state);
 					app.updateTime = new Date(0);
@@ -273,7 +276,9 @@
 					switch (index) {
 						case 1:
 							//注销账号
-							app.setState({});
+							app.setState({
+								token: ""
+							});
 //							var state = app.getState();
 //							state.token = "";
 //							app.setState(state);
@@ -287,11 +292,6 @@
 							plus.webview.getLaunchWebview().show("pop-in");
 							var gpsPage = plus.webview.getWebviewById('tab-webview-subpage-badumap');
 							mui.fire(gpsPage, 'refreshBaidumap', '');
-//							var mainPage = plus.webview.getWebviewById('tab-webview-main.html');
-//							var mainPage = plus.webview.getLaunchWebview();
-//							mainPage.evalJS('faqme()');
-//							plus.webview.close(mainPage);
-//							mui.fire(mainPage, 'refreshMain', '');
 							break;
 						case 2: 
 							plus.runtime.quit();

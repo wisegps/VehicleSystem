@@ -43,6 +43,7 @@
  */
 
 var ajax_function = function(obj){
+//	console.log('current type:' + plus.networkinfo.getCurrentType());
 	app.online = plus.networkinfo.getCurrentType() != plus.networkinfo.CONNECTION_NONE
 	if(app.online){
 		mui.ajax(obj.url,{
@@ -832,7 +833,7 @@ WiStormAPI.prototype._list = function (table, query_json, fields, sorts, page, m
     this.sign_obj.sign = this.sign();
     var params = raw2(this.sign_obj);
     var path = API_URL + "/router/rest?" + params;
-    console.log(path);
+//  console.log(path);
     _get(path, function (obj) {
         callback(obj);
     });

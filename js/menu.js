@@ -87,5 +87,5 @@
 		} else {
 			openMenu();
 		}
-	}
+	} 
 })(mui, window, document);

@@ -256,46 +256,29 @@
 					});
 					var settings = app.getSettings();
 					var state = app.getState();
-					var mainPage = $.preload({
-						"id": 'main',
-						"url": 'tab-webview-main.html'
-					});
-//					mainPage.addEventListener("loaded",function () {
-//						main_loaded_flag = true;
-//					});
 					var mainPage = plus.webview.getWebviewById('main');
-//					var main_loaded_flag = mainPage != null;
 					var main_loaded_flag = false;
 					var toMain = function() {
 						console.log("main_loaded_flag: " + main_loaded_flag);
-						if(main_loaded_flag != false){
+						if(!main_loaded_flag){
 							var mainPage = $.preload({
 								"id": 'main',
 								"url": 'tab-webview-main.html'
 							});
 							mainPage.addEventListener("loaded",function () {
 								main_loaded_flag = true;
-								// 刷新车辆列表
-								vehiclePage = plus.webview.getWebviewById('vehicle-list');
-								$.fire(vehiclePage, 'refreshVehicle', null);
-								mainPage = plus.webview.getWebviewById('main');
-								setTimeout(function(){
-									$.fire(mainPage, 'show', null);
-									$.fire(mainPage, 'refreshTitle', null);
-									$.fire(mainPage, 'refreshMain', null);
-								}, 1000);
 							});						
 							//使用定时器的原因：
 							//可能执行太快，main页面loaded事件尚未触发就执行自定义事件，此时必然会失败
 							var id = setInterval(function () {
 								if(main_loaded_flag){
+									clearInterval(id);
+									$.fire(mainPage, 'show', null);
 									setTimeout(function(){
-										clearInterval(id);
-										$.fire(mainPage, 'show', null);
 										mainPage.show("pop-in");
-									}, 300);
+									}, 2000);
 								}
-							},1000);
+							},300);
 						}else{
 							console.log("login after logout.");
 							var mainPage = $.preload({
@@ -305,13 +288,9 @@
 							// 刷新车辆列表
 							vehiclePage = plus.webview.getWebviewById('vehicle-list');
 							$.fire(vehiclePage, 'refreshVehicle', null);
-							mainPage = plus.webview.getWebviewById('main');
 							setTimeout(function(){
-								$.fire(mainPage, 'show', null);
-								$.fire(mainPage, 'refreshTitle', null);
-								$.fire(mainPage, 'refreshMain', null);
 								mainPage.show("pop-in");
-							}, 1000);
+							}, 2000);
 						}
 					};
 					//检查 "登录状态/锁屏状态" 开始
@@ -418,7 +397,7 @@
 							toMain();
 							setTimeout(function(){
 								mui(_this).button('reset');								
-							}, 500);
+							}, 5000);
 						});
 					});
 //					$.enterfocus('#login-form input', function() {
